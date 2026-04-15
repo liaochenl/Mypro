@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智算竞赛 - 加速科学发现的群智模式</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航和标题 -->
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">智算竞赛</h1>
+            <p class="site-subtitle">加速科学发现的群智模式</p>
+            <div class="external-link">
+                <a href="http://aisccc.cn" target="_blank" class="official-link">
+                    <i class="fas fa-external-link-alt"></i> 官方链接：http://aisccc.cn
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- 主内容区域 -->
+            <div class="content-wrapper">
+                <!-- 左侧主要内容 -->
+                <div class="main-sections">
+                    <!-- 赛题筛选模块 -->
+                    <section class="module topics-module">
+                        <h2 class="module-title"><i class="fas fa-filter"></i> 赛题筛选：提出科学问题</h2>
+                        <div class="cards-container">
+                            <div class="topic-card visual-card" data-card="frontier" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="card-overlay">
+                                    <h3>前沿领域攻关</h3>
+                                    <p class="card-subtitle">AI4PDE、流体力学、生物、气象、材料、医学等领域</p>
+                                    <button class="card-btn">查看详情</button>
+                                </div>
+                            </div>
+
+                            <div class="topic-card visual-card" data-card="exploration" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80');">
+                                <div class="card-overlay">
+                                    <h3>领域任务探索</h3>
+                                    <p class="card-subtitle">宇宙学、密度泛函计算、心理学、智能魔方、社会学等</p>
+                                    <button class="card-btn">查看详情</button>
+                                </div>
+                            </div>
+
+                            <div class="topic-card visual-card" data-card="hotspot" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80');">
+                                <div class="card-overlay">
+                                    <h3>热点研究探讨</h3>
+                                    <p class="card-subtitle">大模型、科学计算工具、特色竞赛等前沿研究</p>
+                                    <button class="card-btn">查看详情</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 模态框内容（隐藏） -->
+                        <div class="topic-modal" id="frontier-modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3><i class="fas fa-microscope"></i> 前沿领域攻关</h3>
+                                    <button class="modal-close">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="topic-list">
+                                        <li><a href="#" target="_blank">AI4PDE：深度学习求解高维泊松方程（2023）</a></li>
+                                        <li><a href="#" target="_blank">基于深度学习的Burgers方程求解（2024）</a></li>
+                                        <li><a href="#" target="_blank">深度学习方法求解反源问题（2024）</a></li>
+                                        <li><a href="#" target="_blank">深度学习方法求解微分方程正或反问题（2025）</a></li>
+                                        <li><a href="#" target="_blank">流体力学：二维翼型流场求解（2025）</a></li>
+                                        <li><a href="#" target="_blank">基于Paddle求解二维方腔自然对流问题（2024）</a></li>
+                                        <li><a href="#" target="_blank">基于飞桨机器学习模型实现 SPH 模拟（2023）</a></li>
+                                        <li><a href="#" target="_blank">基于 PaddleScience 实现汽车外流场定常绕流流场复现（2023）</a></li>
+                                        <li><a href="#" target="_blank">超临界翼型流场与厄尔尼诺预测（2023）</a></li>
+                                        <li><a href="#" target="_blank">基于DNA序列信息预测基因表达（2024）</a></li>
+                                        <li><a href="#" target="_blank">DNA突变对基因表达的效应预测（2025）</a></li>
+                                        <li><a href="#" target="_blank">基于PaddleScience实现公里尺度大气下尺度CorrDiff模型推理复现（2024）</a></li>
+                                        <li><a href="#" target="_blank">超导转变温度预测（2024）</a></li>
+                                        <li><a href="#" target="_blank">生成稳定材料结构的晶体扩散变分自动编码器（2023）</a></li>
+                                        <li><a href="#" target="_blank">宫颈癌放疗建模与求解（2025）</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-modal" id="exploration-modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3><i class="fas fa-compass"></i> 领域任务探索</h3>
+                                    <button class="modal-close">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="topic-list">
+                                        <li><a href="#" target="_blank">宇宙学：星系特征提取（2025）</a></li>
+                                        <li><a href="#" target="_blank">密度泛函理论交换关联泛函复现与优化（2025）</a></li>
+                                        <li><a href="#" target="_blank">为心理学计算建模添加深度学习模块（2024）</a></li>
+                                        <li><a href="#" target="_blank">魔方AI智能对手生成（2024）</a></li>
+                                        <li><a href="#" target="_blank">基于摄像头的魔方状态识别（2024）</a></li>
+                                        <li><a href="#" target="_blank">AI助力智慧交通（2023）</a></li>
+                                        <li><a href="#" target="_blank">基于转发结构分析的社交平台协作团体识别（2023）</a></li>
+                                        <li><a href="#" target="_blank">电磁学：人体姿态识别</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="topic-modal" id="hotspot-modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3><i class="fas fa-fire"></i> 热点研究探讨</h3>
+                                    <button class="modal-close">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul class="topic-list">
+                                        <li><a href="#" target="_blank">大语言模型基础学科解答能力评估（2025）</a></li>
+                                        <li><a href="#" target="_blank">大语言模型解答高中理科题目性能评估（2024）</a></li>
+                                        <li><a href="#" target="_blank">基于大模型的智能化科学实验设计（2023）</a></li>
+                                        <li><a href="#" target="_blank">科学计算工具组建大赛（2024）</a></li>
+                                        <li><a href="#" target="_blank">IJCAI 2024风阻预测竞赛（2024）</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 竞赛组织模块 -->
+                    <section class="module organization-module">
+                        <h2 class="module-title"><i class="fas fa-sitemap"></i> 竞赛组织：资源共建共享</h2>
+                        <div class="tabs-container">
+                            <div class="tabs-header">
+                                <button class="tab-btn active" data-tab="courses">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span class="tab-label">精品课程</span>
+                                    <span class="count">71</span>
+                                </button>
+                                <button class="tab-btn" data-tab="datasets">
+                                    <i class="fas fa-database"></i>
+                                    <span class="tab-label">数据集</span>
+                                    <span class="count">164</span>
+                                </button>
+                                <button class="tab-btn" data-tab="models">
+                                    <i class="fas fa-cube"></i>
+                                    <span class="tab-label">模型</span>
+                                    <span class="count">42</span>
+                                </button>
+                                <button class="tab-btn" data-tab="libraries">
+                                    <i class="fas fa-code"></i>
+                                    <span class="tab-label">计算库</span>
+                                    <span class="count">10</span>
+                                </button>
+                                <button class="tab-btn" data-tab="kits">
+                                    <i class="fas fa-toolbox"></i>
+                                    <span class="tab-label">套件</span>
+                                    <span class="count">9</span>
+                                </button>
+                                <button class="tab-btn" data-tab="evaluation">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span class="tab-label">评测榜单</span>
+                                    <span class="count">14</span>
+                                </button>
+                            </div>
+                            <div class="tabs-content">
+                                <div class="tab-pane active" id="courses-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">2025年第三届大湾区杯竞赛培训课程</h3>
+                                                <p class="resource-desc">针对2025年竞赛的全面培训课程，涵盖AI4S核心知识</p>
+                                                <a href="http://aisccc.cn/course/course-details?id=144" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">2024年第二届大湾区杯竞赛培训课程</h3>
+                                                <p class="resource-desc">2024年竞赛培训课程，包含实战案例和最佳实践</p>
+                                                <a href="http://aisccc.cn/course/course-details?id=117" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">2023年第一届大湾区杯竞赛培训课程</h3>
+                                                <p class="resource-desc">首届竞赛培训课程，奠定AI for Science基础</p>
+                                                <a href="http://aisccc.cn/course/course-details?id=2" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">HPC+AI科学计算前沿</h3>
+                                                <p class="resource-desc">高性能计算与人工智能融合的前沿课程</p>
+                                                <a href="http://aisccc.cn/course/course-details?id=1" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">微分方程数值解</h3>
+                                                <p class="resource-desc">深入讲解微分方程数值求解方法与实现</p>
+                                                <a href="http://aisccc.cn/course/course-details?id=33" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部课程</h3>
+                                                <p class="resource-desc">探索所有精品课程资源，持续更新中</p>
+                                                <a href="http://aisccc.cn/course" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="datasets-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">大语言模型解答高中理科题目性能评估数据集</h3>
+                                                <p class="resource-desc">评估大语言模型在高中理科题目解答能力的数据集</p>
+                                                <a href="http://aisccc.cn/database/data-details?id=118" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">深度学习方法求解反源问题数据集</h3>
+                                                <p class="resource-desc">用于深度学习求解反源问题的标准数据集</p>
+                                                <a href="http://aisccc.cn/database/data-details?id=120" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">基于DNA序列信息预测基因表达数据集</h3>
+                                                <p class="resource-desc">DNA序列与基因表达关联预测的数据集</p>
+                                                <a href="http://aisccc.cn/database/data-details?id=121" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">长新冠症状的分析与预测数据集</h3>
+                                                <p class="resource-desc">长新冠症状分析与预测的医疗数据集</p>
+                                                <a href="http://aisccc.cn/database/data-details?id=123" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-database"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">基于机器学习的超导转变温度预测数据集</h3>
+                                                <p class="resource-desc">用于超导转变温度预测的机器学习数据集</p>
+                                                <a href="http://aisccc.cn/database/data-details?id=124" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部数据集</h3>
+                                                <p class="resource-desc">探索所有数据集资源，涵盖多个科学领域</p>
+                                                <a href="http://aisccc.cn/database/all/1" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="models-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-cube"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">Deltaphi：物理轨迹残差算子求解模型</h3>
+                                                <p class="resource-desc">用于物理轨迹残差算子求解的深度学习模型</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=76" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-cube"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">OmniArch: 科学计算的基础模型构建</h3>
+                                                <p class="resource-desc">科学计算领域的基础模型架构</p>
+                                                <a href="https://beta.cnai4s.com/science-tasks/180" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-cube"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">DeepHPMs</h3>
+                                                <p class="resource-desc">深度学习求解偏微分方程的模型</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=73" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-cube"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">OTransformer</h3>
+                                                <p class="resource-desc">基于Transformer的算子学习模型</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=64" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-cube"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">DFVM</h3>
+                                                <p class="resource-desc">差分格式验证模型</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=44" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部模型</h3>
+                                                <p class="resource-desc">探索所有AI模型资源，覆盖多个应用场景</p>
+                                                <a href="http://aisccc.cn/model/all/3" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="libraries-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-code"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">数据处理计算库</h3>
+                                                <p class="resource-desc">高效的数据处理与转换计算库</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=81" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-code"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">概率统计计算库</h3>
+                                                <p class="resource-desc">概率统计分析与计算工具库</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=82" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-code"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">稀疏计算库</h3>
+                                                <p class="resource-desc">稀疏矩阵运算与优化计算库</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=83" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-code"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">二阶优化计算库</h3>
+                                                <p class="resource-desc">二阶优化算法实现与计算库</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=84" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-code"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">几何形状定义计算库</h3>
+                                                <p class="resource-desc">几何形状定义与计算工具库</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=85" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部计算库</h3>
+                                                <p class="resource-desc">探索所有计算库资源，提升开发效率</p>
+                                                <a href="https://beta.cnai4s.com/framework" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="kits-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-toolbox"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">MindFlow计算流体求解套件</h3>
+                                                <p class="resource-desc">华为MindFlow计算流体力学求解套件</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=11" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-toolbox"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">MindEarth地球科学领域套件</h3>
+                                                <p class="resource-desc">华为MindEarth地球科学计算套件</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=26" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-toolbox"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">SciAI高频模型套件</h3>
+                                                <p class="resource-desc">科学计算高频模型专用套件</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=23" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-toolbox"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">PaddleScience科学计算套件</h3>
+                                                <p class="resource-desc">百度PaddleScience科学计算套件</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=79" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-toolbox"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">PaddleHelix生物计算套件</h3>
+                                                <p class="resource-desc">百度PaddleHelix生物计算套件</p>
+                                                <a href="http://aisccc.cn/model/model-details?id=78" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部套件</h3>
+                                                <p class="resource-desc">探索所有开发套件，加速科研工作</p>
+                                                <a href="https://beta.cnai4s.com/toolkit" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="evaluation-content">
+                                    <div class="resource-grid">
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">模型评测-PDENNEval</h3>
+                                                <p class="resource-desc">偏微分方程神经算子模型评测基准</p>
+                                                <a href="http://aisccc.cn/evaluating_/evaluating-details?id=8" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">模型评测-CFDONEval</h3>
+                                                <p class="resource-desc">计算流体力学神经算子模型评测基准</p>
+                                                <a href="http://aisccc.cn/evaluating_/evaluating-details?id=9" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">模型评测-SuperCon3D</h3>
+                                                <p class="resource-desc">超导材料3D预测模型评测基准</p>
+                                                <a href="http://aisccc.cn/evaluating_/evaluating-details?id=19" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">框架评测-ADBench</h3>
+                                                <p class="resource-desc">自动微分框架性能评测基准</p>
+                                                <a href="http://aisccc.cn/evaluating_/evaluating-details?id=44" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">系统评测-国产硬件评测</h3>
+                                                <p class="resource-desc">国产硬件平台性能评测基准</p>
+                                                <a href="http://aisccc.cn/evaluating_/evaluating-details?id=25" target="_blank" class="resource-link">
+                                                    查看详情 <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="resource-card view-all-card">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-eye"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <h3 class="resource-title">查看全部评测</h3>
+                                                <p class="resource-desc">探索所有评测基准，了解模型性能</p>
+                                                <a href="http://aisccc.cn/evaluating_/all/1" target="_blank" class="resource-link">
+                                                    浏览全部 <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 正式竞赛模块 -->
+                    <section class="module competition-module">
+                        <h2 class="module-title"><i class="fas fa-trophy"></i> 正式竞赛：推动生态建设</h2>
+
+                        <!-- 栏目一：社区规模小组 -->
+                        <div class="community-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <h3><i class="fas fa-users"></i> 社区规模小组：深度学习求解偏微分方程</h3>
+                                    <a href="http://aisccc.cn/task/task-details?id=45&type=resource" class="group-link" target="_blank">加入小组</a>
+                                </div>
+                                <div class="card-tabs">
+                                    <button class="tab-button active" data-tab="task-details">任务详情</button>
+                                    <button class="tab-button" data-tab="solution-cases">求解案例</button>
+                                    <button class="tab-button" data-tab="resources">资源区</button>
+                                    <button class="tab-button" data-tab="discussion">讨论区</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="task-details-content">
+                                        <ul class="task-description">
+                                            <li> 深度学习为偏微分方程（PDE）的求解提供了新范式：物理信息神经网络（PINN）将PDE残差嵌入损失函数，实现无网格求解；傅里叶神经算子（FNO）则学习参数到解的无限维映射。然而，现有方法仍面临关键挑战：一是PINN难以精确捕捉激波等间断解，易产生过平滑；二是自适应界面方法需预先知道间断位置，而实际问题中激波位置未知且动态演化；三是神经算子在外推任务（如超分辨率、极端参数）中泛化能力有限；四是物理信息型算子（pi-FNO）依赖数值微分，在粗分辨率下误差显著。为解决上述问题，研究者提出结合Rankine-Hugoniot条件的自适应网络（RH-APINN），自动学习激波位置并划分子域；以及多级物理信息傅里叶神经算子（Mpi-FNO），通过分阶段训练增强外推能力并降低微分误差。这些工作为深度学习求解非线性PDE，特别是含间断和强外推场景，提供了有效改进思路。</li>
+                                            <li>本任务旨在为AI4PDE提供一个开放的协作平台，促进研究者之间的交流与合作。</li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="solution-cases-content">
+                                        <p>以下是一些深度学习求解偏微分方程的案例示例：</p>
+                                        <ul class="solution-cases">
+                                            <li><strong>一、函数类学习方法</strong>
+                                                <ul>
+                                                    <li><strong>1.1 高维问题</strong>
+                                                        <ul>
+                                                            <li>2018，深度里兹方法（DRM）使用PDEs的离散能量方程构造损失函数。</li>
+                                                            <li>2018，深度伽辽金方法（DGM）使用PDEs的残差构造损失函数，求解了抛物型PDEs。</li>
+                                                            <li>2019，物理信息网络（PINN），将PDEs的残差嵌入进损失函数，以此作为物理约束。</li>
+                                                            <li>......</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>1.2 自适应策略</strong>
+                                                        <ul>
+                                                            <li>Lu L, Meng X, Mao Z, et al. DeepXDE: A deep learning library for solving differential equations[J]. SIAM review, 2021, 63(1): 208-228.</li>
+                                                            <li>Gao Z, Yan L, Zhou T. Failure-informed adaptive sampling for PINNs[J]. arXiv preprint arXiv:2210.00279, 2022.</li>
+                                                            <li>Tang K, Wan X, Yang C. DAS-PINNs: A deep adaptive sampling method for solving high-dimensional partial differential equations[J]. Journal of Computational Physics, 2023, 476: 111868.</li>
+                                                            <li>Zeng S, Zhang Z, Zou Q. Adaptive deep neural networks methods for high-dimensional partial differential equations[J]. Journal of Computational Physics, 2022, 463: 111232.</li>
+                                                            <li>......</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><strong>二、算子类学习方法</strong>
+                                                <ul>
+                                                    <li>DeepOnet、FNO、physics-informed neural operators (PINO)，...</li>
+                                                </ul>
+                                            </li>
+                                            <li><strong>三、PDE大模型</strong>
+                                                <ul>
+                                                    <li>In-context operator learning、PDEformer、OmniArch,...</li>
+                                                </ul>
+                                            </li>
+                                            <li><strong>四、基准评测</strong>
+                                                <ul>
+                                                    <li>PDEBench、CFDBench、PDENNEval、CFDONEval,...</li>
+                                                </ul>
+                                            </li>
+                                            <li><strong>五、计算套件</strong>
+                                                <ul>
+                                                    <li>DeepXDE、MindFlow、Mind SciAI,...</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <div class="view-details-container">
+                                            <a href="http://aisccc.cn/task/task-details?id=45&type=case" class="view-details-btn" target="_blank">
+                                                <i class="fas fa-external-link-alt"></i> 查看详情
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="resources-content">
+                                        <p>以下是一些深度学习求解偏微分方程的相关资源：</p>
+                                        <ul class="resource-list">
+                                            <li class="resource-item">
+                                                <span class="resource-title">Zang 等 - 2020 - Weak adversarial networks for high-dimensional par.pdf</span>
+                                                <a href="http://aisccc.cn/task/task-details?id=45&type=resource" class="download-btn" target="_blank">下载</a>
+                                            </li>
+                                            <li class="resource-item">
+                                                <span class="resource-title">Yang 和 Osher - 2024 - PDE Generalization of In-Context Operator Networks.pdf</span>
+                                                <a href="http://aisccc.cn/task/task-details?id=45&type=resource" class="download-btn" target="_blank">下载</a>
+                                            </li>
+                                            <li class="resource-item">
+                                                <span class="resource-title">更多相关论文资源...</span>
+                                                <a href="http://aisccc.cn/task/task-details?id=45&type=resource" class="download-btn" target="_blank">查看全部</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="discussion-content">
+                                        <p>以下是深度学习求解偏微分方程的讨论主题：</p>
+                                        <ul class="discussion-list">
+                                            <li class="discussion-item">
+                                                <span class="discussion-title">多保真度数据融合 (Multi-fidelity PINN)</span>
+                                                <span class="discussion-time">【最后回复时间：2026-01-13 16:58:46】</span>
+                                                <a href="http://aisccc.cn/forum/forum-details/387?type=task" class="reply-btn" target="_blank">回复</a>
+                                            </li>
+                                            <li class="discussion-item">
+                                                <span class="discussion-title">针对相场方程的自适应激活函数 (Adaptive PINN)</span>
+                                                <span class="discussion-time">【最后回复时间：2026-01-13 16:58:31】</span>
+                                                <a href="http://aisccc.cn/forum/forum-details/385?type=task" class="reply-btn" target="_blank">回复</a>
+                                            </li>
+                                            <li class="discussion-item">
+                                                <span class="discussion-title">用于偏微分方程组的对称性保持神经网络 (SPNN-PDES)</span>
+                                                <span class="discussion-time">【最后回复时间：2025-08-20 16:42:58】</span>
+                                                <a href="http://aisccc.cn/forum/forum-details/375?type=task" class="reply-btn" target="_blank">回复</a>
+                                            </li>
+                                            <li class="discussion-item">
+                                                <span class="discussion-title">可解释张量网络PDE求解器 (XTN-Solver)</span>
+                                                <span class="discussion-time">【最后回复时间：2024-03-08 16:42:08】</span>
+                                                <a href="http://aisccc.cn/forum/forum-details/370?type=task" class="reply-btn" target="_blank">回复</a>
+                                            </li>
+                                            <li class="discussion-item">
+                                                <span class="discussion-title">更多讨论主题...</span>
+                                                <span class="discussion-time"></span>
+                                                <a href="http://aisccc.cn/forum/forum-details/387?type=task" class="reply-btn" target="_blank">查看全部</a>
+                                            </li>
+                                        </ul>
+                                        <div class="post-discussion-container">
+                                            <a href="http://aisccc.cn/forum/publish?ids=7&ids=550&ids=214&type=task" class="post-discussion-btn" target="_blank">
+                                                <i class="fas fa-comment-dots"></i> 发表讨论
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 栏目二：微信交流群 -->
+                        <div class="wechat-section">
+                            <h3><i class="fab fa-weixin"></i> 微信交流群：实时互动</h3>
+                            <div class="wechat-cards">
+                                <div class="wechat-card">
+                                    <h4>2025竞赛交流群1</h4>
+                                    <p>主要讨论AI4PDE、流体力学等前沿领域</p>
+                                    <button class="join-btn">申请加入</button>
+                                </div>
+                                <div class="wechat-card">
+                                    <h4>2025竞赛交流群2</h4>
+                                    <p>主要讨论生物信息、材料科学等领域</p>
+                                    <button class="join-btn">申请加入</button>
+                                </div>
+                                <div class="wechat-card">
+                                    <h4>2025竞赛交流群3</h4>
+                                    <p>主要讨论大模型、科学计算工具等热点</p>
+                                    <button class="join-btn">申请加入</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 作品转化模块 -->
+                    <section class="module works-module">
+                        <h2 class="module-title"><i class="fas fa-award"></i> 作品转化：助力成果产出</h2>
+
+                        <!-- 获奖作品展示 -->
+                        <div class="works-subsection">
+                            <h3><i class="fas fa-medal"></i> 获奖作品展示</h3>
+                            <div class="year-tabs">
+                                <button class="year-btn active" data-year="2023">2023年第一届</button>
+                                <button class="year-btn" data-year="2024">2024年第二届</button>
+                                <button class="year-btn" data-year="2025">2025年第三届</button>
+                            </div>
+                            <div class="awards-carousel">
+                                <div class="carousel-container">
+                                    <div class="carousel-slide active" data-year="2023">
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/1_1.png" alt="2023年获奖作品1">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/1_2.png" alt="2023年获奖作品2">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/1_3.png" alt="2023年获奖作品3">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/1_4.png" alt="2023年获奖作品4">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/1_5.png" alt="2023年获奖作品5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-slide" data-year="2024">
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/2_1.png" alt="2024年获奖作品1">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/2_2.png" alt="2024年获奖作品2">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/2_3.png" alt="2024年获奖作品3">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/2_4.png" alt="2024年获奖作品4">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/2_5.png" alt="2024年获奖作品5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-slide" data-year="2025">
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/3_1.png" alt="2025年获奖作品1">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/3_2.png" alt="2025年获奖作品2">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/3_3.png" alt="2025年获奖作品3">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/3_4.png" alt="2025年获奖作品4">
+                                            </div>
+                                        </div>
+                                        <div class="award-item">
+                                            <div class="award-img">
+                                                <img src="images/awards/3_5.png" alt="2025年获奖作品5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 科学任务案例 -->
+                        <div class="works-subsection">
+                            <h3><i class="fas fa-tasks"></i> 科学任务案例</h3>
+                            <div class="case-card">
+                                <div class="case-img">
+                                    <img src="images/cases/1_5.png" alt="智能生成式乘波体气动分析与设计软件开发">
+                                </div>
+                                <div class="case-info">
+                                    <h4>智能生成式乘波体气动分析与设计软件开发（2025）</h4>
+                                    <p>针对乘波体设计了一款功能完备的软件，集成了各类型乘波体气动性能分析与设计、反设计、3D 渲染等功能。</p>
+                                    <a href="http://aisccc.cn/task/task-details?id=167" target="_blank" class="case-link">查看详情 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="case-card">
+                                <div class="case-img">
+                                    <img src="images/cases/1_4.png" alt="大语言模型基础学科解题能力评估">
+                                </div>
+                                <div class="case-info">
+                                    <h4>大语言模型基础学科解题能力评估（2025）</h4>
+                                    <p>为大语言模型求解基础学科（如数学、物理、化学、生物）题目的性能提供评估标准。</p>
+                                    <a href="http://aisccc.cn/task/task-details?id=180" target="_blank" class="case-link">查看详情 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="case-card">
+                                <div class="case-img">
+                                    <img src="images/cases/1_3.png" alt="求解Burgers方程的深度学习方法">
+                                </div>
+                                <div class="case-info">
+                                    <h4>求解Burgers方程的深度学习方法（2024）</h4>
+                                    <p>深度学习求解Burgers’方程，并考察预测能力、激波捕捉、泛化性能、以及求解效率。</p>
+                                    <a href="http://aisccc.cn/task/task-details?id=142" target="_blank" class="case-link">查看详情 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="case-card">
+                                <div class="case-img">
+                                    <img src="images/cases/1_2.png" alt="基于DNA序列信息预测基因表达">
+                                </div>
+                                <div class="case-info">
+                                    <h4>基于DNA序列信息预测基因表达（2024）</h4>
+                                    <p>通过深度学习方法分析DNA序列特征和mRNA半衰期数据，预测基因表达水平。</p>
+                                    <a href="http://aisccc.cn/task/task-details?id=137" target="_blank" class="case-link">查看详情 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="case-card">
+                                <div class="case-img">
+                                    <img src="images/cases/1_1.png" alt="基于神经算子的叶轮机械流场与性能预测模型">
+                                </div>
+                                <div class="case-info">
+                                    <h4>基于神经算子的叶轮机械流场与性能预测模型（2023）</h4>
+                                    <p>该模型使用神经算子技术预测叶轮机械流场与性能，具有高精度和高效性。</p>
+                                    <a href="http://aisccc.cn/task/task-details?id=4" target="_blank" class="case-link">查看详情 <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- 优秀成果展示 -->
+                        <div class="works-subsection">
+                            <h3><i class="fas fa-star"></i> 优秀成果展示</h3>
+                            <div class="achievements-vertical">
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_1.png" alt="A self-conformation-aware pre-training framework for molecular property prediction with substructure interpretability">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://www.nature.com/articles/s41467-025-59634-0" target="_blank" class="paper-title">A self-conformation-aware pre-training framework for molecular property prediction with substructure interpretability</a>
+                                        <p class="author">乔剑博，山东大学，2024年金奖获得者</p>
+                                        <p class="journal">Nature Communications</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_2.png" alt="Toward a unified benchmark and framework for deep learning-based prediction of nuclear magnetic resonance chemical shifts">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://www.nature.com/articles/s43588-025-00783-z" target="_blank" class="paper-title">Toward a unified benchmark and framework for deep learning-based prediction of nuclear magnetic resonance chemical shifts</a>
+                                        <p class="author">徐凡杰，厦门大学，2023年二等奖获得者</p>
+                                        <p class="journal">Nature Computational Science</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_3.png" alt="A panoramic aerodynamic performance prediction method for turbomachinery cascades using transformer-enhanced neural operator">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://www.sciencedirect.com/science/article/pii/S1000936125000792" target="_blank" class="paper-title">A panoramic aerodynamic performance prediction method for turbomachinery cascades using transformer-enhanced neural operator</a>
+                                        <p class="author">汪祺能，西安交通大学，2023年特等奖作品</p>
+                                        <p class="journal">Chinese Journal of Aeronautics</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_4.png" alt="Solving High-Dimensional Partial Differential Equations Using Tensor Neural Network and A Posteriori Error Estimators">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://link.springer.com/article/10.1007/s10915-024-02700-4" target="_blank" class="paper-title">Solving High-Dimensional Partial Differential Equations Using Tensor Neural Network and A Posteriori Error Estimators</a>
+                                        <p class="author">林仲烁，中国科学院数学与系统科学研究院，2023年特等奖作品</p>
+                                        <p class="journal">Journal of Scientific Computing</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_5.png" alt="CTEFNet：基于CNN与迁移学习的厄尔尼诺预测模型">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://gitee.com/mindspore/mindscience/tree/legacy-master/MindEarth/applications/climate-prediction/ensoforecast" target="_blank" class="paper-title">CTEFNet：基于CNN与迁移学习的厄尔尼诺预测模型</a>
+                                        <p class="author">崔英豪，厦门大学，2023年特等奖作品</p>
+                                        <p class="journal">华为MindEarth套件库</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card-vertical">
+                                    <div class="paper-cover">
+                                        <img src="images/papers/1_6.png" alt="Revealing nanostructures in high-entropy alloys via machine-learning accelerated scalable Monte Carlo simulation">
+                                    </div>
+                                    <div class="paper-info">
+                                        <a href="https://www.nature.com/articles/s41524-025-01762-8" target="_blank" class="paper-title">Revealing nanostructures in high-entropy alloys via machine-learning accelerated scalable Monte Carlo simulation</a>
+                                        <p class="author">范登栋，鹏城实验室，2023年优胜奖获得者</p>
+                                        <p class="journal">npj Computational Materials</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 科学发现模块 -->
+                    <section class="module discovery-module">
+                        <h2 class="module-title"><i class="fas fa-flask"></i> 科学发现：解决科学问题</h2>
+                        <div class="discovery-cards">
+                            <div class="discovery-card color-1">
+                                <p class="discovery-card-content">【流体】2025年，第三届竞赛金奖获得者赖佳敏等人首次将cGANs与乘波体反设计深度融合，在解决"气动→几何"逆问题的同时，实现了高精度、高效率、高成功率的智能设计，为高超声速飞行器的工程化快速迭代提供了新的技术路径。</p>
+                            </div>
+                            <div class="discovery-card color-2">
+                                <p class="discovery-card-content">【PDE】2025年，第三届竞赛金奖获得者徐炀等人提出FHENN与RSMOTE等策略，解决了高波数亥姆霍兹方程高频拟合难及泊松方程反问题参数识别不稳定的问题。</p>
+                            </div>
+                            <div class="discovery-card color-3">
+                                <p class="discovery-card-content">【流体】2025年，第一届竞赛特等奖获得者汪祺能等人提出TNO网络 + 全景预测框架，成功解决了涡轮机械气动设计中高保真模拟计算成本高、模型复用性差的问题。</p>
+                            </div>
+                            <div class="discovery-card color-4">
+                                <p class="discovery-card-content">【分子】2025年，第二届竞赛金奖获得者乔剑博等人提出了一个高性能、可解释、通用性强的分子预训练框架SCAGE，有效解决了分子属性预测中结构信息不足、功能团建模粗糙、任务优化失衡等关键问题。</p>
+                            </div>
+                            <div class="discovery-card color-5">
+                                <p class="discovery-card-content">【PDE】2025年，第二届竞赛金奖获得者龙婷婷等人提出了两种创新的深度学习方法（RH-APINN和Mpi-FNO），分别从函数逼近和算子学习两个角度，有效解决了传统方法在间断捕捉和外推泛化方面的瓶颈问题。</p>
+                            </div>
+                            <div class="discovery-card color-6">
+                                <p class="discovery-card-content">【化学】2025年，第一届竞赛二等奖获得者徐凡杰（参与）等人提出了一个统一的、高性能的NMR化学位移预测框架NMRNet，并构建了高质量的基准数据集。</p>
+                            </div>
+                            <div class="discovery-card color-7">
+                                <p class="discovery-card-content">【材料】2025年，第一届优胜奖获得者范登栋（参与）等人提出可扩展的并行蒙特卡洛算法 SMC-X，结合机器学习势函数和GPU加速，首次实现了对十亿原子级别高熵合金中纳米结构的直接模拟，揭示了FeCoNiAlTi 和 MoNbTaW 两种典型高熵合金中复杂的纳米相演化行为。</p>
+                            </div>
+                            <div class="discovery-card color-8">
+                                <p class="discovery-card-content">【魔方】2024年，第二届竞赛金奖获得者杨路佳宁等人将深度学习与启发式搜索结合，提出了一种可控制难度、可模仿人类行为的魔方AI对手建模方法，为智能游戏对手的设计提供了新的理论框架和技术路径。</p>
+                            </div>
+                            <div class="discovery-card color-9">
+                                <p class="discovery-card-content">【气象】2024年，第一届竞赛特等奖获得者崔英豪等人提出CTEFNet模型，解决了现有方法观测期短、变量少导致的ENSO长期预测精度不足的问题。</p>
+                            </div>
+                            <div class="discovery-card color-10">
+                                <p class="discovery-card-content">【PDE】2024年，第一届竞赛特等奖获得者林仲烁（参与）等人提出了一种高精度、高稳定性、无需超参数调节的机器学习方法，创新性地将后验误差估计器与张量神经网络结合，解决了高维PDE求解中高维积分精度低、误差不可控、边界条件难处理等关键问题。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- 右侧新闻滚动 -->
+                <aside class="news-sidebar">
+                    <div class="news-header">
+                        <h3><i class="fas fa-newspaper"></i> 热点新闻</h3>
+                        <p class="news-subtitle">竞赛开赛通知，宣传材料，培训视频，学校报道</p>
+                    </div>
+                    <div class="news-container">
+                        <div class="news-scroll" id="news-scroll">
+                            <!-- 新闻条目通过JS动态加载 -->
+                             <div class="news-item">
+                                <h4>颁奖仪式|第三届“大湾区杯”粤港澳AI4S科技竞赛</h4>
+                                <p class="news-date">2025-12-10</p>
+                                <p class="news-desc">第三届“大湾区杯”粤港澳AI4S科技竞赛颁奖仪式在广东海洋大学...</p>
+                                <a href="https://www.gdou.edu.cn/info/1092/74140.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>第三届"大湾区杯"AI4S竞赛正式开赛</h4>
+                                <p class="news-date">2025-10-01</p>
+                                <p class="news-desc">第三届"大湾区杯"AI4S竞赛正式开赛</p>
+                                <a href="https://mp.weixin.qq.com/s/JrDHyHNCv2axcMaDubSwng" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                            <h4>高获奖率！丰厚奖金！第三届 "大湾区杯"AI for Science科技竞赛正式来袭！</h4>
+                                <p class="news-date">2025-09-12</p>
+                                <p class="news-desc">高获奖率！丰厚奖金！第三届 "大湾区杯"AI for Science科技竞...</p>
+                                <a href="https://mp.weixin.qq.com/s/27eWaNQBWQD4othEhHSnow" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>我校在第二届"大湾区杯"粤港澳AI for Science科技竞赛中喜获佳绩，韶关学院</h4>
+                                <p class="news-date">2024-12-16</p>
+                                <p class="news-desc">我校在第二届"大湾区杯"粤港澳AI for Science科技竞赛中喜获佳...</p>
+                                <a href="https://www.sgu.edu.cn/sxtjxy/info/1055/6791.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>我校学子在2024年第二届"大湾区杯"AI for Sciecne 科技竞赛中荣获佳绩，广东财经大学</h4>
+                                <p class="news-date">2024-12-14</p>
+                                <p class="news-desc">我校学子在2024年第二届"大湾区杯"AI for Sciecne 科技竞...</p>
+                                <a href="https://kcjyzx.gdufe.edu.cn/2025/0425/c8907a219051/page.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>AI for Science|第二届"大湾区杯"科技竞赛正式开赛！</h4>
+                                <p class="news-date">2024-10-01</p>
+                                <p class="news-desc">AI for Science|第二届"大湾区杯"科技竞赛正式开赛！</p>
+                                <a href="https://mp.weixin.qq.com/s/VGzpjA3YsFB6g8ZULCXXVw" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>2024 第二届 AI For Science 科技竞赛</h4>
+                                <p class="news-date">2024-10-01</p>
+                                <p class="news-desc">赛氪竞赛网</p>
+                                <a href="https://www.saikr.com/vse/51420" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>高获奖率！丰厚奖金！第二届 "大湾区杯"AI for Science科技竞赛来袭！</h4>
+                                <p class="news-date">2024-09-19</p>
+                                <p class="news-desc">高获奖率！丰厚奖金！第二届 "大湾区杯"AI for Science科技竞...</p>
+                                <a href="https://mp.weixin.qq.com/s/LnkCPgeaNW8wQ5zZNqai3g" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>首届"大湾区杯"粤港澳 AI for Science科技竞赛颁奖典礼隆重举行</h4>
+                                <p class="news-date">2023-12-08</p>
+                                <p class="news-desc">首届"大湾区杯"粤港澳 AI for Science科技竞赛颁奖典礼隆重举行</p>
+                                <a href="https://mp.weixin.qq.com/s/Qyykzvn-yLY0OR9JLaEg6w" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>我院学生在2023年"大湾区杯"粤港澳AI4S科技竞赛中喜获佳绩，华南师范大学</h4>
+                                <p class="news-date">2023-12-07</p>
+                                <p class="news-desc">我院学生在2023年"大湾区杯"粤港澳AI4S科技竞赛中喜获佳绩，华南师范大学</p>
+                                <a href="https://mp.weixin.qq.com/s?__biz=MzU4NzU1MTQzOA==&mid=2247506479&idx=1&sn=282fb9717a60209688b6114daea274b5&chksm=fde8dd8eca9f5498dd096a0824dfe423aacd3a34e918f511c22ebb361350c6fa78978c499698&scene=27" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>西安交大数学学院博士生王璠、亓凯荣获首届"大湾区杯"粤港澳AI for Science科技竞赛一等奖</h4>
+                                <p class="news-date">2023-11-24</p>
+                                <p class="news-desc">西安交大数学学院博士生王璠、亓凯荣获首届"大湾区杯"粤港澳AI for S...</p>
+                                <a href="https://news.xjtu.edu.cn/info/1003/203815.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>西安交大获首届"大湾区杯"粤澳港AI for Science科技竞赛特等奖</h4>
+                                <p class="news-date">2023-11-22</p>
+                                <p class="news-desc">西安交大获首届"大湾区杯"粤澳港AI for Science科技竞赛特等奖</p>
+                                <a href="https://news.xjtu.edu.cn/info/1002/203680.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>喜报|上海大学获"大湾区杯"粤港澳AI for Science科技竞赛一等奖</h4>
+                                <p class="news-date">2023-11-05</p>
+                                <p class="news-desc">喜报|上海大学获"大湾区杯"粤港澳AI for Science科技竞赛一等奖</p>
+                                <a href="https://mat.shu.edu.cn/info/1012/12818.htm" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>2023年"大湾区杯"AI for Science竞赛获奖名单出炉~</h4>
+                                <p class="news-date">2023-10-26</p>
+                                <p class="news-desc">2023年"大湾区杯"AI for Science竞赛获奖名单出炉~</p>
+                                <a href="https://mp.weixin.qq.com/s/4lgri33ZxzBuWBwzaFUHQQ" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>AI for Science|"大湾区杯"科技竞赛正式开赛！</h4>
+                                <p class="news-date">2023-09-01</p>
+                                <p class="news-desc">AI for Science|"大湾区杯"科技竞赛正式开赛！</p>
+                                <a href="https://mp.weixin.qq.com/s/-5oy-xhbZxZnjQl-pfKrBg" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                            <div class="news-item">
+                                <h4>AI for Science！"大湾区杯"竞赛重磅来袭！</h4>
+                                <p class="news-date">2023-08-17</p>
+                                <p class="news-desc">AI for Science！"大湾区杯"竞赛重磅来袭！</p>
+                                <a href="https://mp.weixin.qq.com/s/Q6k6sbQZv5eLXd6-KmLiFQ" target="_blank" class="news-link">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="news-controls">
+                            <button id="news-pause"><i class="fas fa-pause"></i> 暂停</button>
+                            <button id="news-add"><i class="fas fa-plus"></i> 添加条目</button>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 人工智能共性平台群智协作社区. 保留所有权利.</p>
+            <p>技术支持：HTML5, CSS3, JavaScript</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
