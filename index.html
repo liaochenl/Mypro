@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>增长量速算自测 V4.5.1</title>
+<title>增长量速算自测 V4.7</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
@@ -350,7 +350,15 @@ button:active{transform:translateY(1px)}
 }
 .favoriteSessionProgress{font-size:13px;font-weight:850;color:#334155}
 .favoriteSessionMeta{font-size:11px;color:#94a3b8}
-.favoriteSessionActions{display:flex;gap:7px;flex-wrap:wrap}
+.favoriteSessionActions{
+  display:none;align-items:center;gap:7px;flex-wrap:wrap;width:100%;
+  padding-top:9px;margin-top:3px;border-top:1px solid #eef2f7
+}
+.favoriteSessionActions.show{display:flex}
+.favoriteSessionProgress{margin-right:2px}
+.classicBadge{background:#eef2ff;color:#4338ca}
+.classicSourceHint{margin-left:auto}
+
 .favoriteSessionBtn{
   border:1px solid #e2e8f0;background:#fff;color:#475569;border-radius:9px;
   padding:7px 10px;font-size:11px;font-weight:850;cursor:pointer
@@ -730,7 +738,11 @@ body.library-modal-open{
   .modeTab{flex:1;padding:8px 7px;font-size:12px}
   .favoriteSessionBar{margin-bottom:9px;padding:10px 11px}
   .favoriteSessionActions{width:100%}
-  .favoriteSessionActions .favoriteSessionBtn{flex:1}
+  .favoriteSessionActions.show{display:grid;grid-template-columns:1fr 1fr}
+  .favoriteSessionActions .favoriteSessionProgress,
+  .favoriteSessionActions .favoriteSessionMeta{grid-column:auto}
+  .favoriteSessionActions .favoriteSessionBtn{width:100%}
+  .classicSourceHint{width:100%;margin-left:0}
   .choiceSessionBar{margin-bottom:9px;padding:10px 11px}
   .choiceGapPresets{width:100%}
   .choiceGapBtn{flex:1}
@@ -810,8 +822,8 @@ body.library-modal-open{
 <div class="app">
 <header class="topbar">
   <div class="brand">
-    <div class="brandTitle">增长量速算 <span class="versionPill">V4.5.1</span></div>
-    <div class="brandSub">经典训练 · 收藏复盘 · 四选一决策</div>
+    <div class="brandTitle">增长量速算 <span class="versionPill">V4.7</span></div>
+    <div class="brandSub">经典估算 · 四选一决策 · 双题源训练</div>
   </div>
 
   <div class="trainControls">
@@ -883,26 +895,30 @@ body.library-modal-open{
 </header>
 
 <div class="modeStrip" id="modeStrip">
-  <button class="modeTab active" id="modeClassic">经典模式</button>
-  <button class="modeTab" id="modeFavorites">收藏模式</button>
-  <button class="modeTab" id="modeChoice">选择模式</button>
+  <button class="modeTab active" id="modeChoice">选择模式</button>
+  <button class="modeTab" id="modeClassic">经典模式</button>
 </div>
 
 <div class="favoriteSessionBar" id="favoriteSessionBar">
   <div class="favoriteSessionInfo">
-    <span class="favoriteSessionBadge">★ 收藏练习</span>
+    <span class="favoriteSessionBadge classicBadge">经典训练</span>
+    <div class="choiceSourceGroup">
+      <span class="choiceSourceLabel">题源</span>
+      <button class="choiceSourceBtn active" id="classicSourceRandom">随机题</button>
+      <button class="choiceSourceBtn" id="classicSourceFavorites">收藏题</button>
+    </div>
+    <span class="favoriteSessionMeta classicSourceHint" id="classicSourceHint">随机题源 · 使用上方筛选条件出题</span>
+  </div>
+  <div class="favoriteSessionActions" id="classicFavoriteControls">
     <span class="favoriteSessionProgress" id="favoriteSessionProgress">尚未开始</span>
     <span class="favoriteSessionMeta" id="favoriteSessionMeta"></span>
-  </div>
-  <div class="favoriteSessionActions">
     <button class="favoriteSessionBtn" id="favoriteSequential">顺序练习</button>
     <button class="favoriteSessionBtn" id="favoriteShuffle">随机不重复</button>
     <button class="favoriteSessionBtn" id="favoriteOpenLibrary">打开收藏库</button>
-    <button class="favoriteSessionBtn primaryFav" id="favoriteExit">返回经典</button>
   </div>
 </div>
 
-<div class="choiceSessionBar" id="choiceSessionBar">
+<div class="choiceSessionBar show" id="choiceSessionBar">
   <div class="choiceSessionInfo">
     <span class="choiceSessionBadge">A/B/C/D 选择训练</span>
     <div class="choiceSourceGroup">
@@ -910,7 +926,7 @@ body.library-modal-open{
       <button class="choiceSourceBtn active" id="choiceSourceRandom">随机题</button>
       <button class="choiceSourceBtn" id="choiceSourceFavorites">收藏题</button>
     </div>
-    <span class="choiceGapLabel">选项间距</span>
+    <span class="choiceGapLabel">干扰项间距</span>
     <div class="choiceGapPresets">
       <button class="choiceGapBtn" data-choice-gap="1">1%</button>
       <button class="choiceGapBtn" data-choice-gap="2">2%</button>
@@ -925,7 +941,7 @@ body.library-modal-open{
       <button class="choiceGapBtn" id="applyChoiceGap">应用</button>
     </div>
   </div>
-  <div class="choiceSessionHint" id="choiceSessionHint">随机题源 · 相邻选项约相差真实结果的 3%；系统会做考试化取整。</div>
+  <div class="choiceSessionHint" id="choiceSessionHint">随机题源 · 正确项优先贴近精确结果；干扰项按 3% 左右的间距生成。</div>
   <div class="choiceFavoriteControls" id="choiceFavoriteControls">
     <div class="choiceFavProgress">
       <span id="choiceFavoriteProgress">尚未开始</span>
@@ -1056,7 +1072,7 @@ body.library-modal-open{
       </div>
       <div class="choiceOptions" id="choiceOptions"></div>
       <div class="choiceActionRow">
-        <div class="choiceStrategyHint" id="choiceStrategyHint">选项差距越大，估算到能排除即可，不必追求精算。</div>
+        <div class="choiceStrategyHint" id="choiceStrategyHint">干扰项越疏，估算到能稳定排除即可，不必追求精算。</div>
         <button class="choiceSubmit" id="choiceSubmit">提交选择</button>
       </div>
     </div>
@@ -1548,6 +1564,7 @@ function generate(type,dirMode){
 let cur=null,submitted=false,startTime=0,timerId=null,timerStarted=false;
 
 let appMode='classic';
+let classicSource='random';
 let choiceSettings={gap:3};
 let choiceSelectedIndex=null;
 let choiceSource='random';
@@ -1571,11 +1588,66 @@ function friendlyChoiceStep(raw){
   else unit=.01;
   return Math.max(unit,Math.round(raw/unit)*unit);
 }
+
 function choiceDecimals(step){
   if(step>=1&&Math.abs(step-Math.round(step))<1e-9)return 0;
   if(step>=.1)return 1;
-  return 2;
+  if(step>=.01)return 2;
+  return 3;
 }
+
+function decimalsForUnit(unit){
+  if(unit>=1&&Math.abs(unit-Math.round(unit))<1e-9)return 0;
+  if(unit>=.1)return 1;
+  if(unit>=.01)return 2;
+  if(unit>=.001)return 3;
+  return 4;
+}
+
+function cleanChoiceNumber(x){
+  return Number(Number(x).toFixed(10));
+}
+
+/*
+ * 正确项与干扰项分开生成：
+ * 1) 正确项先做自然取整，并限制相对误差；
+ * 2) 干扰项间距再按用户设置单独生成。
+ *
+ * 默认正确项误差 <= 0.5%。当干扰项很密时，
+ * 还会自动提高正确项精度，避免干扰项反而比“正确项”更接近精确值。
+ */
+function buildCorrectChoice(truth,gap){
+  const absTruth=Math.abs(truth);
+  const allowedPct=Math.min(.5,Math.max(.01,gap*.2));
+  if(!Number.isFinite(absTruth)||absTruth===0){
+    return{value:0,unit:.01,errorPct:0,allowedPct};
+  }
+
+  const scale=Math.pow(10,Math.floor(Math.log10(absTruth)));
+  const multipliers=[
+    .1,.05,.02,.01,.005,.002,.001,
+    .0005,.0002,.0001,.00005,.00002,.00001,
+    .000005,.000002,.000001
+  ];
+
+  for(const mult of multipliers){
+    const unit=scale*mult;
+    const value=cleanChoiceNumber(Math.round(truth/unit)*unit);
+    const errorPct=Math.abs(value-truth)/absTruth*100;
+    if(errorPct<=allowedPct+1e-10){
+      return{value,unit,errorPct,allowedPct};
+    }
+  }
+
+  const value=cleanChoiceNumber(truth);
+  return{
+    value,
+    unit:scale*.000001,
+    errorPct:Math.abs(value-truth)/absTruth*100,
+    allowedPct
+  };
+}
+
 function nearestChoiceIndex(value,options){
   let idx=0,best=Infinity;
   options.forEach((v,i)=>{
@@ -1584,25 +1656,50 @@ function nearestChoiceIndex(value,options){
   });
   return idx;
 }
+
 function buildChoiceSet(truth,gap=choiceSettings.gap){
+  const correct=buildCorrectChoice(truth,gap);
+
+  // “干扰项间距”只负责控制错误选项与正确项之间的距离。
   const rawStep=Math.abs(truth)*gap/100;
   const step=friendlyChoiceStep(rawStep);
-  const anchor=Math.round(truth/step)*step;
-  const intended=randInt(0,3);
-  const options=[0,1,2,3].map(i=>Math.max(step*.1,anchor+(i-intended)*step));
-  const correctIndex=nearestChoiceIndex(truth,options);
+
+  // 正确项在 A/B/C/D 中的位置随机；只保留数值为正的布局。
+  const validRanks=[0,1,2,3].filter(rank=>correct.value-rank*step>0);
+  const correctIndex=validRanks.length
+    ?validRanks[randInt(0,validRanks.length-1)]
+    :0;
+
+  const options=[0,1,2,3].map(i=>
+    cleanChoiceNumber(correct.value+(i-correctIndex)*step)
+  );
+
+  // 真实值到相邻选项判定中点的距离，作为保守“稳选误差”。
   const boundaries=[];
-  if(correctIndex>0)boundaries.push((options[correctIndex-1]+options[correctIndex])/2);
-  if(correctIndex<3)boundaries.push((options[correctIndex]+options[correctIndex+1])/2);
+  if(correctIndex>0){
+    boundaries.push((options[correctIndex-1]+options[correctIndex])/2);
+  }
+  if(correctIndex<3){
+    boundaries.push((options[correctIndex]+options[correctIndex+1])/2);
+  }
   const safeMarginPct=boundaries.length
     ?Math.min(...boundaries.map(x=>Math.abs(x-truth)))/Math.abs(truth)*100
     :gap/2;
+
+  const decimals=Math.max(
+    choiceDecimals(step),
+    decimalsForUnit(correct.unit)
+  );
+
   return{
     requestedGap:gap,
     step,
-    decimals:choiceDecimals(step),
+    decimals,
     options,
     correctIndex,
+    correctValue:correct.value,
+    correctOptionErrorPct:correct.errorPct,
+    correctAllowedPct:correct.allowedPct,
     actualGap:step/Math.abs(truth)*100,
     safeMarginPct
   };
@@ -1636,17 +1733,52 @@ function updateAnswerModeUI(){
   $('classicAnswerArea').hidden=choice;
   $('choiceAnswer').hidden=!choice;
   $('choiceSessionBar').classList.toggle('show',choice);
-  $('favoriteSessionBar').classList.toggle('show',appMode==='favorites');
+  $('favoriteSessionBar').classList.toggle('show',appMode==='classic');
   $('choiceFavoriteControls').classList.toggle('show',choice&&choiceSource==='favorites');
+  updateClassicSourceUI();
   updateChoiceSourceUI();
 }
+
+function updateClassicSourceUI(){
+  $('classicSourceRandom').classList.toggle('active',classicSource==='random');
+  $('classicSourceFavorites').classList.toggle('active',classicSource==='favorites');
+  $('classicFavoriteControls').classList.toggle(
+    'show',
+    appMode==='classic'&&classicSource==='favorites'
+  );
+
+  if(classicSource==='random'){
+    $('classicSourceHint').textContent='随机题源 · 使用上方方向、题型和筛选条件出题';
+  }else{
+    $('classicSourceHint').textContent='收藏题源 · 仓库收藏 + 本地收藏';
+  }
+  updateFavoriteSessionUI();
+}
+
+function setClassicSource(source,opts={}){
+  classicSource=source;
+  setFocusMode(false);
+
+  if(source==='random'){
+    favoriteSession={type:'sequential',queue:[],index:-1,complete:false};
+    updateClassicSourceUI();
+    if(appMode==='classic'&&opts.load!==false)newClassicQuestion();
+    return;
+  }
+
+  updateClassicSourceUI();
+  if(appMode==='classic'&&opts.load!==false){
+    startFavoriteSession(opts.type||favoriteSession.type||'sequential',opts.startQuestion||null);
+  }
+}
+
 function updateChoiceGapUI(){
   document.querySelectorAll('[data-choice-gap]').forEach(btn=>{
     btn.classList.toggle('active',Math.abs(Number(btn.dataset.choiceGap)-choiceSettings.gap)<1e-9);
   });
   const sourceText=choiceSource==='favorites'?'收藏题源':'随机题源';
   $('choiceSessionHint').textContent=
-    `${sourceText} · 相邻选项约相差真实结果的 ${fmt(choiceSettings.gap,1)}%；系统会做考试化取整。`;
+    `${sourceText} · 正确项误差控制在 0.5% 内；干扰项按约 ${fmt(choiceSettings.gap,1)}% 间距生成。`;
 }
 
 function updateChoiceSourceUI(){
@@ -1811,7 +1943,8 @@ function renderChoiceOptions(showResult=false){
     });
   }
   $('choiceStrategyHint').textContent=
-    `设定间距 ${fmt(set.requestedGap,1)}%，考试化取整后实际约 ${fmt(set.actualGap,2)}%。`;
+    `正确项误差 ${fmtPct(set.correctOptionErrorPct??pctErr(set.options[set.correctIndex],cur.truth),2)}；`+
+    `设定干扰项间距 ${fmt(set.requestedGap,1)}%，实际约 ${fmt(set.actualGap,2)}%。`;
 }
 function loadChoiceQuestion(q,savedChoiceSet=null){
   const truth=exactGrowth(q.A,q.p,q.dir||'positive');
@@ -1846,23 +1979,26 @@ function favoritePool(){
 function setAppMode(mode,opts={}){
   appMode=mode;
   $('modeClassic').classList.toggle('active',mode==='classic');
-  $('modeFavorites').classList.toggle('active',mode==='favorites');
   $('modeChoice').classList.toggle('active',mode==='choice');
-  $('favoriteSessionBar').classList.toggle('show',mode==='favorites');
-  $('choiceSessionBar').classList.toggle('show',mode==='choice');
   updateAnswerModeUI();
 
   if(mode==='classic'){
-    favoriteSession={type:null,queue:[],index:-1,complete:false};
-    choiceFavoriteSession={type:'sequential',queue:[],index:-1,complete:false};
-    updateFavoriteSessionUI();
-    if(opts.load!==false)newClassicQuestion();
+    setFocusMode(false);
+    if(opts.load!==false){
+      if(classicSource==='favorites'){
+        if(favoriteSession.queue.length&&!favoriteSession.complete){
+          loadFavoriteQuestionAt(Math.max(0,favoriteSession.index));
+        }else{
+          startFavoriteSession(favoriteSession.type||'sequential');
+        }
+      }else{
+        newClassicQuestion();
+      }
+    }
     return;
   }
 
   if(mode==='choice'){
-    favoriteSession={type:null,queue:[],index:-1,complete:false};
-    updateFavoriteSessionUI();
     setFocusMode(false);
     updateChoiceSourceUI();
 
@@ -1877,34 +2013,23 @@ function setAppMode(mode,opts={}){
         newChoiceQuestion();
       }
     }
-    return;
-  }
-
-  choiceFavoriteSession={type:'sequential',queue:[],index:-1,complete:false};
-  setFocusMode(false);
-  updateFavoriteSessionUI();
-  if(opts.start==='shuffle') startFavoriteSession('shuffle');
-  else if(opts.start==='sequential') startFavoriteSession('sequential');
-  else if(opts.load!==false && !favoriteSession.queue.length){
-    const pool=favoritePool();
-    if(pool.length) startFavoriteSession('sequential');
-    else{
-      updateFavoriteSessionUI();
-      openCustom();
-    }
   }
 }
 
 function updateFavoriteSessionUI(){
   const bar=$('favoriteSessionBar');
   if(!bar)return;
-  bar.classList.toggle('show',appMode==='favorites');
+  bar.classList.toggle('show',appMode==='classic');
+  $('classicFavoriteControls').classList.toggle(
+    'show',
+    appMode==='classic'&&classicSource==='favorites'
+  );
 
   const total=favoriteSession.queue.length;
   const idx=favoriteSession.index;
   const meta=favoriteSession.type==='shuffle'?'随机不重复':favoriteSession.type==='sequential'?'顺序练习':'';
 
-  if(appMode!=='favorites'){
+  if(appMode!=='classic'||classicSource!=='favorites'){
     $('favoriteSessionProgress').textContent='尚未开始';
     $('favoriteSessionMeta').textContent='';
     return;
@@ -1929,10 +2054,14 @@ function updateFavoriteSessionUI(){
 
 function startFavoriteSession(type='sequential',startQuestion=null){
   const pool=favoritePool();
+  appMode='classic';
+  classicSource='favorites';
+
   if(!pool.length){
-    appMode='favorites';
     favoriteSession={type,queue:[],index:-1,complete:false};
-    updateFavoriteSessionUI();
+    $('modeClassic').classList.add('active');
+    $('modeChoice').classList.remove('active');
+    updateAnswerModeUI();
     openCustom();
     return;
   }
@@ -1952,12 +2081,10 @@ function startFavoriteSession(type='sequential',startQuestion=null){
     }
   }
 
-  appMode='favorites';
   favoriteSession={type,queue,index:0,complete:false};
-  $('modeClassic').classList.remove('active');
-  $('modeFavorites').classList.add('active');
-  $('favoriteSessionBar').classList.add('show');
-  updateFavoriteSessionUI();
+  $('modeClassic').classList.add('active');
+  $('modeChoice').classList.remove('active');
+  updateAnswerModeUI();
   loadFavoriteQuestionAt(0);
 }
 
@@ -1972,7 +2099,7 @@ function loadFavoriteQuestionAt(index){
   updateFavoriteSessionUI();
   loadQuestion({
     A:q.A,p:q.p,dir:q.dir,
-    kind:favoriteSession.type==='shuffle'?'收藏模式 · 随机':'收藏模式 · 顺序',
+    kind:favoriteSession.type==='shuffle'?'经典模式 · 收藏题 · 随机':'经典模式 · 收藏题 · 顺序',
     sourceFavoriteId:q.id
   });
   updateFavoriteSessionUI();
@@ -2000,11 +2127,13 @@ function nextFavoriteQuestion(){
 }
 
 function nextQuestionByMode(){
-  if(appMode==='favorites')nextFavoriteQuestion();
-  else if(appMode==='choice'){
+  if(appMode==='choice'){
     if(choiceSource==='favorites')nextChoiceFavoriteQuestion();
     else newChoiceQuestion();
-  }else newClassicQuestion();
+  }else{
+    if(classicSource==='favorites')nextFavoriteQuestion();
+    else newClassicQuestion();
+  }
 }
 
 function skipQuestionByMode(){
@@ -2012,11 +2141,13 @@ function skipQuestionByMode(){
   clearInterval(timerId);
   submitted=false;
   timerStarted=false;
-  if(appMode==='favorites')nextFavoriteQuestion();
-  else if(appMode==='choice'){
+  if(appMode==='choice'){
     if(choiceSource==='favorites')nextChoiceFavoriteQuestion();
     else newChoiceQuestion();
-  }else newClassicQuestion();
+  }else{
+    if(classicSource==='favorites')nextFavoriteQuestion();
+    else newClassicQuestion();
+  }
 }
 
 
@@ -2211,7 +2342,7 @@ async function loadRemoteCustomQuestions(force=false){
     }
   }
   updateCustomCount();
-  if(appMode==='favorites'&&!favoriteSession.queue.length)updateFavoriteSessionUI();
+  if(appMode==='classic'&&classicSource==='favorites'&&!favoriteSession.queue.length)updateFavoriteSessionUI();
   if(appMode==='choice'&&choiceSource==='favorites'&&!choiceFavoriteSession.queue.length)updateChoiceSourceUI();
   if($('libraryModal')?.classList.contains('show') && $('favoritesPanel')?.classList.contains('active'))renderCustom();
 }
@@ -2294,7 +2425,7 @@ function loadQuestion(q){
   clearSelection();
   $('submit').disabled=false;
   $('choiceSubmit').disabled=false;
-  const favoriteLike=appMode==='favorites'||(appMode==='choice'&&choiceSource==='favorites');
+  const favoriteLike=(appMode==='classic'&&classicSource==='favorites')||(appMode==='choice'&&choiceSource==='favorites');
   $('next').textContent=favoriteLike
     ?(appMode==='choice'?'下一道收藏选择题（N）':'下一道收藏（N）')
     :'下一题（N）';
@@ -2371,18 +2502,19 @@ function submitChoiceCurrent(){
   const correctValue=set.options[set.correctIndex];
 
   $('judgeTitle').textContent=correct?'选择正确':'选择错误';
+  const correctOptionError=set.correctOptionErrorPct??pctErr(correctValue,cur.truth);
   $('judgeSub').textContent=
     `${choiceSource==='favorites'?'收藏题源 · ':'随机题源 · '}你选 ${letters[choiceSelectedIndex]}（${fmt(selectedValue,set.decimals)}）；`+
-    `正确答案 ${letters[set.correctIndex]}（${fmt(correctValue,set.decimals)}）。`+
-    `设定间距 ${fmt(set.requestedGap,1)}%，实际约 ${fmt(set.actualGap,2)}%。`;
+    `正确答案 ${letters[set.correctIndex]}（${fmt(correctValue,set.decimals)}），与精确结果误差 ${fmtPct(correctOptionError,2)}。`+
+    `设定干扰项间距 ${fmt(set.requestedGap,1)}%，实际约 ${fmt(set.actualGap,2)}%。`;
   $('feedbackHead').className='feedback-head '+(correct?'good':'bad');
   $('feedbackMetrics').innerHTML=`<div>用时 ${fmt(elapsed,1)} s</div>`;
 
   $('summaryCards').innerHTML=`
-    <div class="summaryCard"><span>答题结果</span><strong>${correct?'正确':'错误'}</strong></div>
     <div class="summaryCard"><span>正确选项</span><strong>${letters[set.correctIndex]} · ${fmt(correctValue,set.decimals)}</strong></div>
-    <div class="summaryCard"><span>实际选项间距</span><strong>${fmtPct(set.actualGap,2)}</strong></div>
-    <div class="summaryCard"><span>稳选误差约</span><strong>±${fmtPct(set.safeMarginPct,2)}</strong></div>`;
+    <div class="summaryCard"><span>正确项误差</span><strong>${fmtPct(correctOptionError,2)}</strong></div>
+    <div class="summaryCard"><span>实际干扰项间距</span><strong>${fmtPct(set.actualGap,2)}</strong></div>
+    <div class="summaryCard"><span>保守稳选误差</span><strong>±${fmtPct(set.safeMarginPct,2)}</strong></div>`;
 
   setFocusMode(false);
   renderChoiceOptions(true);
@@ -2419,6 +2551,7 @@ function submitChoiceCurrent(){
     choiceCorrectIndex:set.correctIndex,
     choiceGap:set.requestedGap,
     choiceActualGap:set.actualGap,
+    choiceCorrectOptionError:correctOptionError,
     choiceSafeMargin:set.safeMarginPct,
     choiceDecimals:set.decimals,
     priorityKey:evaluation.priority.key,priorityName:evaluation.priority.name,
@@ -2477,9 +2610,10 @@ function submitCurrent(){
     id:Date.now()+'_'+Math.random().toString(36).slice(2,7),
     ts:Date.now(),A:cur.A,p:cur.p,dir:cur.dir,kind:cur.kind,safe,
     practiceMode:appMode,
-    favoriteSessionType:appMode==='favorites'?favoriteSession.type:null,
-    favoriteSessionIndex:appMode==='favorites'?favoriteSession.index:null,
-    favoriteSessionTotal:appMode==='favorites'?favoriteSession.queue.length:null,
+    classicSource:appMode==='classic'?classicSource:null,
+    favoriteSessionType:appMode==='classic'&&classicSource==='favorites'?favoriteSession.type:null,
+    favoriteSessionIndex:appMode==='classic'&&classicSource==='favorites'?favoriteSession.index:null,
+    favoriteSessionTotal:appMode==='classic'&&classicSource==='favorites'?favoriteSession.queue.length:null,
     chosenKey:c.value,chosenName:selectedLabel,
     userAns:u,userErr:ue,methodOK,correct:methodOK,
     priorityKey:evaluation.priority.key,priorityName:evaluation.priority.name,
@@ -2493,14 +2627,9 @@ $('startTimerBtn').onclick=startTimer;
 
 
 $('modeClassic').onclick=()=>setAppMode('classic');
-$('modeFavorites').onclick=()=>{
-  if(appMode==='favorites'){
-    updateFavoriteSessionUI();
-    return;
-  }
-  setAppMode('favorites');
-};
 $('modeChoice').onclick=()=>setAppMode('choice');
+$('classicSourceRandom').onclick=()=>setClassicSource('random');
+$('classicSourceFavorites').onclick=()=>setClassicSource('favorites',{type:'sequential'});
 $('choiceSourceRandom').onclick=()=>setChoiceSource('random');
 $('choiceSourceFavorites').onclick=()=>setChoiceSource('favorites',{type:'sequential'});
 $('choiceFavoriteSequential').onclick=()=>startChoiceFavoriteSession('sequential');
@@ -2513,7 +2642,6 @@ $('choiceFavoriteOpenLibrary').onclick=()=>{
 $('favoriteSequential').onclick=()=>startFavoriteSession('sequential');
 $('favoriteShuffle').onclick=()=>startFavoriteSession('shuffle');
 $('favoriteOpenLibrary').onclick=openCustom;
-$('favoriteExit').onclick=()=>setAppMode('classic');
 
 $('focusToggle').onclick=()=>setFocusMode(!focusMode);
 $('focusExit').onclick=()=>setFocusMode(false);
@@ -2549,11 +2677,11 @@ $('skipQuestion').onclick=skipQuestion;
 $('submit').onclick=submitCurrent;
 $('next').onclick=nextQuestionByMode;
 $('mode').onchange=()=>{
-  if(appMode==='classic')newClassicQuestion();
+  if(appMode==='classic'&&classicSource==='random')newClassicQuestion();
   else if(appMode==='choice'&&choiceSource==='random')newChoiceQuestion();
 };
 $('direction').onchange=()=>{
-  if(appMode==='classic')newClassicQuestion();
+  if(appMode==='classic'&&classicSource==='random')newClassicQuestion();
   else if(appMode==='choice'&&choiceSource==='random')newChoiceQuestion();
 };
 
@@ -2613,7 +2741,7 @@ $('applyFilter').onclick=()=>{
   trainFilter={digits,minRate:one(min),maxRate:one(max)};
   updateFilterLabel();
   closeFilterPopover();
-  if(appMode==='classic')newClassicQuestion();
+  if(appMode==='classic'&&classicSource==='random')newClassicQuestion();
   else if(appMode==='choice'&&choiceSource==='random')newChoiceQuestion();
 };
 $('resetFilter').onclick=()=>{
@@ -2624,7 +2752,7 @@ $('resetFilter').onclick=()=>{
   $('filterError').textContent='';
   updateFilterLabel();
   closeFilterPopover();
-  if(appMode==='classic')newClassicQuestion();
+  if(appMode==='classic'&&classicSource==='random')newClassicQuestion();
   else if(appMode==='choice'&&choiceSource==='random')newChoiceQuestion();
 };
 
@@ -2909,6 +3037,7 @@ function renderCustom(){
     if(appMode==='choice'&&choiceSource==='favorites'){
       startChoiceFavoriteSession('sequential',q);
     }else{
+      classicSource='favorites';
       startFavoriteSession('sequential',q);
     }
   });
@@ -3033,7 +3162,10 @@ $('exportFavoritesQuick').onclick=exportCustomBackup;
 $('practiceSequentialCustom').onclick=()=>{
   closeCustom();
   if(appMode==='choice'&&choiceSource==='favorites')startChoiceFavoriteSession('sequential');
-  else startFavoriteSession('sequential');
+  else{
+    classicSource='favorites';
+    startFavoriteSession('sequential');
+  }
 };
 $('practiceRandomCustom').onclick=()=>{
   const items=favoritePool();
@@ -3043,7 +3175,10 @@ $('practiceRandomCustom').onclick=()=>{
   }
   closeCustom();
   if(appMode==='choice'&&choiceSource==='favorites')startChoiceFavoriteSession('shuffle');
-  else startFavoriteSession('shuffle');
+  else{
+    classicSource='favorites';
+    startFavoriteSession('shuffle');
+  }
 };
 $('clearCustom').onclick=()=>{
   if(loadCustom().length&&confirm('清空全部本地收藏？')){
@@ -3108,7 +3243,7 @@ function renderHistory(){
         ?` · ${Number(x.choiceFavoriteSessionIndex)+1}/${x.choiceFavoriteSessionTotal}`
         :'';
       subText=`${dateText(x.ts)}${elapsedText} · 选择模式 · ${choiceSourceText}${choiceProgress} · `+
-        `你选 ${letters[sel]||'—'} ${x.choiceCorrect?'✓':'✗'} · 选项间距 ${fmt(Number(x.choiceGap)||0,1)}%`;
+        `你选 ${letters[sel]||'—'} ${x.choiceCorrect?'✓':'✗'} · 干扰项间距 ${fmt(Number(x.choiceGap)||0,1)}%`;
       const dec=Number.isFinite(Number(x.choiceDecimals))?Number(x.choiceDecimals):1;
       detailExtra=`
         <div class="historyChoiceOptions">
@@ -3118,11 +3253,20 @@ function renderHistory(){
             return `<div class="historyChoiceOpt ${cls}">${letters[i]} · ${fmt(v,dec)}${mark}</div>`;
           }).join('')}
         </div>
-        <div class="choiceMethodNote">实际相邻间距约 <b>${fmtPct(Number(x.choiceActualGap)||0,2)}</b>；理论稳选误差约 <b>±${fmtPct(Number(x.choiceSafeMargin)||0,2)}</b>。四种速算中有 <b>${evaluation.enoughCount}</b> 种能落到正确选项。</div>`;
+        <div class="choiceMethodNote">正确项误差约 <b>${fmtPct(
+          Number.isFinite(Number(x.choiceCorrectOptionError))
+            ?Number(x.choiceCorrectOptionError)
+            :pctErr(Number((x.choiceOptions||[])[cor]),Number(x.truth)),
+          2
+        )}</b>；实际干扰项间距约 <b>${fmtPct(Number(x.choiceActualGap)||0,2)}</b>；保守稳选误差约 <b>±${fmtPct(Number(x.choiceSafeMargin)||0,2)}</b>。四种速算中有 <b>${evaluation.enoughCount}</b> 种能落到正确选项。</div>`;
     }else{
       const chosenEval=evaluation.info[x.chosenKey]?.label||'—';
       const userText=x.userAns==null?'未填写估值':`你的估值 ${fmt(x.userAns,2)}（误差 ${fmtPct(x.userErr,2)}）`;
-      subText=`${dateText(x.ts)}${elapsedText} · ${x.practiceMode==='favorites'?'收藏模式':'经典模式'} · `+
+      const classicSourceText=(x.classicSource==='favorites'||x.practiceMode==='favorites')?'收藏题源':'随机题源';
+      const classicProgress=(x.classicSource==='favorites'||x.practiceMode==='favorites')&&x.favoriteSessionTotal
+        ?` · ${Number(x.favoriteSessionIndex)+1}/${x.favoriteSessionTotal}`
+        :'';
+      subText=`${dateText(x.ts)}${elapsedText} · 经典模式 · ${classicSourceText}${classicProgress} · `+
         `你选：${x.chosenName}（${chosenEval}） · 优先：${evaluation.priority.name}<br>${userText}`;
     }
 
@@ -3139,7 +3283,7 @@ function renderHistory(){
       <div class="history-detail">
         <div class="history-meta">
           <span>出题侧重：${x.kind}</span>
-          ${isChoice?`<span>设定间距：${fmt(Number(x.choiceGap)||0,1)}%</span>`:`<span>安全阈值：${safe}%</span>`}
+          ${isChoice?`<span>干扰项间距：${fmt(Number(x.choiceGap)||0,1)}%</span>`:`<span>安全阈值：${safe}%</span>`}
           <span>精确值：${fmt(x.truth,3)}</span>
           <div class="history-actions">
             ${
@@ -3201,11 +3345,19 @@ function renderHistory(){
         options:(rec.choiceOptions||[]).map(Number),
         correctIndex:Number(rec.choiceCorrectIndex)||0,
         actualGap:Number(rec.choiceActualGap)||0,
+        correctOptionErrorPct:Number.isFinite(Number(rec.choiceCorrectOptionError))
+          ?Number(rec.choiceCorrectOptionError)
+          :pctErr(
+              Number((rec.choiceOptions||[])[Number(rec.choiceCorrectIndex)||0]),
+              Number(rec.truth)
+            ),
         safeMarginPct:Number(rec.choiceSafeMargin)||2
       };
       loadChoiceQuestion({A:rec.A,p:rec.p,dir:rec.dir||'positive',kind:'历史重做'},saved);
     }else{
-      setAppMode(rec.practiceMode==='favorites'?'favorites':'classic',{load:false});
+      classicSource=(rec.classicSource==='favorites'||rec.practiceMode==='favorites')?'favorites':'random';
+      setAppMode('classic',{load:false});
+      updateClassicSourceUI();
       loadQuestion({A:rec.A,p:rec.p,dir:rec.dir||'positive',kind:'历史重做'});
     }
   });
@@ -3266,10 +3418,13 @@ document.addEventListener('keydown',e=>{
 });
 
 showS();updateHistoryCount();updateCustomCount();updateFilterLabel();
-appMode='classic';
+appMode='choice';
+classicSource='random';
+choiceSource='random';
+updateClassicSourceUI();
 updateChoiceSourceUI();
 updateAnswerModeUI();
-newClassicQuestion();
+newChoiceQuestion();
 updateFavoriteSessionUI();
 updateMobileActions();
 loadRemoteCustomQuestions();
