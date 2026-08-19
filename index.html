@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>增长量速算自测 V3.9</title>
+<title>增长量速算自测 V4.2</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
@@ -306,41 +306,366 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
   .problem{min-height:220px}.methods{grid-template-columns:1fr}.formula{font-size:27px}.stats{grid-template-columns:repeat(2,1fr)}.calcGrid{grid-template-columns:1fr}.calcResults{grid-template-columns:1fr}
   .history-row{align-items:flex-start}.modal{padding:8px}.modal-panel{max-height:95vh}.modal-head{align-items:flex-start}.custom-form{grid-template-columns:1fr}.custom-item{align-items:flex-start;flex-direction:column}.custom-actions{justify-content:flex-start}.dataGrid{grid-template-columns:1fr}.dataImportRow{grid-template-columns:1fr}
 }
+
+/* ========================= V4.0 UI ========================= */
+:root{
+  --surface:#ffffff;
+  --surface-soft:#f8fafc;
+  --surface-blue:#f6f9ff;
+  --shadow-sm:0 8px 24px rgba(15,23,42,.055);
+  --shadow-lg:0 22px 70px rgba(15,23,42,.16);
+}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(180deg,#f7f9fd 0,#f4f6fa 45%,#f5f7fb 100%);min-height:100vh}
+button,select,input{transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,transform .12s ease}
+button:active{transform:translateY(1px)}
+.app{max-width:960px;padding-top:18px}
+
+/* compact top bar */
+.topbar{
+  position:sticky;top:0;z-index:35;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;
+  margin:0 -8px 18px;padding:10px 12px;
+  background:rgba(247,249,253,.88);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(226,232,240,.86)
+}
+.brand{min-width:max-content}
+.brandTitle{font-size:20px;font-weight:900;letter-spacing:-.02em}
+.versionPill{font-size:10px;color:#2563eb;background:#eff6ff;border:1px solid #dbeafe;border-radius:999px;padding:3px 7px;margin-left:6px;vertical-align:2px}
+.brandSub{font-size:11px;color:#94a3b8;margin-top:2px}
+.trainControls{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0}
+.compactSelect{
+  appearance:none;background:#fff;border:1px solid #e2e8f0;border-radius:11px;
+  padding:8px 30px 8px 11px;font-size:13px;font-weight:700;color:#334155;
+  background-image:linear-gradient(45deg,transparent 50%,#64748b 50%),linear-gradient(135deg,#64748b 50%,transparent 50%);
+  background-position:calc(100% - 15px) 13px,calc(100% - 10px) 13px;background-size:5px 5px,5px 5px;background-repeat:no-repeat
+}
+.compactSelect:hover{border-color:#cbd5e1}
+.navActions{display:flex;align-items:center;gap:7px}
+
+.filterWrap{position:relative}
+.filterBtn{
+  border:1px solid #dbe3ed;background:#fff;border-radius:11px;padding:8px 11px;
+  font-size:13px;font-weight:800;color:#334155;cursor:pointer;white-space:nowrap
+}
+.filterBtn.active{border-color:#93c5fd;background:#f5f9ff;color:#1d4ed8}
+.filterPopover{
+  position:absolute;left:50%;top:calc(100% + 8px);transform:translateX(-50%);
+  width:300px;display:none;padding:13px;background:#fff;border:1px solid #e2e8f0;
+  border-radius:14px;box-shadow:var(--shadow-lg);z-index:85
+}
+.filterPopover.show{display:block;animation:menuIn .14s ease}
+.filterTitle{font-size:12px;font-weight:850;color:#475569;margin-bottom:9px}
+.filterGrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.filterField label{display:block;font-size:11px;font-weight:750;color:#94a3b8;margin-bottom:5px}
+.filterField select,.filterField input{
+  width:100%;border:1px solid #e2e8f0;border-radius:9px;padding:8px 9px;
+  background:#fff;color:#334155;outline:none;font-size:13px
+}
+.filterField input:focus,.filterField select:focus{border-color:#93c5fd;box-shadow:0 0 0 3px #dbeafe}
+.filterActions{display:flex;justify-content:flex-end;gap:7px;margin-top:10px}
+.filterApply,.filterReset{
+  border-radius:9px;padding:8px 11px;font-size:12px;font-weight:850;cursor:pointer
+}
+.filterApply{border:0;background:#172033;color:#fff}
+.filterReset{border:1px solid #e2e8f0;background:#fff;color:#475569}
+.filterError{min-height:17px;margin-top:7px;color:#b91c1c;font-size:11px;font-weight:700}
+.favoriteCurrent{
+  border:1px solid #fde68a;background:#fffbeb;color:#a16207;border-radius:12px;
+  padding:11px 15px;font-weight:850;cursor:pointer
+}
+.favoriteCurrent.active{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+.favoriteCurrent.remote{background:#f5f3ff;border-color:#ddd6fe;color:#6d28d9;cursor:default}
+.navBtn{
+  border:1px solid #e2e8f0;background:#fff;border-radius:11px;padding:8px 11px;
+  font-size:13px;font-weight:800;color:#334155;cursor:pointer
+}
+.navBtn:hover{background:#f8fafc;border-color:#cbd5e1}
+.menuWrap{position:relative}
+.popMenu{
+  position:absolute;right:0;top:calc(100% + 8px);width:230px;
+  display:none;padding:8px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;
+  box-shadow:var(--shadow-lg);z-index:80
+}
+.popMenu.show{display:block;animation:menuIn .14s ease}
+@keyframes menuIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.popMenu .menuTitle{font-size:11px;color:#94a3b8;font-weight:800;padding:5px 8px 7px;text-transform:uppercase;letter-spacing:.04em}
+.popMenu button,.popMenu select{
+  width:100%;text-align:left;border:0;background:transparent;border-radius:9px;padding:9px 10px;
+  color:#334155;font-size:13px;cursor:pointer;margin:0
+}
+.popMenu button:hover{background:#f8fafc}
+.popMenu select{border:1px solid #e2e8f0;background:#fff;margin-bottom:6px}
+.menuCount{float:right;font-size:10px;background:#f1f5f9;color:#475569;border-radius:999px;padding:2px 6px}
+
+/* drawers below top bar */
+.calcDrawer,.statsDrawer{box-shadow:var(--shadow-sm);border-color:#e2e8f0}
+.calcDrawer.show,.statsDrawer.show{animation:drawerIn .18s ease}
+@keyframes drawerIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+/* main training area */
+.trainingShell{max-width:840px;margin:0 auto}
+.problem{
+  position:relative;min-height:275px;padding:24px 26px;border-radius:22px;
+  border:1px solid #e2e8f0;box-shadow:0 12px 38px rgba(15,23,42,.06);
+  background:
+    radial-gradient(circle at 86% 12%,rgba(37,99,235,.075),transparent 28%),
+    linear-gradient(145deg,#fff,#fbfdff)
+}
+.problemTop{align-items:center}
+.problemActions{display:flex;align-items:center;gap:7px}
+.focusBtn{
+  border:1px solid #dbeafe;background:#f8fbff;color:#2563eb;border-radius:10px;
+  padding:7px 10px;font-size:12px;font-weight:800;cursor:pointer
+}
+.focusBtn:hover{background:#eff6ff}
+.formula{justify-content:center;font-size:36px;margin:28px 0 23px}
+.frac{min-width:170px}
+.problem-meta{
+  justify-content:center;gap:0;margin:0 auto;padding:10px 5px 0;max-width:620px;
+  border-top:1px solid #eef2f7
+}
+.problem-meta>div{min-width:150px;text-align:center;padding:6px 18px;border-right:1px solid #eef2f7}
+.problem-meta>div:last-child{border-right:0}
+.problem-meta b{font-size:17px}
+.timerBox{justify-content:center}
+.startTimerBtn{box-shadow:0 3px 10px rgba(37,99,235,.08)}
+
+/* answer card */
+.answerCard{max-width:840px;margin:14px auto 0;padding:20px 22px;border-radius:20px}
+.answerHeader{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.answerHeader .section-title{margin:0}
+.keyboardHint{font-size:11px;color:#94a3b8}
+.methods{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.method{
+  min-height:92px;padding:13px 14px;border-color:#e2e8f0;border-radius:14px;
+  display:flex;flex-direction:column;justify-content:center
+}
+.method:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(15,23,42,.055);border-color:#93c5fd}
+.method.selected{border-color:#3b82f6;background:#f5f9ff;box-shadow:0 0 0 2px rgba(59,130,246,.08)}
+.method b{font-size:14px}
+.method small{font-size:12px}
+.keycap{background:#f1f5f9;border:1px solid #e2e8f0;color:#64748b}
+.answer-row{margin-top:13px}
+.answer-row input{background:#fbfdff;border-color:#e2e8f0}
+.primary{background:#172033;box-shadow:0 6px 16px rgba(15,23,42,.12)}
+.primary:hover{background:#0f172a}
+.hint{margin-top:8px}
+
+/* focus mode */
+.focusExit{
+  position:fixed;right:18px;top:16px;z-index:120;display:none;
+  border:1px solid #dbeafe;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+  color:#2563eb;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:800;
+  box-shadow:var(--shadow-sm);cursor:pointer
+}
+body.focus-mode .focusExit{display:block}
+body.focus-mode .topbar,
+body.focus-mode .calcDrawer,
+body.focus-mode .statsDrawer{display:none!important}
+body.focus-mode .app{padding-top:18px}
+body.focus-mode .trainingShell{max-width:800px}
+body.focus-mode .problem{margin-top:4vh}
+body.focus-mode .focusBtn{display:none}
+
+/* feedback summary */
+.feedback{margin-top:16px}
+.feedback-head{border:1px solid transparent}
+.feedback-head.good{border-color:#bbf7d0}
+.feedback-head.bad{border-color:#fed7aa}
+.summaryCards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 12px}
+.summaryCard{
+  border:1px solid #e2e8f0;background:#fff;border-radius:12px;padding:10px 11px
+}
+.summaryCard span{display:block;font-size:10px;color:#94a3b8;font-weight:800;margin-bottom:4px}
+.summaryCard strong{font-size:15px;color:#334155}
+.transformDetails{
+  border:1px solid #e2e8f0;background:#f8fafc;border-radius:12px;margin-bottom:10px;overflow:hidden
+}
+.transformDetails>summary{
+  list-style:none;cursor:pointer;padding:10px 12px;font-size:12px;font-weight:800;color:#64748b
+}
+.transformDetails>summary::-webkit-details-marker{display:none}
+.transformDetails[open]>summary{border-bottom:1px solid #e2e8f0}
+.transformDetails .transform{margin:0;border:0;border-radius:0;background:#fff}
+
+/* compact/collapsible method analysis */
+.result-table{gap:8px}
+.result{
+  padding:0;border-color:#e2e8f0;overflow:hidden;border-radius:13px;
+  transition:border-color .16s ease,box-shadow .16s ease
+}
+.result[open]{box-shadow:0 6px 18px rgba(15,23,42,.05)}
+.resultSummary{
+  list-style:none;cursor:pointer;padding:11px 13px;display:grid;
+  grid-template-columns:minmax(130px,1fr) auto auto;gap:10px;align-items:center
+}
+.resultSummary::-webkit-details-marker{display:none}
+.resultSummary:hover{background:#fafcff}
+.resultSummaryMain{font-weight:850;font-size:13px}
+.resultSummaryValue{font-size:17px;font-weight:900;color:#1e293b;white-space:nowrap}
+.resultSummary .tags{justify-content:flex-end}
+.resultBody{border-top:1px solid #eef2f7;padding:11px 13px 13px;background:#fff}
+.resultBody .steps{margin:0}
+.result.priority{background:#fbfffc}
+.result.usable{background:#fbfdff}
+.exact{border-radius:12px}
+
+/* unified library center */
+.libraryTabs{display:flex;gap:6px;padding:10px 18px 0;border-bottom:1px solid #eef2f7}
+.libraryTab{
+  border:0;background:transparent;padding:9px 12px;font-size:13px;font-weight:850;
+  color:#64748b;border-radius:9px 9px 0 0;cursor:pointer;border-bottom:2px solid transparent
+}
+.libraryTab.active{color:#2563eb;border-bottom-color:#2563eb;background:#f8fbff}
+.libraryPanel{display:none}
+.libraryPanel.active{display:block}
+.libraryPanel .history-body{padding-top:12px}
+
+/* mobile action bar */
+.mobileActionBar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
+  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid #e2e8f0;box-shadow:0 -8px 24px rgba(15,23,42,.07)
+}
+.mobileActionBar .mobileInner{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:540px;margin:0 auto}
+.mobileBtn{
+  border:1px solid #dbe3ed;background:#fff;border-radius:11px;padding:11px;font-weight:850;color:#475569
+}
+.mobileBtn.primaryMobile{background:#172033;color:#fff;border-color:#172033}
+.mobileBtn[hidden]{display:none!important}
+
+/* modal polish */
+.modal{backdrop-filter:blur(3px)}
+.modal-panel{border:1px solid rgba(226,232,240,.9);box-shadow:0 30px 90px rgba(15,23,42,.24)}
+.modal-head{background:#fff}
+
+/* narrow screens */
+@media(max-width:760px){
+  .app{padding:12px 12px 86px}
+  .topbar{
+    position:sticky;grid-template-columns:1fr auto;gap:8px;margin:0 -4px 12px;padding:9px 6px
+  }
+  .brandSub{display:none}
+  .trainControls{grid-column:1/-1;grid-row:2;justify-content:stretch}.filterPopover{position:fixed;left:12px;right:12px;top:108px;transform:none;width:auto}
+  .compactSelect{flex:1;min-width:0}
+  .navActions{grid-column:2;grid-row:1}
+  .brand{grid-column:1;grid-row:1}
+  .navBtn{padding:7px 9px}
+  .popMenu{position:fixed;right:12px;top:58px;width:min(260px,calc(100vw - 24px))}
+  .problem{min-height:235px;padding:18px 14px}
+  .formula{font-size:29px;margin:22px 0 18px}
+  .frac{min-width:145px}
+  .problem-meta{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .problem-meta>div{min-width:0;border-right:1px solid #eef2f7}
+  .problem-meta>div:nth-child(2){border-right:0}
+  .problem-meta>div:last-child{grid-column:1/-1;border-right:0;border-top:1px solid #eef2f7;margin-top:4px}
+  .answerCard{padding:15px 13px}
+  .methods{grid-template-columns:1fr 1fr;gap:7px}
+  .method{min-height:88px;padding:11px}
+  .method b{font-size:13px}
+  .method small{font-size:11px}
+  .answer-row{grid-template-columns:1fr}
+  .answer-row .primary{display:none}
+  .summaryCards{grid-template-columns:1fr 1fr}
+  .resultSummary{grid-template-columns:1fr auto}
+  .resultSummary .tags{grid-column:1/-1;justify-content:flex-start}
+  .mobileActionBar{display:block}
+  .nextrow{display:none}
+  .modal{padding:0;align-items:flex-end}
+  .modal-panel{
+    width:100%;max-height:94dvh;border-radius:20px 20px 0 0;border-bottom:0
+  }
+  .modal-head{position:sticky;top:0;z-index:2}
+  .libraryTabs{position:sticky;top:67px;z-index:2;background:#fff}
+  body.focus-mode .problem{margin-top:1vh}
+}
+@media(max-width:430px){
+  .methods{grid-template-columns:1fr}
+  .formula{font-size:27px}
+  .problemActions .skipBtn{display:none}
+  .keyboardHint{display:none}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-<header>
-  <div>
-    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.9</span></h1>
-    <div class="subtitle">随机题可从历史记录收藏；自定义题自动收藏；data/custom_questions.json 作为仓库收藏题库维护。</div>
+<header class="topbar">
+  <div class="brand">
+    <div class="brandTitle">增长量速算 <span class="versionPill">V4.2</span></div>
+    <div class="brandSub">结构判断 · 心算训练 · 收藏复盘</div>
   </div>
-  <div class="toolbar">
-    <select id="direction">
+
+  <div class="trainControls">
+    <select id="direction" class="compactSelect" aria-label="增长方向">
       <option value="positive">正增长</option>
       <option value="negative">负增长</option>
       <option value="mixed">正负混合</option>
     </select>
-    <select id="mode">
+    <select id="mode" class="compactSelect" aria-label="出题模式">
       <option value="mixed">综合随机</option>
       <option value="feature">百化分型</option>
       <option value="scale100">凑100型</option>
       <option value="scaleNr">归一100+型</option>
       <option value="direct">直除型</option>
     </select>
-    <select id="safe">
-      <option value="1">安全阈值 1%</option>
-      <option value="2" selected>安全阈值 2%</option>
-      <option value="3">安全阈值 3%</option>
-    </select>
-    <button class="smallbtn historyBtn" id="openHistory">历史题目 <span class="historyCount" id="historyCount">0</span></button>
-    <button class="smallbtn customBtn" id="openCustom">收藏题库 <span class="customCount" id="customCount">0</span></button>
-    <button class="smallbtn" id="openData">数据管理</button>
-    <button class="smallbtn" id="toggleCalculator">验证计算器</button>
-    <button class="smallbtn statsToggle" id="toggleStats"><span class="statsDot"></span>训练统计</button>
+    <div class="filterWrap">
+      <button class="filterBtn" id="toggleFilter">筛选：全部位 · 5–50%</button>
+      <div class="filterPopover" id="filterPopover">
+        <div class="filterTitle">随机出题筛选</div>
+        <div class="filterGrid">
+          <div class="filterField">
+            <label for="digitFilter">现期量位数</label>
+            <select id="digitFilter">
+              <option value="all">全部</option>
+              <option value="3">3位数</option>
+              <option value="4">4位数</option>
+              <option value="5">5位数</option>
+            </select>
+          </div>
+          <div></div>
+          <div class="filterField">
+            <label for="rateMin">增长率下限 (%)</label>
+            <input id="rateMin" type="number" min="0.1" max="99" step="0.1" value="5">
+          </div>
+          <div class="filterField">
+            <label for="rateMax">增长率上限 (%)</label>
+            <input id="rateMax" type="number" min="0.2" max="99" step="0.1" value="50">
+          </div>
+        </div>
+        <div class="filterError" id="filterError"></div>
+        <div class="filterActions">
+          <button class="filterReset" id="resetFilter">恢复默认</button>
+          <button class="filterApply" id="applyFilter">应用筛选</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="navActions">
+    <div class="menuWrap">
+      <button class="navBtn" id="openLibrary">题库</button>
+    </div>
+    <div class="menuWrap">
+      <button class="navBtn" id="toggleToolMenu">工具</button>
+      <div class="popMenu" id="toolMenu">
+        <div class="menuTitle">训练设置</div>
+        <select id="safe">
+          <option value="1">安全阈值 1%</option>
+          <option value="2" selected>安全阈值 2%</option>
+          <option value="3">安全阈值 3%</option>
+        </select>
+        <div class="menuTitle">辅助工具</div>
+        <button id="toggleCalculator">验证计算器</button>
+        <button class="statsToggle" id="toggleStats">训练统计</button>
+        <button id="openData">数据管理</button>
+      </div>
+    </div>
   </div>
 </header>
-
 <section class="calcDrawer" id="calcDrawer">
   <div class="calcDrawerHead">
     <div>
@@ -396,12 +721,17 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
   </div>
 </section>
 
-<div class="grid">
+
+<div class="trainingShell">
   <section class="card problem">
     <div class="problemTop">
       <span class="badge" id="problemBadge">求增长量</span>
-      <button class="skipBtn" id="skipQuestion">下一题 / 跳过</button>
+      <div class="problemActions">
+        <button class="focusBtn" id="focusToggle">专注模式</button>
+        <button class="skipBtn" id="skipQuestion">下一题 / 跳过</button>
+      </div>
     </div>
+
     <div class="formula">
       <span>Δ =</span>
       <span class="frac">
@@ -410,55 +740,68 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
       </span>
       <span>× <span id="p2"></span>%</span>
     </div>
+
     <div class="problem-meta">
       <div>现期量<br><b id="A2"></b></div>
       <div><span id="rateLabel">增长率</span><br><b><span id="p3"></span>%</b></div>
-      <div>本题用时<br><div class="timerBox"><b class="timerLive" id="liveTimer">未开始</b><button class="startTimerBtn" id="startTimerBtn">开始计时</button></div></div>
-    </div>
-  </section></div>
-
-<section class="card" style="margin-top:16px">
-  <div class="section-title">① 选择你会用的方法</div>
-  <div class="methods">
-    <label class="method"><input type="radio" name="method" value="feature"><b><span class="keycap">1</span>百化分</b><small>从常用特征分数中找最近的分数</small></label>
-    <label class="method"><input type="radio" name="method" value="scale100"><b><span class="keycap">2</span>比例放缩 · 凑100</b><small>分母减 p，分子对应差量就是增长量</small></label>
-    <label class="method"><input type="radio" name="method" value="scaleNr"><b><span class="keycap">3</span>比例放缩 · 归一100+</b><small>10p 看几百就除以几，再做对应位数放缩</small></label>
-    <label class="method"><input type="radio" name="method" value="direct"><b><span class="keycap">4</span>截位直除</b><small>倍数法归入直除：先估 A/(100+p)，再乘 p</small></label>
-  </div>
-
-  <div class="section-title" style="margin-top:18px">② 可选：填写你的估算结果</div>
-  <div class="answer-row">
-    <input id="myAnswer" inputmode="decimal" placeholder="可留空">
-    <button class="primary" id="submit">提交并看解析</button>
-  </div>
-  <div class="hint">
-    先点击 <b>开始计时</b>。快捷键：焦点不在输入框时按 <b>1–4</b> 选方法；<b>Enter</b> 提交；提交后按 <b>N</b> 下一题。题目区“下一题 / 跳过”不会计入统计。
-  </div>
-
-  <div class="feedback" id="feedback">
-    <div class="feedback-head" id="feedbackHead">
-      <div>
-        <strong id="judgeTitle"></strong>
-        <div id="judgeSub" style="font-size:13px;margin-top:4px"></div>
+      <div>本题用时<br>
+        <div class="timerBox">
+          <b class="timerLive" id="liveTimer">未开始</b>
+          <button class="startTimerBtn" id="startTimerBtn">开始计时</button>
+        </div>
       </div>
-      <div class="feedbackMetrics" id="feedbackMetrics"></div>
+    </div>
+  </section>
+
+  <section class="card answerCard">
+    <div class="answerHeader">
+      <div class="section-title">选择估算方法</div>
+      <div class="keyboardHint">快捷键 1–4 · Enter 提交 · N 下一题</div>
     </div>
 
-    <div class="transform" id="transformBox"></div>
-    <div class="result-table" id="results"></div>
-
-    <div class="exact">
-      <span>精确增长量</span>
-      <strong id="exactValue"></strong>
+    <div class="methods">
+      <label class="method"><input type="radio" name="method" value="feature"><b><span class="keycap">1</span>百化分</b><small>优先识别特征分数</small></label>
+      <label class="method"><input type="radio" name="method" value="scale100"><b><span class="keycap">2</span>比例放缩 · 凑100</b><small>小变化率下快速看差量</small></label>
+      <label class="method"><input type="radio" name="method" value="scaleNr"><b><span class="keycap">3</span>比例放缩 · 归一100+</b><small>10r 归一到 100+ 再放缩</small></label>
+      <label class="method"><input type="radio" name="method" value="direct"><b><span class="keycap">4</span>截位直除</b><small>截取有效位后直接计算</small></label>
     </div>
 
-    <div class="nextrow">
-      <button class="primary" id="next">下一题（N）</button>
+    <div class="answer-row">
+      <input id="myAnswer" inputmode="decimal" placeholder="可选：填写你的估算结果">
+      <button class="primary" id="submit">提交并看解析</button>
     </div>
-  </div>
-</section>
+    <div class="hint">点击“开始计时”会自动进入专注模式；跳过题目不会计入统计。</div>
+
+    <div class="feedback" id="feedback">
+      <div class="feedback-head" id="feedbackHead">
+        <div>
+          <strong id="judgeTitle"></strong>
+          <div id="judgeSub" style="font-size:13px;margin-top:4px"></div>
+        </div>
+        <div class="feedbackMetrics" id="feedbackMetrics"></div>
+      </div>
+
+      <div class="summaryCards" id="summaryCards"></div>
+
+      <details class="transformDetails">
+        <summary>查看等价形式</summary>
+        <div class="transform" id="transformBox"></div>
+      </details>
+
+      <div class="result-table" id="results"></div>
+
+      <div class="exact">
+        <span id="exactLabel">精确增长量</span>
+        <strong id="exactValue"></strong>
+      </div>
+
+      <div class="nextrow">
+        <button class="favoriteCurrent" id="favoriteCurrent">☆ 收藏本题</button>
+        <button class="primary" id="next">下一题（N）</button>
+      </div>
+    </div>
+  </section>
 </div>
-
 <div class="modal" id="dataModal" aria-hidden="true">
   <div class="modal-panel">
     <div class="modal-head">
@@ -516,74 +859,92 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
   </div>
 </div>
 
-<div class="modal" id="customModal" aria-hidden="true">
+
+<div class="modal" id="libraryModal" aria-hidden="true">
   <div class="modal-panel">
     <div class="modal-head">
       <div>
-        <h2>收藏题库</h2>
-        <div style="font-size:12px;color:#6b7280;margin-top:4px">随机题可在历史记录中收藏；手动添加的自定义题会自动加入收藏。</div>
+        <h2>题库中心</h2>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">历史复盘、收藏维护和自定义题统一管理。</div>
       </div>
       <div class="modal-actions">
-        <button class="closebtn" id="closeCustom" aria-label="关闭">×</button>
+        <button class="closebtn" id="closeLibrary" aria-label="关闭">×</button>
       </div>
     </div>
-    <div class="history-body">
-      <div class="custom-form">
-        <div class="custom-field">
-          <label for="customA">现期量</label>
-          <input id="customA" type="number" step="any" min="0" placeholder="例如：1656">
-        </div>
-        <div class="custom-field">
-          <label for="customP">增长/下降幅度</label>
-          <div class="calcInputWrap">
-            <input id="customP" type="number" step="any" min="0" placeholder="例如：16.3">
-            <span class="calcSuffix">%</span>
+
+    <div class="libraryTabs">
+      <button class="libraryTab active" id="openHistory">历史记录 <span class="historyCount" id="historyCount">0</span></button>
+      <button class="libraryTab" id="openCustom">收藏题库 <span class="customCount" id="customCount">0</span></button>
+    </div>
+
+    <section class="libraryPanel active" id="historyPanel">
+      <div class="history-body">
+        <div class="custom-toolbar">
+          <div class="custom-toolbar-left">历史题可展开解析、重新练习，也可加入收藏。</div>
+          <div class="custom-toolbar-right">
+            <select id="historyFilter" class="history-filter">
+              <option value="all">全部题目</option>
+              <option value="wrong">只看需复盘</option>
+            </select>
+            <button class="smallbtn" id="clearHistory">清空历史</button>
           </div>
         </div>
-        <div class="custom-field">
-          <label for="customDir">增长方向</label>
-          <select id="customDir">
-            <option value="positive">正增长</option>
-            <option value="negative">负增长</option>
-          </select>
-        </div>
-        <button class="custom-add" id="addCustom">添加并收藏</button>
+        <div id="historyBody"></div>
       </div>
-      <div class="custom-error" id="customError"></div>
-      <div class="custom-toolbar">
-        <div class="custom-toolbar-left">
-          仓库收藏从 <code>./data/custom_questions.json</code> 自动加载；本地收藏保存在当前浏览器。
+    </section>
+
+    <section class="libraryPanel" id="favoritesPanel">
+      <div class="history-body">
+        <div class="custom-form">
+          <div class="custom-field">
+            <label for="customA">现期量</label>
+            <input id="customA" type="number" step="any" min="0" placeholder="例如：1656">
+          </div>
+          <div class="custom-field">
+            <label for="customP">增长/下降幅度</label>
+            <div class="calcInputWrap">
+              <input id="customP" type="number" step="any" min="0" placeholder="例如：16.3">
+              <span class="calcSuffix">%</span>
+            </div>
+          </div>
+          <div class="custom-field">
+            <label for="customDir">增长方向</label>
+            <select id="customDir">
+              <option value="positive">正增长</option>
+              <option value="negative">负增长</option>
+            </select>
+          </div>
+          <button class="custom-add" id="addCustom">添加并收藏</button>
         </div>
-        <div class="custom-toolbar-right">
-          <button class="smallbtn" id="reloadRemoteCustom">重新加载仓库收藏</button>
-          <button class="smallbtn" id="practiceRandomCustom">随机练收藏</button>
-          <button class="smallbtn" id="exportFavoritesQuick">导出收藏 JSON</button>
-          <button class="smallbtn" id="clearCustom">清空本地收藏</button>
+
+        <div class="custom-error" id="customError"></div>
+        <div class="custom-toolbar">
+          <div class="custom-toolbar-left">
+            仓库收藏从 <code>./data/custom_questions.json</code> 自动加载；本地收藏保存在当前浏览器。
+          </div>
+          <div class="custom-toolbar-right">
+            <button class="smallbtn" id="reloadRemoteCustom">重新加载仓库收藏</button>
+            <button class="smallbtn" id="practiceRandomCustom">随机练收藏</button>
+            <button class="smallbtn" id="exportFavoritesQuick">导出收藏 JSON</button>
+            <button class="smallbtn" id="clearCustom">清空本地收藏</button>
+          </div>
         </div>
+
+        <div id="remoteCustomStatus" class="remoteStatus">仓库收藏：尚未加载</div>
+        <div id="customList"></div>
       </div>
-      <div id="remoteCustomStatus" class="remoteStatus">仓库收藏：尚未加载</div>
-      <div id="customList"></div>
-    </div>
+    </section>
   </div>
 </div>
 
-<div class="modal" id="historyModal" aria-hidden="true">
-  <div class="modal-panel">
-    <div class="modal-head">
-      <div>
-        <h2>历史题目与解析</h2>
-        <div style="font-size:12px;color:#6b7280;margin-top:4px">可展开完整解析，也可直接重新做历史题。</div>
-      </div>
-      <div class="modal-actions">
-        <select id="historyFilter" class="history-filter">
-          <option value="all">全部题目</option>
-          <option value="wrong">只看需复盘</option>
-        </select>
-        <button class="smallbtn" id="clearHistory">清空历史</button>
-        <button class="closebtn" id="closeHistory" aria-label="关闭">×</button>
-      </div>
-    </div>
-    <div class="history-body" id="historyBody"></div>
+<button class="focusExit" id="focusExit">退出专注</button>
+
+<div class="mobileActionBar" id="mobileActionBar">
+  <div class="mobileInner">
+    <button class="mobileBtn" id="mobileSkip">跳过</button>
+    <button class="mobileBtn primaryMobile" id="mobileSubmit">提交</button>
+    <button class="mobileBtn" id="mobileFavorite" hidden>☆ 收藏</button>
+    <button class="mobileBtn primaryMobile" id="mobileNext" hidden>下一题</button>
   </div>
 </div>
 
@@ -600,11 +961,39 @@ let remoteCustomError='';
 /* 百化分范围：1/2~1/20、1/22、2/7、n/9 */
 function buildFractions(){
   const a=[];
+
+  // 基础：1/2 ~ 1/20
   for(let n=2;n<=20;n++) a.push({m:1,n,label:`1/${n}`});
-  a.push({m:1,n:22,label:'1/22'},{m:2,n:7,label:'2/7'});
+
+  // 原有补充
+  a.push(
+    {m:1,n:22,label:'1/22'},
+    {m:2,n:7,label:'2/7'}
+  );
+
+  // n/9 系列：2/9 ~ 8/9
   for(let m=2;m<=8;m++) a.push({m,n:9,label:`${m}/9`});
+
+  // V4.2 新增：图片中的半分母 / 小数分母特征分数
+  a.push(
+    {m:1,n:2.4,label:'1/2.4'},
+    {m:1,n:2.5,label:'1/2.5'},
+    {m:1,n:2.7,label:'1/2.7'},
+    {m:1,n:5.5,label:'1/5.5'},
+    {m:1,n:6.5,label:'1/6.5'},
+    {m:1,n:7.5,label:'1/7.5'},
+    {m:1,n:8.5,label:'1/8.5'},
+    {m:1,n:9.5,label:'1/9.5'},
+    {m:1,n:10.5,label:'1/10.5'}
+  );
+
+  // 按数学值去重：
+  // 例如 1/3.5 = 2/7、1/4.5 = 2/9，因此不重复加入。
   const mp=new Map();
-  a.forEach(f=>{const k=(f.m/f.n).toFixed(10);if(!mp.has(k))mp.set(k,f)});
+  a.forEach(f=>{
+    const k=(f.m/f.n).toFixed(10);
+    if(!mp.has(k)) mp.set(k,f);
+  });
   return [...mp.values()];
 }
 const FRACTIONS=buildFractions();
@@ -788,49 +1177,100 @@ function evaluateMethods(ms,safe){
 function rand(a,b){return Math.random()*(b-a)+a}
 function randInt(a,b){return Math.floor(rand(a,b+1))}
 function one(x){return Math.round(x*10)/10}
+
+let trainFilter={digits:'all',minRate:5,maxRate:50};
+
 function randomA(){
+  if(trainFilter.digits==='3')return randInt(180,999);
+  if(trainFilter.digits==='4')return randInt(1000,9999);
+  if(trainFilter.digits==='5')return randInt(10000,19999);
   const z=Math.random();
   return z<.35?randInt(180,999):z<.78?randInt(1000,5999):randInt(6000,19999);
+}
+function randomRate(){
+  return one(rand(trainFilter.minRate,trainFilter.maxRate));
+}
+function rateInFilter(p){
+  return p>=trainFilter.minRate-1e-9&&p<=trainFilter.maxRate+1e-9;
 }
 function pickDirection(mode){
   return mode==='mixed'?(Math.random()<.5?'positive':'negative'):mode;
 }
 function generate(type,dirMode){
-  let A=randomA(),p,tries=0,dir=pickDirection(dirMode);
+  let A=randomA(),p=randomRate(),tries=0,dir=pickDirection(dirMode);
+
   if(type==='feature'){
-    const v=FRACTIONS.filter(f=>{const q=100*f.m/f.n;return q>=4.5&&q<=50});
-    const f=v[randInt(0,v.length-1)],j=[-.4,-.3,-.2,-.1,0,.1,.2,.3,.4];
-    p=one(100*f.m/f.n+j[randInt(0,j.length-1)]);
+    const candidates=FRACTIONS
+      .map(f=>({...f,pct:100*f.m/f.n}))
+      .filter(f=>f.pct>=4&&f.pct<=90&&rateInFilter(f.pct));
+    if(candidates.length){
+      const f=candidates[randInt(0,candidates.length-1)];
+      const j=[-.4,-.3,-.2,-.1,0,.1,.2,.3,.4];
+      p=one(Math.max(trainFilter.minRate,Math.min(trainFilter.maxRate,f.pct+j[randInt(0,j.length-1)])));
+    }else{
+      p=randomRate();
+    }
     return{A,p,dir,kind:'百化分型'};
   }
+
   if(type==='scale100'){
-    while(tries++<160){
-      p=one(rand(6,38));
+    let best=null;
+    while(tries++<220){
+      p=randomRate();
       const m=scale100Method(A,p,exactGrowth(A,p,dir),dir);
+      const score=m.err+Math.abs(m.aux.rem)*.06;
+      if(!best||score<best.score)best={p,score};
       if(m.err<=2.2&&nearestFraction(p).diff>.18)break;
     }
+    if(tries>=220&&best)p=best.p;
     return{A,p,dir,kind:'凑100型'};
   }
+
   if(type==='scaleNr'){
-    while(tries++<180){
-      p=one(rand(10,50));
+    let best=null;
+    while(tries++<240){
+      p=randomRate();
       const m=normalizedScaleMethod(A,p,exactGrowth(A,p,dir),dir);
+      const score=m.err+Math.abs(m.aux.rem)*.05;
+      if(!best||score<best.score)best={p,score};
       if(m.err<=1.8&&Math.abs(m.aux.rem)<=4)break;
     }
+    if(tries>=240&&best)p=best.p;
     return{A,p,dir,kind:'归一100+型'};
   }
+
   if(type==='direct'){
-    while(tries++<180){
-      p=one(rand(5,48));
+    let best=null;
+    while(tries++<220){
+      p=randomRate();
       const x=allMethods(A,p,dir).list;
-      if(x[0].err>1.8&&x[1].err>1.8&&x[2].err>1.8)break;
+      const otherMin=Math.min(x[0].err,x[1].err,x[2].err);
+      if(!best||otherMin>best.score)best={p,score:otherMin};
+      if(otherMin>1.8)break;
     }
+    if(tries>=220&&best)p=best.p;
     return{A,p,dir,kind:'直除型'};
   }
+
   return generate(['feature','scale100','scaleNr','direct'][randInt(0,3)],dirMode);
 }
 
 let cur=null,submitted=false,startTime=0,timerId=null,timerStarted=false;
+
+let focusMode=false;
+function setFocusMode(on){
+  focusMode=!!on;
+  document.body.classList.toggle('focus-mode',focusMode);
+}
+function updateMobileActions(){
+  if(!$('mobileSubmit'))return;
+  $('mobileSubmit').hidden=submitted;
+  $('mobileSkip').hidden=submitted;
+  $('mobileFavorite').hidden=!submitted;
+  $('mobileNext').hidden=!submitted;
+  if(submitted)updateCurrentFavoriteButton();
+}
+
 
 function normalizeStats(s){
   return{
@@ -905,6 +1345,34 @@ function removeLocalFavorite(q){
   const items=loadCustom().filter(x=>questionKey(x)!==key);
   saveCustom(items);
 }
+function updateCurrentFavoriteButton(){
+  if(!cur)return;
+  const state=favoriteState(cur);
+  const buttons=[$('favoriteCurrent'),$('mobileFavorite')].filter(Boolean);
+  buttons.forEach(btn=>{
+    btn.disabled=false;
+    btn.classList.remove('active','remote');
+    if(state==='remote'){
+      btn.textContent='★ 仓库已收藏';
+      btn.classList.add('remote');
+      btn.disabled=true;
+    }else if(state==='local'){
+      btn.textContent='★ 已收藏';
+      btn.classList.add('active');
+    }else{
+      btn.textContent=btn.id==='mobileFavorite'?'☆ 收藏':'☆ 收藏本题';
+    }
+  });
+}
+function toggleCurrentFavorite(){
+  if(!cur||!submitted)return;
+  const state=favoriteState(cur);
+  if(state==='remote')return;
+  if(state==='local')removeLocalFavorite(cur);
+  else addLocalFavorite(cur,'answer');
+  updateCurrentFavoriteButton();
+}
+
 function normalizeQuestionList(list,source='remote'){
   if(!Array.isArray(list))return[];
   return list.filter(q=>
@@ -972,7 +1440,7 @@ async function loadRemoteCustomQuestions(force=false){
     }
   }
   updateCustomCount();
-  if($('customModal')?.classList.contains('show'))renderCustom();
+  if($('libraryModal')?.classList.contains('show') && $('favoritesPanel')?.classList.contains('active'))renderCustom();
 }
 
 function saveHistory(h){
@@ -992,6 +1460,7 @@ function resetTimer(){
 }
 function startTimer(){
   if(timerStarted||submitted)return;
+  setFocusMode(true);
   clearInterval(timerId);
   timerStarted=true;
   startTime=performance.now();
@@ -1042,9 +1511,17 @@ function loadQuestion(q){
   $('myAnswer').value='';
   $('feedback').classList.remove('show');
   $('results').innerHTML='';
+  if($('favoriteCurrent')){
+    $('favoriteCurrent').textContent='☆ 收藏本题';
+    $('favoriteCurrent').className='favoriteCurrent';
+    $('favoriteCurrent').disabled=false;
+  }
   clearSelection();
   $('submit').disabled=false;
+  $('exactLabel').textContent=dir==='negative'?'精确减少量（绝对值）':'精确增长量';
   resetTimer();
+  setFocusMode(false);
+  updateMobileActions();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function newQ(){loadQuestion(generate($('mode').value,$('direction').value))}
@@ -1065,20 +1542,22 @@ function methodHtml(m,evaluation,safe){
   const alt=m.alt?.length
     ?`<details class="altSteps"><summary>查看另一种比例拆法</summary>${m.alt.map(s=>`<div>• ${s}</div>`).join('')}</details>`
     :'';
-  return `<div class="result ${cls}">
-    <div class="result-top">
-      <div class="result-name">${m.name}</div>
-      <div class="tags">
+  return `<details class="result ${cls}">
+    <summary class="resultSummary">
+      <span class="resultSummaryMain">${m.name}</span>
+      <span class="resultSummaryValue">${fmt(m.est,2)}</span>
+      <span class="tags">
         <span class="tag ${tierClass}">${ev.label}</span>
-        <span class="tag ${errTag(m.err)}">相对误差 ${fmtPct(m.err,2)}</span>
-        ${m.key==='direct'&&m.err2!=null?`<span class="tag">截2位误差 ${fmtPct(m.err2,2)}</span>`:''}
-      </div>
+        <span class="tag ${errTag(m.err)}">误差 ${fmtPct(m.err,2)}</span>
+        ${m.key==='direct'&&m.err2!=null?`<span class="tag">截2位 ${fmtPct(m.err2,2)}</span>`:''}
+      </span>
+    </summary>
+    <div class="resultBody">
+      <div class="steps">${m.steps.map(s=>`<div>• ${s}</div>`).join('')}</div>
+      ${alt}
+      ${directHint(m,safe)}
     </div>
-    <div class="result-value">${fmt(m.est,2)}</div>
-    <div class="steps">${m.steps.map(s=>`<div>• ${s}</div>`).join('')}</div>
-    ${alt}
-    ${directHint(m,safe)}
-  </div>`;
+  </details>`;
 }
 
 function renderCurrent(evaluation,safe){
@@ -1113,11 +1592,19 @@ function submitCurrent(){
   $('feedbackMetrics').innerHTML=
     `<div>用时 ${fmt(elapsed,1)} s</div>`+
     (ue==null?'':`<div>你的估值误差 ${fmtPct(ue,2)}</div>`);
+  $('summaryCards').innerHTML=`
+    <div class="summaryCard"><span>你的方法</span><strong>${chosenEval.label}</strong></div>
+    <div class="summaryCard"><span>优先方法</span><strong>${evaluation.priority.name}</strong></div>
+    <div class="summaryCard"><span>用时</span><strong>${fmt(elapsed,1)} s</strong></div>
+    <div class="summaryCard"><span>估值误差</span><strong>${ue==null?'未填写':fmtPct(ue,2)}</strong></div>`;
 
+  setFocusMode(false);
   renderCurrent(evaluation,safe);
   $('feedback').classList.add('show');
   $('submit').disabled=true;
   submitted=true;
+  updateCurrentFavoriteButton();
+  updateMobileActions();
 
   const s=loadS();
   s.total++;
@@ -1139,7 +1626,17 @@ function submitCurrent(){
 }
 
 $('startTimerBtn').onclick=startTimer;
+
+$('focusToggle').onclick=()=>setFocusMode(!focusMode);
+$('focusExit').onclick=()=>setFocusMode(false);
+$('mobileSkip').onclick=skipQuestion;
+$('mobileSubmit').onclick=submitCurrent;
+$('mobileNext').onclick=newQ;
+$('mobileFavorite').onclick=toggleCurrentFavorite;
+$('favoriteCurrent').onclick=toggleCurrentFavorite;
+
 function skipQuestion(){
+  setFocusMode(false);
   clearInterval(timerId);
   submitted=false;
   timerStarted=false;
@@ -1174,7 +1671,65 @@ function calculateVerifier(){
   $('calcBaseResult').textContent=formatCalcNumber(base);
   $('calcGrowthResult').textContent=formatCalcNumber(growth);
 }
+
+
+function filterLabel(){
+  const d=trainFilter.digits==='all'?'全部位':`${trainFilter.digits}位`;
+  return `筛选：${d} · ${fmt(trainFilter.minRate,1)}–${fmt(trainFilter.maxRate,1)}%`;
+}
+function updateFilterLabel(){
+  $('toggleFilter').textContent=filterLabel();
+  const active=trainFilter.digits!=='all'||trainFilter.minRate!==5||trainFilter.maxRate!==50;
+  $('toggleFilter').classList.toggle('active',active);
+}
+function closeFilterPopover(){
+  $('filterPopover').classList.remove('show');
+}
+$('toggleFilter').onclick=e=>{
+  e.stopPropagation();
+  closeTopMenus();
+  $('filterPopover').classList.toggle('show');
+};
+$('filterPopover').addEventListener('click',e=>e.stopPropagation());
+$('applyFilter').onclick=()=>{
+  const digits=$('digitFilter').value;
+  const min=Number($('rateMin').value);
+  const max=Number($('rateMax').value);
+  $('filterError').textContent='';
+  if(!Number.isFinite(min)||!Number.isFinite(max)||min<=0||max<=min||max>=100){
+    $('filterError').textContent='请输入 0 < 下限 < 上限 < 100 的有效范围。';
+    return;
+  }
+  trainFilter={digits,minRate:one(min),maxRate:one(max)};
+  updateFilterLabel();
+  closeFilterPopover();
+  newQ();
+};
+$('resetFilter').onclick=()=>{
+  trainFilter={digits:'all',minRate:5,maxRate:50};
+  $('digitFilter').value='all';
+  $('rateMin').value='5';
+  $('rateMax').value='50';
+  $('filterError').textContent='';
+  updateFilterLabel();
+  closeFilterPopover();
+  newQ();
+};
+
+function closeTopMenus(){
+  $('toolMenu')?.classList.remove('show');
+}
+$('toggleToolMenu').onclick=e=>{
+  e.stopPropagation();
+  $('toolMenu').classList.toggle('show');
+};
+document.addEventListener('click',e=>{
+  if(!$('toolMenu')?.contains(e.target)&&e.target!==$('toggleToolMenu'))closeTopMenus();
+  if(!$('filterPopover')?.contains(e.target)&&e.target!==$('toggleFilter'))closeFilterPopover();
+});
+
 $('toggleCalculator').onclick=()=>{
+  closeTopMenus();
   $('calcDrawer').classList.toggle('show');
   if($('calcDrawer').classList.contains('show')) $('calcCurrent').focus();
 };
@@ -1193,6 +1748,7 @@ $('calcBtn').onclick=calculateVerifier;
 });
 
 $('toggleStats').onclick=()=>{
+  closeTopMenus();
   $('statsDrawer').classList.toggle('show');
 };
 $('closeStats').onclick=()=>{
@@ -1299,8 +1855,10 @@ function refreshAfterImport(){
   showS();
   updateHistoryCount();
   updateCustomCount();
-  if($('historyModal').classList.contains('show'))renderHistory();
-  if($('customModal').classList.contains('show'))renderCustom();
+  if($('libraryModal').classList.contains('show')){
+    if($('historyPanel').classList.contains('active'))renderHistory();
+    if($('favoritesPanel').classList.contains('active'))renderCustom();
+  }
   updateDataSummary();
 }
 function updateDataSummary(){
@@ -1364,7 +1922,7 @@ function closeData(){
   $('dataModal').classList.remove('show');
   $('dataModal').setAttribute('aria-hidden','true');
 }
-$('openData').onclick=openData;
+$('openData').onclick=()=>{closeTopMenus();openData();};
 $('closeData').onclick=closeData;
 $('exportAllData').onclick=exportAllBackup;
 $('exportCustomData').onclick=exportCustomBackup;
@@ -1489,19 +2047,28 @@ function practiceRandomCustom(){
     kind:q._source==='remote'?'仓库收藏题':'本地收藏题'
   });
 }
+function setLibraryTab(tab){
+  const history=tab==='history';
+  $('historyPanel').classList.toggle('active',history);
+  $('favoritesPanel').classList.toggle('active',!history);
+  $('openHistory').classList.toggle('active',history);
+  $('openCustom').classList.toggle('active',!history);
+}
 function openCustom(){
-  $('customModal').classList.add('show');
-  $('customModal').setAttribute('aria-hidden','false');
+  $('libraryModal').classList.add('show');
+  $('libraryModal').setAttribute('aria-hidden','false');
+  setLibraryTab('favorites');
   $('customError').textContent='';
   renderCustom();
   if(!remoteCustomLoaded) loadRemoteCustomQuestions();
 }
 function closeCustom(){
-  $('customModal').classList.remove('show');
-  $('customModal').setAttribute('aria-hidden','true');
+  closeLibrary();
 }
+$('openLibrary').onclick=openHistory;
 $('openCustom').onclick=openCustom;
-$('closeCustom').onclick=closeCustom;
+$('closeLibrary').onclick=closeLibrary;
+
 $('addCustom').onclick=addCustomQuestion;
 $('reloadRemoteCustom').onclick=()=>loadRemoteCustomQuestions(true);
 $('exportFavoritesQuick').onclick=exportCustomBackup;
@@ -1513,9 +2080,7 @@ $('clearCustom').onclick=()=>{
     renderCustom();
   }
 };
-$('customModal').addEventListener('click',e=>{
-  if(e.target===$('customModal'))closeCustom();
-});
+$('libraryModal').addEventListener('click',e=>{if(e.target===$('libraryModal'))closeLibrary();});
 [$('customA'),$('customP')].forEach(input=>{
   input.addEventListener('keydown',e=>{
     if(e.key==='Enter'){
@@ -1588,7 +2153,7 @@ function renderHistory(){
             : `增长量 = ${String(x.A)}×${fmt(x.p,1)}/${fmt(100+x.p,1)}`
         }</div>
         <div class="result-table">${(x.methods||[]).map(m=>methodHtml(m,evaluation,safe)).join('')}</div>
-        <div class="exact"><span>精确增长量</span><strong>${fmt(x.truth,3)}</strong></div>
+        <div class="exact"><span>${(x.dir||'positive')==='negative'?'精确减少量（绝对值）':'精确增长量'}</span><strong>${fmt(x.truth,3)}</strong></div>
       </div>
     </details>`;
   }).join('');
@@ -1605,7 +2170,7 @@ function renderHistory(){
       addLocalFavorite(rec,'history');
     }
     renderHistory();
-    if($('customModal').classList.contains('show'))renderCustom();
+    if($('libraryModal').classList.contains('show'))renderCustom();
   });
   document.querySelectorAll('[data-delete]').forEach(btn=>btn.onclick=e=>{
     e.preventDefault();e.stopPropagation();
@@ -1625,28 +2190,32 @@ function renderHistory(){
 }
 
 function openHistory(){
-  $('historyModal').classList.add('show');
-  $('historyModal').setAttribute('aria-hidden','false');
+  $('libraryModal').classList.add('show');
+  $('libraryModal').setAttribute('aria-hidden','false');
+  setLibraryTab('history');
   renderHistory();
 }
 function closeHistory(){
-  $('historyModal').classList.remove('show');
-  $('historyModal').setAttribute('aria-hidden','true');
+  closeLibrary();
+}
+function closeLibrary(){
+  $('libraryModal').classList.remove('show');
+  $('libraryModal').setAttribute('aria-hidden','true');
 }
 $('openHistory').onclick=openHistory;
-$('closeHistory').onclick=closeHistory;
+
 $('historyFilter').onchange=renderHistory;
 $('clearHistory').onclick=()=>{
   if(confirm('清空全部历史题目及解析？')){
     localStorage.removeItem(HISTORY_KEY);updateHistoryCount();showS();renderHistory();
   }
 };
-$('historyModal').addEventListener('click',e=>{if(e.target===$('historyModal'))closeHistory()});
+
 
 /* 快捷键：输入框中不抢占数字键；Enter 可直接提交。 */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeHistory();closeCustom();closeData();return}
-  if($('historyModal').classList.contains('show')||$('customModal').classList.contains('show')||$('dataModal').classList.contains('show'))return;
+  if(e.key==='Escape'){closeLibrary();closeData();closeFilterPopover();setFocusMode(false);return}
+  if($('libraryModal').classList.contains('show')||$('dataModal').classList.contains('show'))return;
 
   const editable=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName);
   if(e.key==='Enter'&&!submitted){
@@ -1664,7 +2233,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-showS();updateHistoryCount();updateCustomCount();newQ();loadRemoteCustomQuestions();
+showS();updateHistoryCount();updateCustomCount();updateFilterLabel();newQ();updateMobileActions();loadRemoteCustomQuestions();
 </script>
 </body>
 </html>
