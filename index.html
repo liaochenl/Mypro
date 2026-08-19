@@ -1,139 +1,1206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>基期与增长量计算器</title>
-  <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-      background:#f5f6f8;color:#1f2937;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px
-    }
-    .card{
-      width:100%;max-width:560px;background:#fff;border-radius:20px;padding:28px;
-      box-shadow:0 12px 35px rgba(0,0,0,.08)
-    }
-    h1{margin:0 0 8px;font-size:28px}
-    .sub{color:#6b7280;margin-bottom:26px;line-height:1.6}
-    .field{margin-bottom:18px}
-    label{display:block;font-weight:600;margin-bottom:8px}
-    .input-wrap{
-      display:flex;align-items:center;border:1px solid #d1d5db;border-radius:12px;overflow:hidden;background:#fff
-    }
-    input{
-      flex:1;width:100%;border:none;outline:none;padding:14px 16px;font-size:18px;background:transparent
-    }
-    .suffix{padding:0 14px;color:#6b7280;font-size:16px}
-    button{
-      width:100%;border:none;border-radius:12px;padding:14px;font-size:18px;font-weight:700;
-      cursor:pointer;background:#111827;color:#fff;margin-top:4px
-    }
-    button:hover{opacity:.92}
-    .results{margin-top:24px;display:grid;gap:14px}
-    .result-box{
-      background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:16px
-    }
-    .result-title{font-size:14px;color:#6b7280;margin-bottom:6px}
-    .result-value{font-size:28px;font-weight:800;word-break:break-all}
-    .formula{
-      margin-top:22px;padding-top:18px;border-top:1px solid #e5e7eb;color:#4b5563;line-height:1.8;font-size:14px
-    }
-    .error{margin-top:12px;color:#b91c1c;font-weight:600;min-height:22px}
-    .hint{color:#6b7280;font-size:13px;margin-top:6px}
-    @media(max-width:520px){
-      body{padding:14px}.card{padding:22px 18px;border-radius:16px}h1{font-size:24px}.result-value{font-size:24px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>增长量速算自测 V3.6</title>
+<style>
+:root{
+  --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
+  --blue:#2563eb;--blue2:#eff6ff;--green:#047857;--green2:#ecfdf5;
+  --orange:#b45309;--orange2:#fff7ed;--red:#b91c1c;--red2:#fef2f2;
+  --purple:#6d28d9;--purple2:#f5f3ff
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif
+}
+.app{max-width:1020px;margin:0 auto;padding:24px 16px 56px}
+header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+h1{margin:0;font-size:30px}
+.subtitle{margin-top:7px;color:var(--muted);font-size:14px;line-height:1.6}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+select,button,input{font:inherit}
+select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 11px;color:var(--text)}
+.smallbtn{cursor:pointer}
+.historyBtn{position:relative}
+.historyCount{display:inline-flex;align-items:center;justify-content:center;min-width:21px;height:21px;border-radius:999px;background:#111827;color:#fff;font-size:11px;margin-left:5px;padding:0 5px}
+
+.grid{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px rgba(31,41,55,.05);padding:20px}
+.problem{display:flex;flex-direction:column;justify-content:center;min-height:255px;background:linear-gradient(145deg,#fff,#f8fbff)}
+.problemTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.skipBtn{
+  border:1px solid #d1d5db;background:#fff;color:#475569;border-radius:10px;
+  padding:7px 11px;font-size:12px;font-weight:800;cursor:pointer
+}
+.skipBtn:hover{background:#f8fafc;border-color:#94a3b8}
+
+.badge{display:inline-flex;width:max-content;padding:5px 9px;border-radius:999px;background:var(--blue2);color:var(--blue);font-size:12px;font-weight:700}
+
+/* 分式题面 */
+.formula{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:31px;font-weight:800;line-height:1.2;margin:20px 0 16px
+}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;min-width:145px}
+.frac .num{padding:0 12px 5px;border-bottom:2.4px solid #172033;min-width:100%;text-align:center}
+.frac .den{padding:6px 12px 0;min-width:100%;text-align:center}
+.problem-meta{display:flex;gap:26px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+.problem-meta b{color:var(--text);font-size:18px}
+.timerLive{font-variant-numeric:tabular-nums}
+.timerBox{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.startTimerBtn{
+  border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:9px;
+  padding:6px 10px;font-size:12px;font-weight:800;cursor:pointer
+}
+.startTimerBtn:hover{background:#dbeafe}
+.startTimerBtn:disabled{opacity:.5;cursor:default}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.statsToggle{display:inline-flex;align-items:center;gap:7px}
+.statsDot{width:7px;height:7px;border-radius:999px;background:#2563eb}
+.statsDrawer{
+  display:none;margin-bottom:16px;padding:16px 18px;background:#fff;
+  border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(31,41,55,.04)
+}
+.statsDrawer.show{display:block}
+.statsDrawerHead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.statsDrawerHead .section-title{margin:0}
+.statsDrawerActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.statsDrawer .note{margin-top:12px;padding-top:12px}
+
+.calcDrawer{
+  display:none;margin-bottom:16px;padding:18px;background:#fff;
+  border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(31,41,55,.04)
+}
+.calcDrawer.show{display:block}
+.calcDrawerHead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.calcDrawerHead .section-title{margin:0}
+.calcGrid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.calcField label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.calcInputWrap{
+  display:flex;align-items:center;border:1px solid var(--line);border-radius:11px;
+  overflow:hidden;background:#fff;min-height:44px
+}
+.calcInputWrap input{
+  flex:1;min-width:0;border:0;outline:0;padding:11px 12px;font-size:16px;background:transparent
+}
+.calcSuffix{padding:0 12px;color:var(--muted);font-size:14px}
+.calcBtn{
+  border:0;background:#111827;color:#fff;border-radius:11px;padding:11px 16px;
+  min-height:44px;font-weight:800;cursor:pointer
+}
+.calcResults{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.calcResult{
+  background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:12px 14px
+}
+.calcResult span{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+.calcResult strong{font-size:22px}
+.calcFormula{
+  margin-top:12px;color:#64748b;font-size:12px;line-height:1.7;border-top:1px dashed var(--line);padding-top:10px
+}
+.calcError{color:#b91c1c;font-size:12px;font-weight:700;min-height:18px;margin-top:8px}
+
+.stat{padding:14px;border-radius:14px;background:#f9fafb;border:1px solid var(--line)}
+.stat strong{display:block;font-size:24px;margin-top:4px}
+.stat span{font-size:12px;color:var(--muted)}
+
+.section-title{font-weight:800;font-size:16px;margin-bottom:12px}
+.methods{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.method{position:relative;border:1.5px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;background:#fff;transition:.15s}
+.method:hover{border-color:#a5b4fc}
+.method input{position:absolute;opacity:0}
+.method.selected{border-color:var(--blue);background:var(--blue2)}
+.method b{display:block;margin-bottom:4px}
+.method small{color:var(--muted);line-height:1.45}
+.keycap{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:6px;background:#f3f4f6;color:#475569;font-size:11px;font-weight:800;margin-right:6px}
+
+.answer-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:14px}
+.answer-row input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 13px;font-size:17px;outline:none}
+.answer-row input:focus{border-color:#93c5fd;box-shadow:0 0 0 3px #dbeafe}
+.primary{border:0;background:#111827;color:white;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer}
+.primary:disabled{opacity:.45;cursor:not-allowed}
+.hint{margin-top:10px;color:var(--muted);font-size:12px;line-height:1.65}
+
+.feedback{display:none;margin-top:16px}
+.feedback.show{display:block}
+.feedback-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:14px;border-radius:14px;margin-bottom:12px}
+.feedback-head.good{background:var(--green2);color:var(--green)}
+.feedback-head.bad{background:var(--orange2);color:var(--orange)}
+.feedback-head strong{font-size:18px}
+.feedbackMetrics{text-align:right;font-size:12px;line-height:1.6;font-weight:700}
+
+.transform{
+  background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:13px 15px;
+  margin-bottom:12px;font-size:14px;line-height:1.7
+}
+.transform b{display:block;margin-bottom:3px}
+
+.result-table{display:grid;gap:10px}
+.result{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
+.result.priority{border-color:#86efac;background:#f0fdf4}
+.result.usable{border-color:#bfdbfe;background:#f8fbff}
+.result-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.result-name{font-weight:800}
+.tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tag{font-size:11px;padding:4px 7px;border-radius:999px;background:#f3f4f6;color:#4b5563;font-weight:700}
+.tag.priority{background:#dcfce7;color:#166534}
+.tag.usable{background:#dbeafe;color:#1d4ed8}
+.tag.no{background:#fee2e2;color:#b91c1c}
+.tag.best{background:#ede9fe;color:#6d28d9}
+.tag.err-ok{background:#ecfdf5;color:#047857}
+.tag.err-mid{background:#fff7ed;color:#b45309}
+.tag.err-high{background:#fef2f2;color:#b91c1c}
+.result-value{font-size:24px;font-weight:850;margin:8px 0 5px}
+.steps{font-size:13px;line-height:1.78;color:#4b5563}
+.altSteps{margin-top:7px}
+.altSteps summary{cursor:pointer;color:#64748b;font-size:12px;font-weight:700}
+.altSteps div{margin-top:4px;color:#64748b}
+.directHint{margin-top:7px;font-size:12px;font-weight:800;color:#475569}
+
+.exact{margin-top:12px;padding:13px 14px;border-radius:14px;background:#111827;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.exact strong{font-size:24px}
+.nextrow{display:flex;justify-content:flex-end;margin-top:14px;gap:8px}
+.note{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px;color:var(--muted);font-size:12px;line-height:1.7}
+
+/* history */
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.46);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal.show{display:flex}
+.modal-panel{width:min(940px,100%);max-height:90vh;background:#fff;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.22);display:flex;flex-direction:column;overflow:hidden}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 20px;border-bottom:1px solid var(--line)}
+.modal-head h2{margin:0;font-size:21px}
+.modal-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.closebtn{border:0;background:#f3f4f6;border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:20px}
+.history-body{padding:14px 18px 22px;overflow:auto}
+.empty{text-align:center;color:var(--muted);padding:48px 10px}
+.history-item{border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:10px;overflow:hidden}
+.history-item[open]{border-color:#cbd5e1}
+.history-summary{cursor:pointer;padding:14px 15px;list-style:none}
+.history-summary::-webkit-details-marker{display:none}
+.history-row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.history-main{font-weight:800}
+.history-sub{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.55}
+.history-status{white-space:nowrap;font-size:12px;font-weight:800;padding:5px 8px;border-radius:999px}
+.history-status.good{background:var(--green2);color:var(--green)}
+.history-status.bad{background:var(--orange2);color:var(--orange)}
+.history-detail{border-top:1px solid var(--line);padding:14px;background:#f8fafc}
+.history-detail .result{background:#fff}
+.history-detail .exact{margin-bottom:12px}
+.history-actions{display:flex;gap:7px;flex-wrap:wrap;margin-left:auto}
+.history-delete{border:1px solid #fecaca;background:#fff;color:#b91c1c;border-radius:9px;padding:6px 9px;cursor:pointer;font-size:12px}
+.history-retry{border:1px solid #bfdbfe;background:#fff;color:#1d4ed8;border-radius:9px;padding:6px 9px;cursor:pointer;font-size:12px;font-weight:700}
+.history-meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-bottom:10px}
+.history-filter{padding:8px 9px}
+
+/* custom questions */
+.customBtn{position:relative}
+.customCount{
+  display:inline-flex;align-items:center;justify-content:center;min-width:21px;height:21px;
+  border-radius:999px;background:#1d4ed8;color:#fff;font-size:11px;margin-left:5px;padding:0 5px
+}
+.custom-form{
+  display:grid;grid-template-columns:1.1fr 1fr .9fr auto;gap:10px;align-items:end;
+  padding:14px;background:#f8fafc;border:1px solid var(--line);border-radius:14px;margin-bottom:14px
+}
+.custom-field label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.custom-field input,.custom-field select{
+  width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;
+  padding:10px 11px;outline:none;min-height:42px
+}
+.custom-field input:focus,.custom-field select:focus{border-color:#93c5fd;box-shadow:0 0 0 3px #dbeafe}
+.custom-add{
+  border:0;background:#111827;color:#fff;border-radius:10px;padding:10px 15px;
+  min-height:42px;font-weight:800;cursor:pointer
+}
+.custom-toolbar{
+  display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;
+  margin-bottom:12px
+}
+.custom-toolbar-left{font-size:12px;color:var(--muted)}
+.custom-toolbar-right{display:flex;gap:8px;flex-wrap:wrap}
+.custom-list{display:grid;gap:9px}
+.custom-item{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#fff
+}
+.custom-main{font-weight:800;font-size:15px}
+.custom-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
+.custom-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.custom-practice{
+  border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:9px;
+  padding:7px 10px;cursor:pointer;font-size:12px;font-weight:800
+}
+.custom-delete{
+  border:1px solid #fecaca;background:#fff;color:#b91c1c;border-radius:9px;
+  padding:7px 10px;cursor:pointer;font-size:12px
+}
+.custom-error{color:#b91c1c;font-size:12px;font-weight:700;min-height:18px;margin:2px 0 8px}
+
+@media(max-width:780px){
+  header{flex-direction:column}.toolbar{justify-content:flex-start}.grid{grid-template-columns:1fr}
+  .problem{min-height:220px}.methods{grid-template-columns:1fr}.formula{font-size:27px}.stats{grid-template-columns:repeat(2,1fr)}.calcGrid{grid-template-columns:1fr}.calcResults{grid-template-columns:1fr}
+  .history-row{align-items:flex-start}.modal{padding:8px}.modal-panel{max-height:95vh}.modal-head{align-items:flex-start}.custom-form{grid-template-columns:1fr}.custom-item{align-items:flex-start;flex-direction:column}.custom-actions{justify-content:flex-start}
+}
+</style>
 </head>
 <body>
-  <main class="card">
-    <h1>基期与增长量计算器</h1>
-    <div class="sub">输入现期量和增长率，自动计算基期量与增长量。</div>
+<div class="app">
+<header>
+  <div>
+    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.6</span></h1>
+    <div class="subtitle">支持随机训练与自定义题库；自定义题可直接调用现有计时、方法判断与完整解析。</div>
+  </div>
+  <div class="toolbar">
+    <select id="direction">
+      <option value="positive">正增长</option>
+      <option value="negative">负增长</option>
+      <option value="mixed">正负混合</option>
+    </select>
+    <select id="mode">
+      <option value="mixed">综合随机</option>
+      <option value="feature">百化分型</option>
+      <option value="scale100">凑100型</option>
+      <option value="scaleNr">归一100+型</option>
+      <option value="direct">直除型</option>
+    </select>
+    <select id="safe">
+      <option value="1">安全阈值 1%</option>
+      <option value="2" selected>安全阈值 2%</option>
+      <option value="3">安全阈值 3%</option>
+    </select>
+    <button class="smallbtn historyBtn" id="openHistory">历史题目 <span class="historyCount" id="historyCount">0</span></button>
+    <button class="smallbtn customBtn" id="openCustom">自定义题 <span class="customCount" id="customCount">0</span></button>
+    <button class="smallbtn" id="toggleCalculator">验证计算器</button>
+    <button class="smallbtn statsToggle" id="toggleStats"><span class="statsDot"></span>训练统计</button>
+  </div>
+</header>
 
-    <div class="field">
-      <label for="current">现期量</label>
-      <div class="input-wrap">
-        <input id="current" type="number" step="any" placeholder="例如：520">
+<section class="calcDrawer" id="calcDrawer">
+  <div class="calcDrawerHead">
+    <div>
+      <div class="section-title">基期与增长量验证计算器</div>
+      <div style="font-size:12px;color:#6b7280;margin-top:4px">输入现期量和增长率，可快速核对精确结果。</div>
+    </div>
+    <button class="smallbtn" id="closeCalculator">收起</button>
+  </div>
+  <div class="calcGrid">
+    <div class="calcField">
+      <label for="calcCurrent">现期量</label>
+      <div class="calcInputWrap">
+        <input id="calcCurrent" type="number" step="any" placeholder="例如：520">
       </div>
     </div>
-
-    <div class="field">
-      <label for="rate">增长率</label>
-      <div class="input-wrap">
-        <input id="rate" type="number" step="any" placeholder="例如：20 或 -15">
-        <span class="suffix">%</span>
+    <div class="calcField">
+      <label for="calcRate">增长率</label>
+      <div class="calcInputWrap">
+        <input id="calcRate" type="number" step="any" placeholder="例如：20 或 -15">
+        <span class="calcSuffix">%</span>
       </div>
-      <div class="hint">正增长填正数；下降填负数，例如下降15%输入 -15。</div>
     </div>
+    <button class="calcBtn" id="calcBtn">计算</button>
+  </div>
+  <div id="calcError" class="calcError"></div>
+  <div class="calcResults">
+    <div class="calcResult"><span>基期量</span><strong id="calcBaseResult">—</strong></div>
+    <div class="calcResult"><span>增长/减少量（绝对值）</span><strong id="calcGrowthResult">—</strong></div>
+  </div>
+  <div class="calcFormula">
+    基期量 = 现期量 ÷ (1 + 增长率)；变化量按绝对值显示。正增长：A×r/(1+r)；负增长若 r 表示下降幅度：A×r/(1−r)。
+  </div>
+</section>
 
-    <button id="calcBtn">计算</button>
-    <div id="error" class="error"></div>
+<section class="statsDrawer" id="statsDrawer">
+  <div class="statsDrawerHead">
+    <div class="section-title">训练统计</div>
+    <div class="statsDrawerActions">
+      <button class="smallbtn" id="resetStats">清空统计</button>
+      <button class="smallbtn" id="closeStats">收起</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><span>已做题数</span><strong id="sTotal">0</strong></div>
+    <div class="stat"><span>方法判断合理</span><strong id="sCorrect">0</strong></div>
+    <div class="stat"><span>方法合理率</span><strong id="sRate">—</strong></div>
+    <div class="stat"><span>平均估值误差</span><strong id="sErr">—</strong></div>
+    <div class="stat"><span>平均用时</span><strong id="sTime">—</strong></div>
+    <div class="stat"><span>历史题数</span><strong id="sHistory">0</strong></div>
+  </div>
+  <div class="note">
+    方法不再只有唯一“正确答案”：安全阈值内按 <b>优先推荐 / 可以使用</b> 区分；超出阈值才标记为“不建议”。
+  </div>
+</section>
 
-    <section class="results">
-      <div class="result-box">
-        <div class="result-title">基期量</div>
-        <div id="baseResult" class="result-value">—</div>
-      </div>
-      <div class="result-box">
-        <div class="result-title">增长量</div>
-        <div id="growthResult" class="result-value">—</div>
-      </div>
-    </section>
-
+<div class="grid">
+  <section class="card problem">
+    <div class="problemTop">
+      <span class="badge" id="problemBadge">求增长量</span>
+      <button class="skipBtn" id="skipQuestion">下一题 / 跳过</button>
+    </div>
     <div class="formula">
-      <div><strong>基期量：</strong>现期量 ÷ (1 + 增长率)</div>
-      <div><strong>增长量：</strong>现期量 − 基期量</div>
-      <div>也可写为：现期量 × 增长率 ÷ (1 + 增长率)</div>
+      <span>Δ =</span>
+      <span class="frac">
+        <span class="num" id="A1"></span>
+        <span class="den">1 <span id="opSign">+</span> <span id="p1"></span>%</span>
+      </span>
+      <span>× <span id="p2"></span>%</span>
     </div>
-  </main>
+    <div class="problem-meta">
+      <div>现期量<br><b id="A2"></b></div>
+      <div><span id="rateLabel">增长率</span><br><b><span id="p3"></span>%</b></div>
+      <div>本题用时<br><div class="timerBox"><b class="timerLive" id="liveTimer">未开始</b><button class="startTimerBtn" id="startTimerBtn">开始计时</button></div></div>
+    </div>
+  </section></div>
 
-  <script>
-    const currentInput = document.getElementById('current');
-    const rateInput = document.getElementById('rate');
-    const baseResult = document.getElementById('baseResult');
-    const growthResult = document.getElementById('growthResult');
-    const errorBox = document.getElementById('error');
-    const calcBtn = document.getElementById('calcBtn');
+<section class="card" style="margin-top:16px">
+  <div class="section-title">① 选择你会用的方法</div>
+  <div class="methods">
+    <label class="method"><input type="radio" name="method" value="feature"><b><span class="keycap">1</span>百化分</b><small>从常用特征分数中找最近的分数</small></label>
+    <label class="method"><input type="radio" name="method" value="scale100"><b><span class="keycap">2</span>比例放缩 · 凑100</b><small>分母减 p，分子对应差量就是增长量</small></label>
+    <label class="method"><input type="radio" name="method" value="scaleNr"><b><span class="keycap">3</span>比例放缩 · 归一100+</b><small>10p 看几百就除以几，再做对应位数放缩</small></label>
+    <label class="method"><input type="radio" name="method" value="direct"><b><span class="keycap">4</span>截位直除</b><small>倍数法归入直除：先估 A/(100+p)，再乘 p</small></label>
+  </div>
 
-    function formatNumber(num){
-      if(!Number.isFinite(num)) return '—';
-      return num.toLocaleString('zh-CN',{maximumFractionDigits:4});
-    }
+  <div class="section-title" style="margin-top:18px">② 可选：填写你的估算结果</div>
+  <div class="answer-row">
+    <input id="myAnswer" inputmode="decimal" placeholder="可留空">
+    <button class="primary" id="submit">提交并看解析</button>
+  </div>
+  <div class="hint">
+    先点击 <b>开始计时</b>。快捷键：焦点不在输入框时按 <b>1–4</b> 选方法；<b>Enter</b> 提交；提交后按 <b>N</b> 下一题。题目区“下一题 / 跳过”不会计入统计。
+  </div>
 
-    function calculate(){
-      errorBox.textContent='';
-      const current=parseFloat(currentInput.value);
-      const ratePercent=parseFloat(rateInput.value);
+  <div class="feedback" id="feedback">
+    <div class="feedback-head" id="feedbackHead">
+      <div>
+        <strong id="judgeTitle"></strong>
+        <div id="judgeSub" style="font-size:13px;margin-top:4px"></div>
+      </div>
+      <div class="feedbackMetrics" id="feedbackMetrics"></div>
+    </div>
 
-      if(!Number.isFinite(current)||!Number.isFinite(ratePercent)){
-        errorBox.textContent='请输入有效的现期量和增长率。';
-        return;
-      }
+    <div class="transform" id="transformBox"></div>
+    <div class="result-table" id="results"></div>
 
-      const r=ratePercent/100;
-      if(1+r===0){
-        errorBox.textContent='增长率不能为 -100%。';
-        return;
-      }
+    <div class="exact">
+      <span>精确增长量</span>
+      <strong id="exactValue"></strong>
+    </div>
 
-      const base=current/(1+r);
-      const growth=current-base;
+    <div class="nextrow">
+      <button class="primary" id="next">下一题（N）</button>
+    </div>
+  </div>
+</section>
+</div>
 
-      baseResult.textContent=formatNumber(base);
-      growthResult.textContent=formatNumber(growth);
-    }
+<div class="modal" id="customModal" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2>自定义题库</h2>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">自行录入题目后，可直接调用当前自测与解析流程。</div>
+      </div>
+      <div class="modal-actions">
+        <button class="closebtn" id="closeCustom" aria-label="关闭">×</button>
+      </div>
+    </div>
+    <div class="history-body">
+      <div class="custom-form">
+        <div class="custom-field">
+          <label for="customA">现期量</label>
+          <input id="customA" type="number" step="any" min="0" placeholder="例如：1656">
+        </div>
+        <div class="custom-field">
+          <label for="customP">增长/下降幅度</label>
+          <div class="calcInputWrap">
+            <input id="customP" type="number" step="any" min="0" placeholder="例如：16.3">
+            <span class="calcSuffix">%</span>
+          </div>
+        </div>
+        <div class="custom-field">
+          <label for="customDir">增长方向</label>
+          <select id="customDir">
+            <option value="positive">正增长</option>
+            <option value="negative">负增长</option>
+          </select>
+        </div>
+        <button class="custom-add" id="addCustom">添加题目</button>
+      </div>
+      <div class="custom-error" id="customError"></div>
+      <div class="custom-toolbar">
+        <div class="custom-toolbar-left">自定义题仅保存在当前浏览器，不会与随机题库混合。</div>
+        <div class="custom-toolbar-right">
+          <button class="smallbtn" id="practiceRandomCustom">随机练一道</button>
+          <button class="smallbtn" id="clearCustom">清空自定义题</button>
+        </div>
+      </div>
+      <div id="customList" class="custom-list"></div>
+    </div>
+  </div>
+</div>
 
-    calcBtn.addEventListener('click',calculate);
+<div class="modal" id="historyModal" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2>历史题目与解析</h2>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">可展开完整解析，也可直接重新做历史题。</div>
+      </div>
+      <div class="modal-actions">
+        <select id="historyFilter" class="history-filter">
+          <option value="all">全部题目</option>
+          <option value="wrong">只看需复盘</option>
+        </select>
+        <button class="smallbtn" id="clearHistory">清空历史</button>
+        <button class="closebtn" id="closeHistory" aria-label="关闭">×</button>
+      </div>
+    </div>
+    <div class="history-body" id="historyBody"></div>
+  </div>
+</div>
 
-    [currentInput,rateInput].forEach(input=>{
-      input.addEventListener('keydown',e=>{
-        if(e.key==='Enter') calculate();
-      });
-      input.addEventListener('input',()=>{
-        if(currentInput.value!==''&&rateInput.value!=='') calculate();
-      });
+<script>
+const HISTORY_KEY='growthTrainerHistoryV2';
+const STATS_KEY='growthTrainerStats';
+const CUSTOM_KEY='growthTrainerCustomQuestionsV1';
+
+/* 百化分范围：1/2~1/20、1/22、2/7、n/9 */
+function buildFractions(){
+  const a=[];
+  for(let n=2;n<=20;n++) a.push({m:1,n,label:`1/${n}`});
+  a.push({m:1,n:22,label:'1/22'},{m:2,n:7,label:'2/7'});
+  for(let m=2;m<=8;m++) a.push({m,n:9,label:`${m}/9`});
+  const mp=new Map();
+  a.forEach(f=>{const k=(f.m/f.n).toFixed(10);if(!mp.has(k))mp.set(k,f)});
+  return [...mp.values()];
+}
+const FRACTIONS=buildFractions();
+const $=id=>document.getElementById(id);
+const exactGrowth=(A,p,dir='positive')=>{
+  const sign=dir==='negative'?-1:1;
+  return A*p/(100+sign*p);
+};
+const pctErr=(e,t)=>Math.abs(e-t)/Math.abs(t)*100;
+
+function fmt(x,d=2){
+  return Number(x).toLocaleString('zh-CN',{maximumFractionDigits:d,useGrouping:false});
+}
+function fmtPct(x,d=2){return fmt(x,d)+'%'}
+function truncSig(x,n){
+  if(x===0)return 0;
+  const s=Math.sign(x),a=Math.abs(x),e=Math.floor(Math.log10(a)),f=10**(n-1-e);
+  return s*Math.floor(a*f+1e-12)/f;
+}
+function first3Parts(A){
+  const a=Math.abs(A),e=Math.floor(Math.log10(a)),scale=10**(e-2),a3=Math.floor(a/scale+1e-12);
+  return{scale,a3,a2:Math.floor(a3/10),a1:Math.floor(a3/100),approx:(Math.sign(A)||1)*a3*scale}
+}
+function nearestFraction(p){
+  let b=null;
+  for(const f of FRACTIONS){
+    const pct=100*f.m/f.n;
+    if(pct<4||pct>90)continue;
+    const diff=Math.abs(p-pct);
+    if(!b||diff<b.diff)b={...f,pct,diff};
+  }
+  return b;
+}
+
+function featureMethod(A,p,t,dir='positive'){
+  const f=nearestFraction(p);
+  const den=dir==='negative'?(f.n-f.m):(f.n+f.m);
+  const est=A*f.m/den;
+  return{
+    key:'feature',name:'百化分',est,err:pctErr(est,t),
+    complexity:1+Math.min(f.diff,2)*.45,
+    steps:[
+      `最近特征分数：${f.label} = ${fmt(f.pct,2)}%`,
+      `变化率相差 ${fmt(f.diff,2)} 个百分点`,
+      dir==='negative'
+        ? `下降时取绝对量：Δ ≈ A×${f.m}/(${f.n}−${f.m}) = ${fmt(est,2)}`
+        : `增长时：Δ ≈ A×${f.m}/(${f.n}+${f.m}) = ${fmt(est,2)}`
+    ]
+  };
+}
+
+/* 比例放缩：取前两位的最近倍数；正负修正均参与。 */
+function placeScaleMental(A,Bref,aMental){
+  const b2=Math.floor(Math.abs(Bref)/10);
+  const b1=Math.floor(Math.abs(Bref)/100)||1;
+  const ap=first3Parts(A),aa=Math.abs(aMental);
+  const raw=aa/b2;
+  const cand=[Math.floor(raw),Math.ceil(raw),Math.round(raw)-1,Math.round(raw)+1]
+    .filter(d=>d>=0);
+  const uniq=[...new Set(cand)].map(d=>({d,rem:aa-d*b2}))
+    .sort((x,y)=>Math.abs(x.rem)-Math.abs(y.rem)||x.d-y.d);
+  const best=uniq[0]||{d:0,rem:aa};
+  const alt=uniq[1]||null;
+  const calc=(obj)=>{
+    const main=obj.d*ap.a2;
+    const cor=obj.rem*(ap.a1/b1);
+    const change3=main+cor;
+    const change=Math.sign(aMental)*change3*ap.scale;
+    const sg=obj.rem>=0?'+':'−';
+    return{
+      ...obj,change3,change,
+      decomp:`${fmt(aa,1)} = ${obj.d}×${b2} ${sg} ${fmt(Math.abs(obj.rem),1)}`,
+      map:`分子对应：${obj.d}×${ap.a2} ${sg} ${fmt(Math.abs(obj.rem),1)}×${ap.a1}`
+    };
+  };
+  const b=calc(best),a=alt?calc(alt):null;
+  return{Bref,b2,b1,ap,...b,alt:a};
+}
+
+function scale100Method(A,p,t,dir='positive'){
+  const B=100+(dir==='negative'?-p:p),Bref=Math.round(B),aMental=100-Bref;
+  const s=placeScaleMental(A,Bref,aMental),est=Math.abs(s.change);
+  return{
+    key:'scale100',name:'比例放缩 · 凑100',est,err:pctErr(est,t),
+    complexity:1.2+Math.abs(s.rem)*.08,aux:s,
+    steps:[
+      `分母心算：${fmt(B,1)} ≈ ${Bref} → 100，差 ${aMental>=0?'+':''}${aMental}`,
+      `就近分解：${s.decomp}`,
+      s.map,
+      dir==='negative'
+        ? `对应分子增加量 ≈ ${fmt(est,2)}；这就是减少量的绝对值估计`
+        : `对应分子减少量 ≈ ${fmt(est,2)}；这就是增长量估计`
+    ],
+    alt:s.alt?[
+      `另一种分解：${s.alt.decomp}`,
+      s.alt.map
+    ]:null
+  };
+}
+
+/* 10p 是几百，就除以几，统一归一到 100+。 */
+function normalizedScaleMethod(A,p,t,dir='positive'){
+  const B=100+(dir==='negative'?-p:p),Bref=Math.round(B),tenP=10*p;
+  let c=1,low=false;
+  if(tenP>=100)c=Math.max(1,Math.floor(tenP/100));
+  else low=true;
+  const target=tenP/c,targetRef=Math.round(target),aMental=targetRef-Bref;
+  const s=placeScaleMental(A,Bref,aMental),Aadj=A+s.change,est=Math.abs(Aadj*c/10);
+  let lead;
+  if(low) lead=`10r=${fmt(tenP,1)}<100，本法不具备“几百÷几”的归一结构，仅作参考`;
+  else if(c===1) lead=`10r=${fmt(tenP,1)}，看作1百多 → 目标取 ${fmt(target,1)}`;
+  else lead=`10r=${fmt(tenP,1)}，看作${c}百多 → ÷${c} 得目标 ${fmt(target,2)}`;
+  const end=c===1
+    ? `变化量绝对值 ≈ ${fmt(Math.abs(Aadj),2)}÷10 = ${fmt(est,2)}`
+    : `变化量绝对值 ≈ ${fmt(Math.abs(Aadj),2)}×${c}/10 = ${fmt(est,2)}`;
+  return{
+    key:'scaleNr',name:'比例放缩 · 归一100+',est,err:pctErr(est,t),
+    complexity:(low?3:1.15)+Math.abs(s.rem)*.07+(c>1?.05:0),c,aux:s,
+    steps:[
+      lead,
+      `分母心算：${fmt(B,1)} ≈ ${Bref} → ${targetRef}，差 ${aMental>=0?'+':''}${aMental}`,
+      `就近分解：${s.decomp}`,
+      s.map,
+      `分子：${fmt(A,2)} ${s.change>=0?'+':'−'} ${fmt(Math.abs(s.change),2)} ≈ ${fmt(Aadj,2)}`,
+      end
+    ],
+    alt:s.alt?[
+      `另一种分解：${s.alt.decomp}`,
+      s.alt.map
+    ]:null
+  };
+}
+
+function directMethod(A,p,t,dir='positive'){
+  const B=100+(dir==='negative'?-p:p);
+  const A3=truncSig(A,3),B3=truncSig(B,3),A2=truncSig(A,2),B2=truncSig(B,2);
+  const k3=A3/B3,k2=A2/B2,est3=Math.abs(k3*p),est2=Math.abs(k2*p);
+  return{
+    key:'direct',name:'截位直除',est:est3,err:pctErr(est3,t),
+    est2,err2:pctErr(est2,t),complexity:2,
+    steps:[
+      `截3位：${fmt(A3,3)} ÷ ${fmt(B3,3)} ≈ ${fmt(k3,3)}，再 × ${fmt(p,1)} → ${fmt(est3,2)}`,
+      `截2位：${fmt(A2,3)} ÷ ${fmt(B2,3)} ≈ ${fmt(k2,3)}，再 × ${fmt(p,1)} → ${fmt(est2,2)}`,
+      `这里只比较变化量绝对值，不判断正负号`
+    ]
+  };
+}
+
+function allMethods(A,p,dir='positive'){
+  const t=exactGrowth(A,p,dir);
+  return{truth:t,list:[
+    featureMethod(A,p,t,dir),
+    scale100Method(A,p,t,dir),
+    normalizedScaleMethod(A,p,t,dir),
+    directMethod(A,p,t,dir)
+  ]};
+}
+
+/* 多级评价：安全阈值内不再只有一个“正确方法”。 */
+function evaluateMethods(ms,safe){
+  const safeOnes=ms.filter(m=>m.err<=safe);
+  const info={};
+  if(safeOnes.length){
+    const priority=[...safeOnes].sort((a,b)=>a.complexity-b.complexity||a.err-b.err)[0];
+    ms.forEach(m=>{
+      if(m.key===priority.key) info[m.key]={level:'priority',label:'优先推荐'};
+      else if(m.err<=safe) info[m.key]={level:'usable',label:'可以使用'};
+      else info[m.key]={level:'no',label:'不建议'};
     });
-  </script>
+    return{info,priority,hasSafe:true};
+  }
+  const best=[...ms].sort((a,b)=>a.err-b.err)[0];
+  ms.forEach(m=>{
+    info[m.key]=m.key===best.key
+      ?{level:'best',label:'相对最稳'}
+      :{level:'no',label:'不建议'};
+  });
+  return{info,priority:best,hasSafe:false};
+}
+
+function rand(a,b){return Math.random()*(b-a)+a}
+function randInt(a,b){return Math.floor(rand(a,b+1))}
+function one(x){return Math.round(x*10)/10}
+function randomA(){
+  const z=Math.random();
+  return z<.35?randInt(180,999):z<.78?randInt(1000,5999):randInt(6000,19999);
+}
+function pickDirection(mode){
+  return mode==='mixed'?(Math.random()<.5?'positive':'negative'):mode;
+}
+function generate(type,dirMode){
+  let A=randomA(),p,tries=0,dir=pickDirection(dirMode);
+  if(type==='feature'){
+    const v=FRACTIONS.filter(f=>{const q=100*f.m/f.n;return q>=4.5&&q<=50});
+    const f=v[randInt(0,v.length-1)],j=[-.4,-.3,-.2,-.1,0,.1,.2,.3,.4];
+    p=one(100*f.m/f.n+j[randInt(0,j.length-1)]);
+    return{A,p,dir,kind:'百化分型'};
+  }
+  if(type==='scale100'){
+    while(tries++<160){
+      p=one(rand(6,38));
+      const m=scale100Method(A,p,exactGrowth(A,p,dir),dir);
+      if(m.err<=2.2&&nearestFraction(p).diff>.18)break;
+    }
+    return{A,p,dir,kind:'凑100型'};
+  }
+  if(type==='scaleNr'){
+    while(tries++<180){
+      p=one(rand(10,50));
+      const m=normalizedScaleMethod(A,p,exactGrowth(A,p,dir),dir);
+      if(m.err<=1.8&&Math.abs(m.aux.rem)<=4)break;
+    }
+    return{A,p,dir,kind:'归一100+型'};
+  }
+  if(type==='direct'){
+    while(tries++<180){
+      p=one(rand(5,48));
+      const x=allMethods(A,p,dir).list;
+      if(x[0].err>1.8&&x[1].err>1.8&&x[2].err>1.8)break;
+    }
+    return{A,p,dir,kind:'直除型'};
+  }
+  return generate(['feature','scale100','scaleNr','direct'][randInt(0,3)],dirMode);
+}
+
+let cur=null,submitted=false,startTime=0,timerId=null,timerStarted=false;
+
+function normalizeStats(s){
+  return{
+    total:Number(s?.total)||0,
+    correct:Number(s?.correct)||0,
+    errSum:Number(s?.errSum)||0,
+    errN:Number(s?.errN)||0,
+    timeSum:Number(s?.timeSum)||0,
+    timeN:Number(s?.timeN)||0
+  };
+}
+function loadS(){
+  try{return normalizeStats(JSON.parse(localStorage.getItem(STATS_KEY))||{})}
+  catch(e){return normalizeStats({})}
+}
+function saveS(s){localStorage.setItem(STATS_KEY,JSON.stringify(s))}
+function showS(){
+  const s=loadS(),h=loadHistory();
+  $('sTotal').textContent=s.total;
+  $('sCorrect').textContent=s.correct;
+  $('sRate').textContent=s.total?fmtPct(100*s.correct/s.total,1):'—';
+  $('sErr').textContent=s.errN?fmtPct(s.errSum/s.errN,1):'—';
+  $('sTime').textContent=s.timeN?fmt(s.timeSum/s.timeN,1)+' s':'—';
+  $('sHistory').textContent=h.length;
+}
+function loadHistory(){
+  try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[]}
+  catch(e){return[]}
+}
+function loadCustom(){
+  try{return JSON.parse(localStorage.getItem(CUSTOM_KEY))||[]}
+  catch(e){return[]}
+}
+function saveCustom(items){
+  localStorage.setItem(CUSTOM_KEY,JSON.stringify(items.slice(0,500)));
+  updateCustomCount();
+}
+function updateCustomCount(){
+  $('customCount').textContent=loadCustom().length;
+}
+
+function saveHistory(h){
+  localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(0,200)));
+  updateHistoryCount();showS();
+}
+function updateHistoryCount(){$('historyCount').textContent=loadHistory().length}
+function addHistory(rec){const h=loadHistory();h.unshift(rec);saveHistory(h)}
+
+function resetTimer(){
+  clearInterval(timerId);
+  timerStarted=false;
+  startTime=0;
+  $('liveTimer').textContent='未开始';
+  $('startTimerBtn').disabled=false;
+  $('startTimerBtn').textContent='开始计时';
+}
+function startTimer(){
+  if(timerStarted||submitted)return;
+  clearInterval(timerId);
+  timerStarted=true;
+  startTime=performance.now();
+  $('liveTimer').textContent='0.0 s';
+  $('startTimerBtn').disabled=true;
+  $('startTimerBtn').textContent='计时中';
+  timerId=setInterval(()=>{
+    if(!submitted&&timerStarted){
+      $('liveTimer').textContent=fmt((performance.now()-startTime)/1000,1)+' s';
+    }
+  },100);
+}
+function stopTimer(){
+  if(!timerStarted)return null;
+  clearInterval(timerId);
+  const sec=(performance.now()-startTime)/1000;
+  $('liveTimer').textContent=fmt(sec,1)+' s';
+  $('startTimerBtn').disabled=true;
+  $('startTimerBtn').textContent='已停止';
+  return sec;
+}
+
+function clearSelection(){
+  document.querySelectorAll('.method').forEach(x=>x.classList.remove('selected'));
+  document.querySelectorAll('input[name=method]').forEach(x=>x.checked=false);
+}
+function chooseMethod(key){
+  const input=document.querySelector(`input[name=method][value="${key}"]`);
+  if(!input)return;
+  input.checked=true;
+  document.querySelectorAll('.method').forEach(x=>x.classList.remove('selected'));
+  input.closest('.method').classList.add('selected');
+}
+document.querySelectorAll('.method').forEach(l=>l.addEventListener('click',()=>{
+  chooseMethod(l.querySelector('input').value);
+}));
+
+function loadQuestion(q){
+  const dir=q.dir||'positive',a=allMethods(q.A,q.p,dir);
+  cur={...q,dir,...a};
+  submitted=false;
+  $('A1').textContent=String(q.A);
+  $('A2').textContent=String(q.A);
+  $('p1').textContent=$('p2').textContent=$('p3').textContent=fmt(q.p,1);
+  $('opSign').textContent=dir==='negative'?'−':'+';
+  $('problemBadge').textContent=dir==='negative'?'求减少量（绝对值）':'求增长量';
+  $('rateLabel').textContent=dir==='negative'?'下降幅度':'增长率';
+  $('myAnswer').value='';
+  $('feedback').classList.remove('show');
+  $('results').innerHTML='';
+  clearSelection();
+  $('submit').disabled=false;
+  resetTimer();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function newQ(){loadQuestion(generate($('mode').value,$('direction').value))}
+
+function errTag(e){return e<=1?'err-ok':e<=3?'err-mid':'err-high'}
+
+function directHint(m,safe){
+  if(m.key!=='direct')return'';
+  if(m.err2<=safe)return`<div class="directHint">本题判断：截2位已经能控制在 ${safe}% 安全阈值内。</div>`;
+  if(m.err<=safe)return`<div class="directHint">本题判断：截2位偏粗，建议保留3位。</div>`;
+  return`<div class="directHint">本题判断：截3位仍超过当前 ${safe}% 安全阈值，需结合选项间距判断。</div>`;
+}
+
+function methodHtml(m,evaluation,safe){
+  const ev=evaluation.info[m.key]||{level:'no',label:'不建议'};
+  const cls=ev.level==='priority'?'priority':ev.level==='usable'?'usable':'';
+  const tierClass=ev.level==='priority'?'priority':ev.level==='usable'?'usable':ev.level==='best'?'best':'no';
+  const alt=m.alt?.length
+    ?`<details class="altSteps"><summary>查看另一种比例拆法</summary>${m.alt.map(s=>`<div>• ${s}</div>`).join('')}</details>`
+    :'';
+  return `<div class="result ${cls}">
+    <div class="result-top">
+      <div class="result-name">${m.name}</div>
+      <div class="tags">
+        <span class="tag ${tierClass}">${ev.label}</span>
+        <span class="tag ${errTag(m.err)}">相对误差 ${fmtPct(m.err,2)}</span>
+        ${m.key==='direct'&&m.err2!=null?`<span class="tag">截2位误差 ${fmtPct(m.err2,2)}</span>`:''}
+      </div>
+    </div>
+    <div class="result-value">${fmt(m.est,2)}</div>
+    <div class="steps">${m.steps.map(s=>`<div>• ${s}</div>`).join('')}</div>
+    ${alt}
+    ${directHint(m,safe)}
+  </div>`;
+}
+
+function renderCurrent(evaluation,safe){
+  $('results').innerHTML=cur.list.map(m=>methodHtml(m,evaluation,safe)).join('');
+  $('exactValue').textContent=fmt(cur.truth,3);
+  const den=100+(cur.dir==='negative'?-cur.p:cur.p);
+  $('transformBox').innerHTML=
+    cur.dir==='negative'
+    ? `<b>提交后统一转换：</b>减少量绝对值 = A×r/(100−r) = ${String(cur.A)}×${fmt(cur.p,1)}/${fmt(den,1)}。下面只比较绝对值，不判断负号。`
+    : `<b>提交后统一转换：</b>增长量 = A×r/(100+r) = ${String(cur.A)}×${fmt(cur.p,1)}/${fmt(den,1)}。`;
+}
+
+function submitCurrent(){
+  if(submitted)return;
+  if(!timerStarted){alert('请先点击“开始计时”。');return}
+  const c=document.querySelector('input[name=method]:checked');
+  if(!c){alert('请先选择一种方法。');return}
+  const safe=+$('safe').value;
+  const evaluation=evaluateMethods(cur.list,safe);
+  const chosenEval=evaluation.info[c.value];
+  const methodOK=chosenEval.level!=='no';
+  const selectedLabel=document.querySelector('.method.selected b').innerText.replace(/^\d+\s*/,'').trim();
+  const val=$('myAnswer').value.trim();
+  const u=val===''?null:Number(val);
+  const ue=u!==null&&Number.isFinite(u)?pctErr(u,cur.truth):null;
+  const elapsed=stopTimer() ?? 0;
+
+  $('judgeTitle').textContent=methodOK?'方法判断合理':'这题不建议用你选的方法';
+  $('judgeSub').textContent=
+    `你的选择：${selectedLabel}（${chosenEval.label}）；优先：${evaluation.priority.name}。本题出题侧重：${cur.kind}。`;
+  $('feedbackHead').className='feedback-head '+(methodOK?'good':'bad');
+  $('feedbackMetrics').innerHTML=
+    `<div>用时 ${fmt(elapsed,1)} s</div>`+
+    (ue==null?'':`<div>你的估值误差 ${fmtPct(ue,2)}</div>`);
+
+  renderCurrent(evaluation,safe);
+  $('feedback').classList.add('show');
+  $('submit').disabled=true;
+  submitted=true;
+
+  const s=loadS();
+  s.total++;
+  if(methodOK)s.correct++;
+  if(ue!==null){s.errSum+=ue;s.errN++}
+  s.timeSum+=elapsed;s.timeN++;
+  saveS(s);showS();
+
+  addHistory({
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    ts:Date.now(),A:cur.A,p:cur.p,dir:cur.dir,kind:cur.kind,safe,
+    chosenKey:c.value,chosenName:selectedLabel,
+    userAns:u,userErr:ue,methodOK,correct:methodOK,
+    priorityKey:evaluation.priority.key,priorityName:evaluation.priority.name,
+    truth:cur.truth,methods:cur.list,elapsed
+  });
+
+  setTimeout(()=>$('feedback').scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+
+$('startTimerBtn').onclick=startTimer;
+function skipQuestion(){
+  clearInterval(timerId);
+  submitted=false;
+  timerStarted=false;
+  newQ();
+}
+$('skipQuestion').onclick=skipQuestion;
+$('submit').onclick=submitCurrent;
+$('next').onclick=newQ;
+$('mode').onchange=newQ;$('direction').onchange=newQ;
+
+function formatCalcNumber(num){
+  if(!Number.isFinite(num)) return '—';
+  return num.toLocaleString('zh-CN',{maximumFractionDigits:4});
+}
+function calculateVerifier(){
+  $('calcError').textContent='';
+  const current=parseFloat($('calcCurrent').value);
+  const ratePercent=parseFloat($('calcRate').value);
+  if(!Number.isFinite(current)||!Number.isFinite(ratePercent)){
+    $('calcError').textContent='请输入有效的现期量和增长率。';
+    return;
+  }
+  const r=ratePercent/100;
+  if(1+r===0){
+    $('calcError').textContent='增长率不能为 -100%。';
+    $('calcBaseResult').textContent='—';
+    $('calcGrowthResult').textContent='—';
+    return;
+  }
+  const base=current/(1+r);
+  const growth=Math.abs(current-base);
+  $('calcBaseResult').textContent=formatCalcNumber(base);
+  $('calcGrowthResult').textContent=formatCalcNumber(growth);
+}
+$('toggleCalculator').onclick=()=>{
+  $('calcDrawer').classList.toggle('show');
+  if($('calcDrawer').classList.contains('show')) $('calcCurrent').focus();
+};
+$('closeCalculator').onclick=()=>$('calcDrawer').classList.remove('show');
+$('calcBtn').onclick=calculateVerifier;
+[$('calcCurrent'),$('calcRate')].forEach(input=>{
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      calculateVerifier();
+    }
+  });
+  input.addEventListener('input',()=>{
+    if($('calcCurrent').value!==''&&$('calcRate').value!=='') calculateVerifier();
+  });
+});
+
+$('toggleStats').onclick=()=>{
+  $('statsDrawer').classList.toggle('show');
+};
+$('closeStats').onclick=()=>{
+  $('statsDrawer').classList.remove('show');
+};
+$('resetStats').onclick=()=>{
+  if(confirm('清空训练统计？历史题目不会删除。')){
+    localStorage.removeItem(STATS_KEY);showS();
+  }
+};
+
+
+function customDateText(ts){
+  const d=new Date(ts),pad=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function renderCustom(){
+  const items=loadCustom();
+  $('customCount').textContent=items.length;
+  $('practiceRandomCustom').disabled=!items.length;
+  $('clearCustom').disabled=!items.length;
+  if(!items.length){
+    $('customList').innerHTML='<div class="empty">还没有自定义题。可以在上方输入现期量和变化率添加。</div>';
+    return;
+  }
+  $('customList').innerHTML=items.map((x,i)=>{
+    const dirText=x.dir==='negative'?'负增长 / 求减少量':'正增长 / 求增长量';
+    return `<div class="custom-item">
+      <div>
+        <div class="custom-main">${String(x.A)}，${x.dir==='negative'?'下降':'增长'} ${fmt(x.p,2)}%</div>
+        <div class="custom-sub">${dirText} · 添加于 ${customDateText(x.ts)}</div>
+      </div>
+      <div class="custom-actions">
+        <button class="custom-practice" data-custom-practice="${x.id}">开始自测</button>
+        <button class="custom-delete" data-custom-delete="${x.id}">删除</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.querySelectorAll('[data-custom-practice]').forEach(btn=>btn.onclick=()=>{
+    const q=loadCustom().find(x=>x.id===btn.dataset.customPractice);
+    if(!q)return;
+    closeCustom();
+    loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:'自定义题'});
+  });
+  document.querySelectorAll('[data-custom-delete]').forEach(btn=>btn.onclick=()=>{
+    const id=btn.dataset.customDelete;
+    if(confirm('删除这道自定义题？')){
+      saveCustom(loadCustom().filter(x=>x.id!==id));
+      renderCustom();
+    }
+  });
+}
+function addCustomQuestion(){
+  $('customError').textContent='';
+  const A=Number($('customA').value);
+  const p=Number($('customP').value);
+  const dir=$('customDir').value;
+  if(!Number.isFinite(A)||A<=0){
+    $('customError').textContent='请输入大于 0 的有效现期量。';
+    return;
+  }
+  if(!Number.isFinite(p)||p<=0){
+    $('customError').textContent='请输入大于 0 的增长/下降幅度。';
+    return;
+  }
+  if(dir==='negative'&&p>=100){
+    $('customError').textContent='负增长的下降幅度必须小于 100%。';
+    return;
+  }
+  const items=loadCustom();
+  items.unshift({
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    ts:Date.now(),A,p,dir
+  });
+  saveCustom(items);
+  $('customA').value='';
+  $('customP').value='';
+  renderCustom();
+}
+function practiceRandomCustom(){
+  const items=loadCustom();
+  if(!items.length){
+    $('customError').textContent='请先添加至少一道自定义题。';
+    return;
+  }
+  const q=items[Math.floor(Math.random()*items.length)];
+  closeCustom();
+  loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:'自定义题'});
+}
+function openCustom(){
+  $('customModal').classList.add('show');
+  $('customModal').setAttribute('aria-hidden','false');
+  $('customError').textContent='';
+  renderCustom();
+}
+function closeCustom(){
+  $('customModal').classList.remove('show');
+  $('customModal').setAttribute('aria-hidden','true');
+}
+$('openCustom').onclick=openCustom;
+$('closeCustom').onclick=closeCustom;
+$('addCustom').onclick=addCustomQuestion;
+$('practiceRandomCustom').onclick=practiceRandomCustom;
+$('clearCustom').onclick=()=>{
+  if(loadCustom().length&&confirm('清空全部自定义题？')){
+    localStorage.removeItem(CUSTOM_KEY);
+    updateCustomCount();
+    renderCustom();
+  }
+};
+$('customModal').addEventListener('click',e=>{
+  if(e.target===$('customModal'))closeCustom();
+});
+[$('customA'),$('customP')].forEach(input=>{
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){
+      e.preventDefault();
+      addCustomQuestion();
+    }
+  });
+});
+
+function dateText(ts){
+  const d=new Date(ts),pad=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+function historyMethodOK(h){
+  if(typeof h.methodOK==='boolean')return h.methodOK;
+  if(typeof h.correct==='boolean')return h.correct;
+  const ev=evaluateMethods(h.methods||[],Number(h.safe)||2);
+  return ev.info[h.chosenKey]?.level!=='no';
+}
+function isWrong(h){
+  return !historyMethodOK(h)||(h.userErr!=null&&h.userErr>(Number(h.safe)||2));
+}
+function renderHistory(){
+  const filter=$('historyFilter').value;
+  let h=loadHistory();
+  if(filter==='wrong')h=h.filter(isWrong);
+  if(!h.length){$('historyBody').innerHTML='<div class="empty">暂无符合条件的历史题目。</div>';return}
+
+  $('historyBody').innerHTML=h.map(x=>{
+    const safe=Number(x.safe)||2;
+    const evaluation=evaluateMethods(x.methods||[],safe);
+    const status=isWrong(x)?'需要复盘':'完成良好';
+    const statusClass=isWrong(x)?'bad':'good';
+    const userText=x.userAns==null?'未填写估值':`你的估值 ${fmt(x.userAns,2)}（误差 ${fmtPct(x.userErr,2)}）`;
+    const elapsedText=x.elapsed!=null?` · 用时 ${fmt(x.elapsed,1)} s`:'';
+    const chosenEval=evaluation.info[x.chosenKey]?.label||'—';
+    return `<details class="history-item" data-id="${x.id}">
+      <summary class="history-summary">
+        <div class="history-row">
+          <div>
+            <div class="history-main">A=${String(x.A)}，${(x.dir||'positive')==='negative'?'下降':'增长'} ${fmt(x.p,1)}%</div>
+            <div class="history-sub">
+              ${dateText(x.ts)}${elapsedText} · 你选：${x.chosenName}（${chosenEval}） · 优先：${evaluation.priority.name}<br>
+              ${userText}
+            </div>
+          </div>
+          <span class="history-status ${statusClass}">${status}</span>
+        </div>
+      </summary>
+      <div class="history-detail">
+        <div class="history-meta">
+          <span>出题侧重：${x.kind}</span>
+          <span>安全阈值：${safe}%</span>
+          <span>精确值：${fmt(x.truth,3)}</span>
+          <div class="history-actions">
+            <button class="history-retry" data-retry="${x.id}">重新做此题</button>
+            <button class="history-delete" data-delete="${x.id}">删除此题</button>
+          </div>
+        </div>
+        <div class="transform"><b>等价形式：</b>${
+          (x.dir||'positive')==='negative'
+            ? `减少量绝对值 = ${String(x.A)}×${fmt(x.p,1)}/${fmt(100-x.p,1)}`
+            : `增长量 = ${String(x.A)}×${fmt(x.p,1)}/${fmt(100+x.p,1)}`
+        }</div>
+        <div class="result-table">${(x.methods||[]).map(m=>methodHtml(m,evaluation,safe)).join('')}</div>
+        <div class="exact"><span>精确增长量</span><strong>${fmt(x.truth,3)}</strong></div>
+      </div>
+    </details>`;
+  }).join('');
+
+  document.querySelectorAll('[data-delete]').forEach(btn=>btn.onclick=e=>{
+    e.preventDefault();e.stopPropagation();
+    const id=btn.dataset.delete;
+    if(confirm('删除这道历史题？')){
+      saveHistory(loadHistory().filter(x=>x.id!==id));renderHistory();
+    }
+  });
+  document.querySelectorAll('[data-retry]').forEach(btn=>btn.onclick=e=>{
+    e.preventDefault();e.stopPropagation();
+    const id=btn.dataset.retry;
+    const rec=loadHistory().find(x=>x.id===id);
+    if(!rec)return;
+    closeHistory();
+    loadQuestion({A:rec.A,p:rec.p,dir:rec.dir||'positive',kind:'历史重做'});
+  });
+}
+
+function openHistory(){
+  $('historyModal').classList.add('show');
+  $('historyModal').setAttribute('aria-hidden','false');
+  renderHistory();
+}
+function closeHistory(){
+  $('historyModal').classList.remove('show');
+  $('historyModal').setAttribute('aria-hidden','true');
+}
+$('openHistory').onclick=openHistory;
+$('closeHistory').onclick=closeHistory;
+$('historyFilter').onchange=renderHistory;
+$('clearHistory').onclick=()=>{
+  if(confirm('清空全部历史题目及解析？')){
+    localStorage.removeItem(HISTORY_KEY);updateHistoryCount();showS();renderHistory();
+  }
+};
+$('historyModal').addEventListener('click',e=>{if(e.target===$('historyModal'))closeHistory()});
+
+/* 快捷键：输入框中不抢占数字键；Enter 可直接提交。 */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeHistory();closeCustom();return}
+  if($('historyModal').classList.contains('show')||$('customModal').classList.contains('show'))return;
+
+  const editable=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName);
+  if(e.key==='Enter'&&!submitted){
+    e.preventDefault();
+    if(!timerStarted) startTimer();
+    else submitCurrent();
+    return;
+  }
+  if(!editable&&!submitted&&['1','2','3','4'].includes(e.key)){
+    const map={'1':'feature','2':'scale100','3':'scaleNr','4':'direct'};
+    chooseMethod(map[e.key]);return;
+  }
+  if(!editable&&submitted&&(e.key==='n'||e.key==='N')){
+    e.preventDefault();newQ();
+  }
+});
+
+showS();updateHistoryCount();updateCustomCount();newQ();
+</script>
 </body>
 </html>
