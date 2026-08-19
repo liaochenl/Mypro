@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>增长量速算自测 V3.8</title>
+<title>增长量速算自测 V3.9</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
@@ -191,6 +191,13 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 .history-actions{display:flex;gap:7px;flex-wrap:wrap;margin-left:auto}
 .history-delete{border:1px solid #fecaca;background:#fff;color:#b91c1c;border-radius:9px;padding:6px 9px;cursor:pointer;font-size:12px}
 .history-retry{border:1px solid #bfdbfe;background:#fff;color:#1d4ed8;border-radius:9px;padding:6px 9px;cursor:pointer;font-size:12px;font-weight:700}
+.history-favorite{
+  border:1px solid #fde68a;background:#fffbeb;color:#a16207;border-radius:9px;
+  padding:6px 9px;cursor:pointer;font-size:12px;font-weight:800
+}
+.history-favorite.active{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+.history-favorite.remote{background:#f5f3ff;border-color:#ddd6fe;color:#6d28d9;cursor:default}
+
 .history-meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-bottom:10px}
 .history-filter{padding:8px 9px}
 
@@ -305,8 +312,8 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 <div class="app">
 <header>
   <div>
-    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.8</span></h1>
-    <div class="subtitle">支持 GitHub Pages 自动加载仓库 JSON 题库，并与浏览器本地添加题并存。</div>
+    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.9</span></h1>
+    <div class="subtitle">随机题可从历史记录收藏；自定义题自动收藏；data/custom_questions.json 作为仓库收藏题库维护。</div>
   </div>
   <div class="toolbar">
     <select id="direction">
@@ -327,7 +334,7 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
       <option value="3">安全阈值 3%</option>
     </select>
     <button class="smallbtn historyBtn" id="openHistory">历史题目 <span class="historyCount" id="historyCount">0</span></button>
-    <button class="smallbtn customBtn" id="openCustom">自定义题 <span class="customCount" id="customCount">0</span></button>
+    <button class="smallbtn customBtn" id="openCustom">收藏题库 <span class="customCount" id="customCount">0</span></button>
     <button class="smallbtn" id="openData">数据管理</button>
     <button class="smallbtn" id="toggleCalculator">验证计算器</button>
     <button class="smallbtn statsToggle" id="toggleStats"><span class="statsDot"></span>训练统计</button>
@@ -457,7 +464,7 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
     <div class="modal-head">
       <div>
         <h2>数据管理</h2>
-        <div style="font-size:12px;color:#6b7280;margin-top:4px">通过 JSON 备份和迁移历史题、自定义题与训练统计。</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">通过 JSON 备份和迁移历史题、收藏题库与训练统计。</div>
       </div>
       <div class="modal-actions">
         <button class="closebtn" id="closeData" aria-label="关闭">×</button>
@@ -467,23 +474,23 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
       <div class="dataGrid">
         <div class="dataCard">
           <h3>导出完整备份</h3>
-          <p>包含训练统计、历史题目和本地自定义题库；仓库题库会在页面打开时重新加载。</p>
+          <p>包含训练统计、历史题目和本地收藏；仓库收藏会在页面打开时重新加载。</p>
           <div class="dataActions">
             <button class="dataPrimary" id="exportAllData">导出全部 JSON</button>
           </div>
         </div>
 
         <div class="dataCard">
-          <h3>仅导出自定义题</h3>
-          <p>只导出当前浏览器里手动添加的题目；仓库题库由 GitHub JSON 单独维护。</p>
+          <h3>导出收藏题库</h3>
+          <p>导出“仓库收藏 + 本地收藏”的合并题库，可直接替换 GitHub 的 data/custom_questions.json。</p>
           <div class="dataActions">
-            <button class="dataSecondary" id="exportCustomData">导出自定义题 JSON</button>
+            <button class="dataSecondary" id="exportCustomData">导出收藏 JSON</button>
           </div>
         </div>
 
         <div class="dataCard">
           <h3>导入 JSON</h3>
-          <p>支持本网页导出的完整备份或自定义题题库。导入前会先校验文件结构。</p>
+          <p>支持本网页导出的完整备份或收藏题库 JSON。导入前会先校验文件结构。</p>
           <div class="dataFileWrap">
             <input id="importFile" type="file" accept=".json,application/json">
           </div>
@@ -501,7 +508,7 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 
         <div class="dataCard">
           <h3>导入规则</h3>
-          <p><b>覆盖恢复：</b>用备份中的对应数据覆盖本机数据。<br><b>合并导入：</b>合并历史题和自定义题并按 ID 去重；训练统计保留本机数据，避免重复累计。</p>
+          <p><b>覆盖恢复：</b>用备份中的对应数据覆盖本机数据。<br><b>合并导入：</b>合并历史题和本地收藏并去重；训练统计保留本机数据，避免重复累计。</p>
           <div class="dataSummary" id="dataSummary">正在读取当前本地数据…</div>
         </div>
       </div>
@@ -513,8 +520,8 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
   <div class="modal-panel">
     <div class="modal-head">
       <div>
-        <h2>自定义题库</h2>
-        <div style="font-size:12px;color:#6b7280;margin-top:4px">自行录入题目后，可直接调用当前自测与解析流程。</div>
+        <h2>收藏题库</h2>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">随机题可在历史记录中收藏；手动添加的自定义题会自动加入收藏。</div>
       </div>
       <div class="modal-actions">
         <button class="closebtn" id="closeCustom" aria-label="关闭">×</button>
@@ -540,20 +547,21 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
             <option value="negative">负增长</option>
           </select>
         </div>
-        <button class="custom-add" id="addCustom">添加题目</button>
+        <button class="custom-add" id="addCustom">添加并收藏</button>
       </div>
       <div class="custom-error" id="customError"></div>
       <div class="custom-toolbar">
         <div class="custom-toolbar-left">
-          仓库题库从 <code>./data/custom_questions.json</code> 自动加载；本地添加题保存在当前浏览器。
+          仓库收藏从 <code>./data/custom_questions.json</code> 自动加载；本地收藏保存在当前浏览器。
         </div>
         <div class="custom-toolbar-right">
-          <button class="smallbtn" id="reloadRemoteCustom">重新加载仓库题库</button>
-          <button class="smallbtn" id="practiceRandomCustom">随机练一道</button>
-          <button class="smallbtn" id="clearCustom">清空本地题</button>
+          <button class="smallbtn" id="reloadRemoteCustom">重新加载仓库收藏</button>
+          <button class="smallbtn" id="practiceRandomCustom">随机练收藏</button>
+          <button class="smallbtn" id="exportFavoritesQuick">导出收藏 JSON</button>
+          <button class="smallbtn" id="clearCustom">清空本地收藏</button>
         </div>
       </div>
-      <div id="remoteCustomStatus" class="remoteStatus">仓库题库：尚未加载</div>
+      <div id="remoteCustomStatus" class="remoteStatus">仓库收藏：尚未加载</div>
       <div id="customList"></div>
     </div>
   </div>
@@ -860,6 +868,43 @@ function saveCustom(items){
   localStorage.setItem(CUSTOM_KEY,JSON.stringify(items.slice(0,500)));
   updateCustomCount();
 }
+function questionKey(q){
+  return `${q?.dir||'positive'}|${Number(q?.A)}|${Number(q?.p)}`;
+}
+function localFavoriteState(q){
+  const key=questionKey(q);
+  return loadCustom().some(x=>questionKey(x)===key);
+}
+function remoteFavoriteState(q){
+  const key=questionKey(q);
+  return remoteCustomQuestions.some(x=>questionKey(x)===key);
+}
+function favoriteState(q){
+  if(remoteFavoriteState(q))return'remote';
+  if(localFavoriteState(q))return'local';
+  return'none';
+}
+function addLocalFavorite(q,origin='history'){
+  const key=questionKey(q);
+  if(remoteFavoriteState(q))return{added:false,state:'remote'};
+  const items=loadCustom();
+  if(items.some(x=>questionKey(x)===key))return{added:false,state:'local'};
+  items.unshift({
+    id:q.id&&String(q.id).startsWith('repo_')?String(q.id):'fav_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    ts:Date.now(),
+    A:Number(q.A),
+    p:Number(q.p),
+    dir:q.dir||'positive',
+    origin
+  });
+  saveCustom(items);
+  return{added:true,state:'local'};
+}
+function removeLocalFavorite(q){
+  const key=questionKey(q);
+  const items=loadCustom().filter(x=>questionKey(x)!==key);
+  saveCustom(items);
+}
 function normalizeQuestionList(list,source='remote'){
   if(!Array.isArray(list))return[];
   return list.filter(q=>
@@ -889,7 +934,7 @@ function combinedCustomQuestions(){
   const seen=new Set();
   const out=[];
   [...remote,...local].forEach(q=>{
-    const key=String(q.id);
+    const key=questionKey(q);
     if(seen.has(key))return;
     seen.add(key);
     out.push(q);
@@ -903,7 +948,7 @@ async function loadRemoteCustomQuestions(force=false){
   const status=$('remoteCustomStatus');
   if(status){
     status.className='remoteStatus';
-    status.textContent='仓库题库：正在加载…';
+    status.textContent='仓库收藏：正在加载…';
   }
   try{
     const url=force?`${REMOTE_CUSTOM_URL}?t=${Date.now()}`:REMOTE_CUSTOM_URL;
@@ -915,7 +960,7 @@ async function loadRemoteCustomQuestions(force=false){
     remoteCustomError='';
     if(status){
       status.className='remoteStatus ok';
-      status.textContent=`仓库题库：已加载 ${remoteCustomQuestions.length} 道`;
+      status.textContent=`仓库收藏：已加载 ${remoteCustomQuestions.length} 道`;
     }
   }catch(err){
     remoteCustomQuestions=[];
@@ -923,7 +968,7 @@ async function loadRemoteCustomQuestions(force=false){
     remoteCustomError=err?.message||'加载失败';
     if(status){
       status.className='remoteStatus bad';
-      status.textContent='仓库题库：未加载（本地打开 HTML 时属于正常情况；部署到 GitHub Pages 后会自动读取）';
+      status.textContent='仓库收藏：未加载（本地打开 HTML 时属于正常情况；部署到 GitHub Pages 后会自动读取）';
     }
   }
   updateCustomCount();
@@ -1181,19 +1226,29 @@ function exportAllBackup(){
     exportedAt:new Date().toISOString(),
     stats:loadS(),
     history:loadHistory(),
-    customQuestions:loadCustom()
+    customQuestions:loadCustom(),
+    favoritesSnapshot:combinedCustomQuestions().map(cleanQuestionForExport)
   };
   downloadJSON(payload,`growth_trainer_backup_${isoCompactDate()}.json`);
 }
+function cleanQuestionForExport(q,i){
+  return{
+    id:String(q.id||`fav_${i+1}`),
+    A:Number(q.A),
+    p:Number(q.p),
+    dir:q.dir||'positive'
+  };
+}
 function exportCustomBackup(){
+  const favorites=combinedCustomQuestions().map(cleanQuestionForExport);
   const payload={
     app:'growth_amount_estimation_trainer',
     schemaVersion:1,
-    exportType:'custom_questions',
+    exportType:'favorites',
     exportedAt:new Date().toISOString(),
-    customQuestions:loadCustom()
+    customQuestions:favorites
   };
-  downloadJSON(payload,`growth_trainer_custom_questions_${isoCompactDate()}.json`);
+  downloadJSON(payload,`custom_questions_${isoCompactDate()}.json`);
 }
 function normalizeImportedPayload(raw){
   if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new Error('JSON 顶层结构无效。');
@@ -1207,7 +1262,7 @@ function normalizeImportedPayload(raw){
     out.customQuestions=raw.questions;
   }
   if(!out.customQuestions&&!out.history&&!out.stats){
-    throw new Error('未识别到可导入的 stats、history 或 customQuestions。');
+    throw new Error('未识别到可导入的 stats、history 或 customQuestions（收藏题库）。');
   }
   if(out.customQuestions){
     out.customQuestions=out.customQuestions.filter(q=>
@@ -1251,7 +1306,7 @@ function refreshAfterImport(){
 function updateDataSummary(){
   const s=loadS(),h=loadHistory(),c=loadCustom();
   $('dataSummary').innerHTML=
-    `当前本地：<b>${s.total}</b> 次训练，<b>${h.length}</b> 条历史题，<b>${c.length}</b> 道本地自定义题；仓库题库：<b>${remoteCustomQuestions.length}</b> 道。`;
+    `当前本地：<b>${s.total}</b> 次训练，<b>${h.length}</b> 条历史题，<b>${c.length}</b> 道本地收藏；仓库收藏：<b>${remoteCustomQuestions.length}</b> 道。`;
 }
 async function importJSONFile(){
   const file=$('importFile').files?.[0];
@@ -1289,7 +1344,7 @@ async function importJSONFile(){
     const parts=[];
     if(data.stats)parts.push('训练统计');
     if(data.history)parts.push(`历史题 ${data.history.length} 条`);
-    if(data.customQuestions)parts.push(`自定义题 ${data.customQuestions.length} 道`);
+    if(data.customQuestions)parts.push(`收藏题 ${data.customQuestions.length} 道`);
     status.classList.add('ok');
     status.textContent=`导入成功：${parts.join('，')}。`;
     $('importFile').value='';
@@ -1333,13 +1388,13 @@ function renderCustom(){
   if($('remoteCustomStatus')){
     if(!remoteCustomLoaded){
       $('remoteCustomStatus').className='remoteStatus';
-      $('remoteCustomStatus').textContent='仓库题库：尚未加载';
+      $('remoteCustomStatus').textContent='仓库收藏：尚未加载';
     }else if(remoteCustomError){
       $('remoteCustomStatus').className='remoteStatus bad';
-      $('remoteCustomStatus').textContent='仓库题库：未加载（'+remoteCustomError+'）';
+      $('remoteCustomStatus').textContent='仓库收藏：未加载（'+remoteCustomError+'）';
     }else{
       $('remoteCustomStatus').className='remoteStatus ok';
-      $('remoteCustomStatus').textContent=`仓库题库：已加载 ${remoteItems.length} 道`;
+      $('remoteCustomStatus').textContent=`仓库收藏：已加载 ${remoteItems.length} 道`;
     }
   }
 
@@ -1350,27 +1405,27 @@ function renderCustom(){
       <div>
         <div class="custom-main">
           ${String(x.A)}，${x.dir==='negative'?'下降':'增长'} ${fmt(x.p,2)}%
-          <span class="custom-source ${isRemote?'remote':'local'}">${isRemote?'仓库题库':'本地添加'}</span>
+          <span class="custom-source ${isRemote?'remote':'local'}">${isRemote?'仓库收藏':'本地收藏'}</span>
         </div>
         <div class="custom-sub">${dirText}${!isRemote&&x.ts?' · 添加于 '+customDateText(x.ts):''}</div>
       </div>
       <div class="custom-actions">
         <button class="custom-practice" data-custom-practice="${encodeURIComponent(String(x.id))}" data-source="${source}">开始自测</button>
-        ${isRemote?'':`<button class="custom-delete" data-custom-delete="${encodeURIComponent(String(x.id))}">删除</button>`}
+        ${isRemote?'':`<button class="custom-delete" data-custom-delete="${encodeURIComponent(String(x.id))}">取消收藏</button>`}
       </div>
     </div>`;
   };
 
   let html='';
-  html+=`<div class="custom-section-title"><span>仓库题库</span><span>${remoteItems.length} 道</span></div>`;
+  html+=`<div class="custom-section-title"><span>仓库收藏</span><span>${remoteItems.length} 道</span></div>`;
   html+=remoteItems.length
     ? `<div class="custom-list">${remoteItems.map(x=>card(x,'remote')).join('')}</div>`
-    : `<div class="empty" style="padding:20px 10px">暂无仓库题。部署到 GitHub Pages 后可从 data/custom_questions.json 自动加载。</div>`;
+    : `<div class="empty" style="padding:20px 10px">暂无仓库收藏。部署到 GitHub Pages 后可从 data/custom_questions.json 自动加载。</div>`;
 
-  html+=`<div class="custom-section-title"><span>本地添加</span><span>${localItems.length} 道</span></div>`;
+  html+=`<div class="custom-section-title"><span>本地收藏</span><span>${localItems.length} 道</span></div>`;
   html+=localItems.length
     ? `<div class="custom-list">${localItems.map(x=>card(x,'local')).join('')}</div>`
-    : `<div class="empty" style="padding:20px 10px">还没有本地自定义题。</div>`;
+    : `<div class="empty" style="padding:20px 10px">还没有本地收藏。</div>`;
 
   $('customList').innerHTML=html;
 
@@ -1381,12 +1436,12 @@ function renderCustom(){
     const q=pool.find(x=>String(x.id)===id);
     if(!q)return;
     closeCustom();
-    loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:source==='remote'?'仓库自定义题':'本地自定义题'});
+    loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:source==='remote'?'仓库收藏题':'本地收藏题'});
   });
 
   document.querySelectorAll('[data-custom-delete]').forEach(btn=>btn.onclick=()=>{
     const id=decodeURIComponent(btn.dataset.customDelete);
-    if(confirm('删除这道本地自定义题？')){
+    if(confirm('取消收藏这道题？')){
       saveCustom(loadCustom().filter(x=>String(x.id)!==id));
       renderCustom();
     }
@@ -1409,12 +1464,14 @@ function addCustomQuestion(){
     $('customError').textContent='负增长的下降幅度必须小于 100%。';
     return;
   }
-  const items=loadCustom();
-  items.unshift({
-    id:Date.now()+'_'+Math.random().toString(36).slice(2,7),
-    ts:Date.now(),A,p,dir
-  });
-  saveCustom(items);
+  const result=addLocalFavorite({A,p,dir},'custom');
+  if(result.state==='remote'){
+    $('customError').textContent='这道题已经在仓库收藏中。';
+  }else if(!result.added){
+    $('customError').textContent='这道题已经在本地收藏中。';
+  }else{
+    $('customError').textContent='已添加并自动收藏。';
+  }
   $('customA').value='';
   $('customP').value='';
   renderCustom();
@@ -1429,7 +1486,7 @@ function practiceRandomCustom(){
   closeCustom();
   loadQuestion({
     A:q.A,p:q.p,dir:q.dir,
-    kind:q._source==='remote'?'仓库自定义题':'本地自定义题'
+    kind:q._source==='remote'?'仓库收藏题':'本地收藏题'
   });
 }
 function openCustom(){
@@ -1447,9 +1504,10 @@ $('openCustom').onclick=openCustom;
 $('closeCustom').onclick=closeCustom;
 $('addCustom').onclick=addCustomQuestion;
 $('reloadRemoteCustom').onclick=()=>loadRemoteCustomQuestions(true);
+$('exportFavoritesQuick').onclick=exportCustomBackup;
 $('practiceRandomCustom').onclick=practiceRandomCustom;
 $('clearCustom').onclick=()=>{
-  if(loadCustom().length&&confirm('清空全部自定义题？')){
+  if(loadCustom().length&&confirm('清空全部本地收藏？')){
     localStorage.removeItem(CUSTOM_KEY);
     updateCustomCount();
     renderCustom();
@@ -1513,6 +1571,13 @@ function renderHistory(){
           <span>安全阈值：${safe}%</span>
           <span>精确值：${fmt(x.truth,3)}</span>
           <div class="history-actions">
+            ${
+              favoriteState(x)==='remote'
+                ? `<button class="history-favorite remote" disabled>★ 仓库已收藏</button>`
+                : favoriteState(x)==='local'
+                  ? `<button class="history-favorite active" data-favorite="${x.id}">★ 已收藏</button>`
+                  : `<button class="history-favorite" data-favorite="${x.id}">☆ 收藏</button>`
+            }
             <button class="history-retry" data-retry="${x.id}">重新做此题</button>
             <button class="history-delete" data-delete="${x.id}">删除此题</button>
           </div>
@@ -1528,6 +1593,20 @@ function renderHistory(){
     </details>`;
   }).join('');
 
+  document.querySelectorAll('[data-favorite]').forEach(btn=>btn.onclick=e=>{
+    e.preventDefault();e.stopPropagation();
+    const id=btn.dataset.favorite;
+    const rec=loadHistory().find(x=>String(x.id)===String(id));
+    if(!rec)return;
+    const state=favoriteState(rec);
+    if(state==='local'){
+      removeLocalFavorite(rec);
+    }else if(state==='none'){
+      addLocalFavorite(rec,'history');
+    }
+    renderHistory();
+    if($('customModal').classList.contains('show'))renderCustom();
+  });
   document.querySelectorAll('[data-delete]').forEach(btn=>btn.onclick=e=>{
     e.preventDefault();e.stopPropagation();
     const id=btn.dataset.delete;

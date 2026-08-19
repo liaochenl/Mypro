@@ -1,16 +1,16 @@
 {
   "app": "growth_amount_estimation_trainer",
   "schemaVersion": 1,
-  "exportType": "custom_questions",
+  "exportType": "favorites",
   "customQuestions": [
     {
-      "id": "repo_q001",
+      "id": "fav_repo_001",
       "A": 1656,
       "p": 16.3,
       "dir": "positive"
     },
     {
-      "id": "repo_q002",
+      "id": "fav_repo_002",
       "A": 4358,
       "p": 13.8,
       "dir": "negative"
