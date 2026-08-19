@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>增长量速算自测 V3.6</title>
+<title>增长量速算自测 V3.8</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
@@ -194,6 +194,45 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 .history-meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted);margin-bottom:10px}
 .history-filter{padding:8px 9px}
 
+
+/* data management */
+.dataGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dataCard{
+  border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff
+}
+.dataCard h3{margin:0 0 7px;font-size:15px}
+.dataCard p{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.6}
+.dataActions{display:flex;gap:8px;flex-wrap:wrap}
+.dataPrimary{
+  border:0;background:#111827;color:#fff;border-radius:10px;padding:9px 12px;
+  font-size:12px;font-weight:800;cursor:pointer
+}
+.dataSecondary{
+  border:1px solid var(--line);background:#fff;color:#334155;border-radius:10px;
+  padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer
+}
+.dataDanger{
+  border:1px solid #fecaca;background:#fff;color:#b91c1c;border-radius:10px;
+  padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer
+}
+.dataImportRow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.dataFileWrap{
+  border:1px dashed #cbd5e1;border-radius:11px;padding:10px;background:#f8fafc
+}
+.dataFileWrap input{width:100%;font-size:12px}
+.dataMode{
+  width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:#fff
+}
+.dataStatus{
+  min-height:20px;margin-top:10px;font-size:12px;font-weight:700;line-height:1.5
+}
+.dataStatus.ok{color:#047857}
+.dataStatus.bad{color:#b91c1c}
+.dataSummary{
+  margin-top:12px;padding:12px 13px;border-radius:12px;background:#f8fafc;
+  border:1px solid var(--line);font-size:12px;color:#475569;line-height:1.7
+}
+
 /* custom questions */
 .customBtn{position:relative}
 .customCount{
@@ -238,10 +277,27 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 }
 .custom-error{color:#b91c1c;font-size:12px;font-weight:700;min-height:18px;margin:2px 0 8px}
 
+.custom-section-title{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:15px 0 8px;font-size:13px;font-weight:850;color:#334155
+}
+.custom-source{
+  display:inline-flex;align-items:center;border-radius:999px;padding:3px 7px;
+  font-size:10px;font-weight:800;margin-left:6px
+}
+.custom-source.remote{background:#ede9fe;color:#6d28d9}
+.custom-source.local{background:#dbeafe;color:#1d4ed8}
+.remoteStatus{
+  font-size:11px;color:#64748b;padding:7px 9px;border-radius:9px;background:#f8fafc;
+  border:1px solid var(--line)
+}
+.remoteStatus.ok{color:#047857;background:#ecfdf5;border-color:#bbf7d0}
+.remoteStatus.bad{color:#b45309;background:#fff7ed;border-color:#fed7aa}
+
 @media(max-width:780px){
   header{flex-direction:column}.toolbar{justify-content:flex-start}.grid{grid-template-columns:1fr}
   .problem{min-height:220px}.methods{grid-template-columns:1fr}.formula{font-size:27px}.stats{grid-template-columns:repeat(2,1fr)}.calcGrid{grid-template-columns:1fr}.calcResults{grid-template-columns:1fr}
-  .history-row{align-items:flex-start}.modal{padding:8px}.modal-panel{max-height:95vh}.modal-head{align-items:flex-start}.custom-form{grid-template-columns:1fr}.custom-item{align-items:flex-start;flex-direction:column}.custom-actions{justify-content:flex-start}
+  .history-row{align-items:flex-start}.modal{padding:8px}.modal-panel{max-height:95vh}.modal-head{align-items:flex-start}.custom-form{grid-template-columns:1fr}.custom-item{align-items:flex-start;flex-direction:column}.custom-actions{justify-content:flex-start}.dataGrid{grid-template-columns:1fr}.dataImportRow{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -249,8 +305,8 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 <div class="app">
 <header>
   <div>
-    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.6</span></h1>
-    <div class="subtitle">支持随机训练与自定义题库；自定义题可直接调用现有计时、方法判断与完整解析。</div>
+    <h1>增长量速算自测 <span style="font-size:14px;color:#64748b">V3.8</span></h1>
+    <div class="subtitle">支持 GitHub Pages 自动加载仓库 JSON 题库，并与浏览器本地添加题并存。</div>
   </div>
   <div class="toolbar">
     <select id="direction">
@@ -272,6 +328,7 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
     </select>
     <button class="smallbtn historyBtn" id="openHistory">历史题目 <span class="historyCount" id="historyCount">0</span></button>
     <button class="smallbtn customBtn" id="openCustom">自定义题 <span class="customCount" id="customCount">0</span></button>
+    <button class="smallbtn" id="openData">数据管理</button>
     <button class="smallbtn" id="toggleCalculator">验证计算器</button>
     <button class="smallbtn statsToggle" id="toggleStats"><span class="statsDot"></span>训练统计</button>
   </div>
@@ -395,6 +452,63 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 </section>
 </div>
 
+<div class="modal" id="dataModal" aria-hidden="true">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2>数据管理</h2>
+        <div style="font-size:12px;color:#6b7280;margin-top:4px">通过 JSON 备份和迁移历史题、自定义题与训练统计。</div>
+      </div>
+      <div class="modal-actions">
+        <button class="closebtn" id="closeData" aria-label="关闭">×</button>
+      </div>
+    </div>
+    <div class="history-body">
+      <div class="dataGrid">
+        <div class="dataCard">
+          <h3>导出完整备份</h3>
+          <p>包含训练统计、历史题目和本地自定义题库；仓库题库会在页面打开时重新加载。</p>
+          <div class="dataActions">
+            <button class="dataPrimary" id="exportAllData">导出全部 JSON</button>
+          </div>
+        </div>
+
+        <div class="dataCard">
+          <h3>仅导出自定义题</h3>
+          <p>只导出当前浏览器里手动添加的题目；仓库题库由 GitHub JSON 单独维护。</p>
+          <div class="dataActions">
+            <button class="dataSecondary" id="exportCustomData">导出自定义题 JSON</button>
+          </div>
+        </div>
+
+        <div class="dataCard">
+          <h3>导入 JSON</h3>
+          <p>支持本网页导出的完整备份或自定义题题库。导入前会先校验文件结构。</p>
+          <div class="dataFileWrap">
+            <input id="importFile" type="file" accept=".json,application/json">
+          </div>
+          <div style="margin-top:9px">
+            <select id="importMode" class="dataMode">
+              <option value="replace">覆盖恢复</option>
+              <option value="merge">合并导入</option>
+            </select>
+          </div>
+          <div class="dataActions" style="margin-top:9px">
+            <button class="dataPrimary" id="importDataBtn">导入所选 JSON</button>
+          </div>
+          <div id="dataStatus" class="dataStatus"></div>
+        </div>
+
+        <div class="dataCard">
+          <h3>导入规则</h3>
+          <p><b>覆盖恢复：</b>用备份中的对应数据覆盖本机数据。<br><b>合并导入：</b>合并历史题和自定义题并按 ID 去重；训练统计保留本机数据，避免重复累计。</p>
+          <div class="dataSummary" id="dataSummary">正在读取当前本地数据…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="customModal" aria-hidden="true">
   <div class="modal-panel">
     <div class="modal-head">
@@ -430,13 +544,17 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
       </div>
       <div class="custom-error" id="customError"></div>
       <div class="custom-toolbar">
-        <div class="custom-toolbar-left">自定义题仅保存在当前浏览器，不会与随机题库混合。</div>
+        <div class="custom-toolbar-left">
+          仓库题库从 <code>./data/custom_questions.json</code> 自动加载；本地添加题保存在当前浏览器。
+        </div>
         <div class="custom-toolbar-right">
+          <button class="smallbtn" id="reloadRemoteCustom">重新加载仓库题库</button>
           <button class="smallbtn" id="practiceRandomCustom">随机练一道</button>
-          <button class="smallbtn" id="clearCustom">清空自定义题</button>
+          <button class="smallbtn" id="clearCustom">清空本地题</button>
         </div>
       </div>
-      <div id="customList" class="custom-list"></div>
+      <div id="remoteCustomStatus" class="remoteStatus">仓库题库：尚未加载</div>
+      <div id="customList"></div>
     </div>
   </div>
 </div>
@@ -465,6 +583,11 @@ select,.smallbtn{border:1px solid var(--line);background:#fff;border-radius:10px
 const HISTORY_KEY='growthTrainerHistoryV2';
 const STATS_KEY='growthTrainerStats';
 const CUSTOM_KEY='growthTrainerCustomQuestionsV1';
+const REMOTE_CUSTOM_URL='./data/custom_questions.json';
+let remoteCustomQuestions=[];
+let remoteCustomLoaded=false;
+let remoteCustomError='';
+
 
 /* 百化分范围：1/2~1/20、1/22、2/7、n/9 */
 function buildFractions(){
@@ -737,8 +860,74 @@ function saveCustom(items){
   localStorage.setItem(CUSTOM_KEY,JSON.stringify(items.slice(0,500)));
   updateCustomCount();
 }
+function normalizeQuestionList(list,source='remote'){
+  if(!Array.isArray(list))return[];
+  return list.filter(q=>
+    q&&Number.isFinite(Number(q.A))&&Number(q.A)>0&&
+    Number.isFinite(Number(q.p))&&Number(q.p)>0&&
+    ['positive','negative'].includes(q.dir||'positive')&&
+    !((q.dir||'positive')==='negative'&&Number(q.p)>=100)
+  ).map((q,i)=>({
+    ...q,
+    A:Number(q.A),
+    p:Number(q.p),
+    dir:q.dir||'positive',
+    id:String(q.id||`${source}_${i}_${q.A}_${q.p}_${q.dir||'positive'}`),
+    ts:Number(q.ts)||Date.now(),
+    _source:source
+  }));
+}
+function extractRemoteQuestions(raw){
+  if(Array.isArray(raw))return normalizeQuestionList(raw,'remote');
+  if(raw&&Array.isArray(raw.customQuestions))return normalizeQuestionList(raw.customQuestions,'remote');
+  if(raw&&Array.isArray(raw.questions))return normalizeQuestionList(raw.questions,'remote');
+  throw new Error('JSON 中未找到题目数组。');
+}
+function combinedCustomQuestions(){
+  const remote=normalizeQuestionList(remoteCustomQuestions,'remote');
+  const local=normalizeQuestionList(loadCustom(),'local');
+  const seen=new Set();
+  const out=[];
+  [...remote,...local].forEach(q=>{
+    const key=String(q.id);
+    if(seen.has(key))return;
+    seen.add(key);
+    out.push(q);
+  });
+  return out;
+}
 function updateCustomCount(){
-  $('customCount').textContent=loadCustom().length;
+  $('customCount').textContent=combinedCustomQuestions().length;
+}
+async function loadRemoteCustomQuestions(force=false){
+  const status=$('remoteCustomStatus');
+  if(status){
+    status.className='remoteStatus';
+    status.textContent='仓库题库：正在加载…';
+  }
+  try{
+    const url=force?`${REMOTE_CUSTOM_URL}?t=${Date.now()}`:REMOTE_CUSTOM_URL;
+    const res=await fetch(url,{cache:force?'no-store':'default'});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const raw=await res.json();
+    remoteCustomQuestions=extractRemoteQuestions(raw);
+    remoteCustomLoaded=true;
+    remoteCustomError='';
+    if(status){
+      status.className='remoteStatus ok';
+      status.textContent=`仓库题库：已加载 ${remoteCustomQuestions.length} 道`;
+    }
+  }catch(err){
+    remoteCustomQuestions=[];
+    remoteCustomLoaded=true;
+    remoteCustomError=err?.message||'加载失败';
+    if(status){
+      status.className='remoteStatus bad';
+      status.textContent='仓库题库：未加载（本地打开 HTML 时属于正常情况；部署到 GitHub Pages 后会自动读取）';
+    }
+  }
+  updateCustomCount();
+  if($('customModal')?.classList.contains('show'))renderCustom();
 }
 
 function saveHistory(h){
@@ -971,43 +1160,234 @@ $('resetStats').onclick=()=>{
 };
 
 
+
+function isoCompactDate(){
+  const d=new Date(),pad=n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}_${pad(d.getHours())}${pad(d.getMinutes())}${pad(d.getSeconds())}`;
+}
+function downloadJSON(obj,filename){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),500);
+}
+function exportAllBackup(){
+  const payload={
+    app:'growth_amount_estimation_trainer',
+    schemaVersion:1,
+    exportType:'full',
+    exportedAt:new Date().toISOString(),
+    stats:loadS(),
+    history:loadHistory(),
+    customQuestions:loadCustom()
+  };
+  downloadJSON(payload,`growth_trainer_backup_${isoCompactDate()}.json`);
+}
+function exportCustomBackup(){
+  const payload={
+    app:'growth_amount_estimation_trainer',
+    schemaVersion:1,
+    exportType:'custom_questions',
+    exportedAt:new Date().toISOString(),
+    customQuestions:loadCustom()
+  };
+  downloadJSON(payload,`growth_trainer_custom_questions_${isoCompactDate()}.json`);
+}
+function normalizeImportedPayload(raw){
+  if(!raw||typeof raw!=='object'||Array.isArray(raw))throw new Error('JSON 顶层结构无效。');
+  const out={};
+  if(Array.isArray(raw.customQuestions)) out.customQuestions=raw.customQuestions;
+  if(Array.isArray(raw.history)) out.history=raw.history;
+  if(raw.stats&&typeof raw.stats==='object'&&!Array.isArray(raw.stats)) out.stats=raw.stats;
+
+  // 兼容直接导出的自定义题数组
+  if(!out.customQuestions&&!out.history&&!out.stats&&Array.isArray(raw.questions)){
+    out.customQuestions=raw.questions;
+  }
+  if(!out.customQuestions&&!out.history&&!out.stats){
+    throw new Error('未识别到可导入的 stats、history 或 customQuestions。');
+  }
+  if(out.customQuestions){
+    out.customQuestions=out.customQuestions.filter(q=>
+      q&&Number.isFinite(Number(q.A))&&Number(q.A)>0&&
+      Number.isFinite(Number(q.p))&&Number(q.p)>0&&
+      ['positive','negative'].includes(q.dir||'positive')&&
+      !((q.dir||'positive')==='negative'&&Number(q.p)>=100)
+    ).map(q=>({
+      ...q,
+      A:Number(q.A),p:Number(q.p),
+      dir:q.dir||'positive',
+      id:q.id||Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      ts:Number(q.ts)||Date.now()
+    }));
+  }
+  if(out.history){
+    out.history=out.history.filter(h=>
+      h&&Number.isFinite(Number(h.A))&&Number(h.A)>0&&
+      Number.isFinite(Number(h.p))&&Number(h.p)>0
+    );
+  }
+  if(out.stats) out.stats=normalizeStats(out.stats);
+  return out;
+}
+function mergeById(localItems,incomingItems){
+  const map=new Map();
+  [...incomingItems,...localItems].forEach(item=>{
+    const key=item?.id||JSON.stringify([item?.A,item?.p,item?.dir,item?.ts]);
+    if(!map.has(key))map.set(key,item);
+  });
+  return [...map.values()];
+}
+function refreshAfterImport(){
+  showS();
+  updateHistoryCount();
+  updateCustomCount();
+  if($('historyModal').classList.contains('show'))renderHistory();
+  if($('customModal').classList.contains('show'))renderCustom();
+  updateDataSummary();
+}
+function updateDataSummary(){
+  const s=loadS(),h=loadHistory(),c=loadCustom();
+  $('dataSummary').innerHTML=
+    `当前本地：<b>${s.total}</b> 次训练，<b>${h.length}</b> 条历史题，<b>${c.length}</b> 道本地自定义题；仓库题库：<b>${remoteCustomQuestions.length}</b> 道。`;
+}
+async function importJSONFile(){
+  const file=$('importFile').files?.[0];
+  const status=$('dataStatus');
+  status.className='dataStatus';
+  status.textContent='';
+  if(!file){
+    status.classList.add('bad');
+    status.textContent='请先选择一个 JSON 文件。';
+    return;
+  }
+  try{
+    const rawText=await file.text();
+    const raw=JSON.parse(rawText);
+    const data=normalizeImportedPayload(raw);
+    const mode=$('importMode').value;
+
+    if(mode==='replace'){
+      if(data.stats) saveS(data.stats);
+      if(data.history) localStorage.setItem(HISTORY_KEY,JSON.stringify(data.history.slice(0,200)));
+      if(data.customQuestions) saveCustom(data.customQuestions);
+    }else{
+      if(data.history){
+        const merged=mergeById(loadHistory(),data.history).slice(0,200);
+        localStorage.setItem(HISTORY_KEY,JSON.stringify(merged));
+      }
+      if(data.customQuestions){
+        const merged=mergeById(loadCustom(),data.customQuestions).slice(0,500);
+        saveCustom(merged);
+      }
+      // merge 模式故意不累加 stats，避免重复导入导致双倍统计
+      if(data.stats && loadS().total===0) saveS(data.stats);
+    }
+    refreshAfterImport();
+    const parts=[];
+    if(data.stats)parts.push('训练统计');
+    if(data.history)parts.push(`历史题 ${data.history.length} 条`);
+    if(data.customQuestions)parts.push(`自定义题 ${data.customQuestions.length} 道`);
+    status.classList.add('ok');
+    status.textContent=`导入成功：${parts.join('，')}。`;
+    $('importFile').value='';
+  }catch(err){
+    status.classList.add('bad');
+    status.textContent='导入失败：'+(err?.message||'无法解析该 JSON 文件。');
+  }
+}
+function openData(){
+  $('dataModal').classList.add('show');
+  $('dataModal').setAttribute('aria-hidden','false');
+  $('dataStatus').textContent='';
+  $('dataStatus').className='dataStatus';
+  updateDataSummary();
+}
+function closeData(){
+  $('dataModal').classList.remove('show');
+  $('dataModal').setAttribute('aria-hidden','true');
+}
+$('openData').onclick=openData;
+$('closeData').onclick=closeData;
+$('exportAllData').onclick=exportAllBackup;
+$('exportCustomData').onclick=exportCustomBackup;
+$('importDataBtn').onclick=importJSONFile;
+$('dataModal').addEventListener('click',e=>{
+  if(e.target===$('dataModal'))closeData();
+});
+
 function customDateText(ts){
   const d=new Date(ts),pad=n=>String(n).padStart(2,'0');
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function renderCustom(){
-  const items=loadCustom();
-  $('customCount').textContent=items.length;
-  $('practiceRandomCustom').disabled=!items.length;
-  $('clearCustom').disabled=!items.length;
-  if(!items.length){
-    $('customList').innerHTML='<div class="empty">还没有自定义题。可以在上方输入现期量和变化率添加。</div>';
-    return;
+  const localItems=normalizeQuestionList(loadCustom(),'local');
+  const remoteItems=normalizeQuestionList(remoteCustomQuestions,'remote');
+
+  $('customCount').textContent=combinedCustomQuestions().length;
+  $('practiceRandomCustom').disabled=combinedCustomQuestions().length===0;
+  $('clearCustom').disabled=localItems.length===0;
+
+  if($('remoteCustomStatus')){
+    if(!remoteCustomLoaded){
+      $('remoteCustomStatus').className='remoteStatus';
+      $('remoteCustomStatus').textContent='仓库题库：尚未加载';
+    }else if(remoteCustomError){
+      $('remoteCustomStatus').className='remoteStatus bad';
+      $('remoteCustomStatus').textContent='仓库题库：未加载（'+remoteCustomError+'）';
+    }else{
+      $('remoteCustomStatus').className='remoteStatus ok';
+      $('remoteCustomStatus').textContent=`仓库题库：已加载 ${remoteItems.length} 道`;
+    }
   }
-  $('customList').innerHTML=items.map((x,i)=>{
+
+  const card=(x,source)=>{
+    const isRemote=source==='remote';
     const dirText=x.dir==='negative'?'负增长 / 求减少量':'正增长 / 求增长量';
     return `<div class="custom-item">
       <div>
-        <div class="custom-main">${String(x.A)}，${x.dir==='negative'?'下降':'增长'} ${fmt(x.p,2)}%</div>
-        <div class="custom-sub">${dirText} · 添加于 ${customDateText(x.ts)}</div>
+        <div class="custom-main">
+          ${String(x.A)}，${x.dir==='negative'?'下降':'增长'} ${fmt(x.p,2)}%
+          <span class="custom-source ${isRemote?'remote':'local'}">${isRemote?'仓库题库':'本地添加'}</span>
+        </div>
+        <div class="custom-sub">${dirText}${!isRemote&&x.ts?' · 添加于 '+customDateText(x.ts):''}</div>
       </div>
       <div class="custom-actions">
-        <button class="custom-practice" data-custom-practice="${x.id}">开始自测</button>
-        <button class="custom-delete" data-custom-delete="${x.id}">删除</button>
+        <button class="custom-practice" data-custom-practice="${encodeURIComponent(String(x.id))}" data-source="${source}">开始自测</button>
+        ${isRemote?'':`<button class="custom-delete" data-custom-delete="${encodeURIComponent(String(x.id))}">删除</button>`}
       </div>
     </div>`;
-  }).join('');
+  };
+
+  let html='';
+  html+=`<div class="custom-section-title"><span>仓库题库</span><span>${remoteItems.length} 道</span></div>`;
+  html+=remoteItems.length
+    ? `<div class="custom-list">${remoteItems.map(x=>card(x,'remote')).join('')}</div>`
+    : `<div class="empty" style="padding:20px 10px">暂无仓库题。部署到 GitHub Pages 后可从 data/custom_questions.json 自动加载。</div>`;
+
+  html+=`<div class="custom-section-title"><span>本地添加</span><span>${localItems.length} 道</span></div>`;
+  html+=localItems.length
+    ? `<div class="custom-list">${localItems.map(x=>card(x,'local')).join('')}</div>`
+    : `<div class="empty" style="padding:20px 10px">还没有本地自定义题。</div>`;
+
+  $('customList').innerHTML=html;
 
   document.querySelectorAll('[data-custom-practice]').forEach(btn=>btn.onclick=()=>{
-    const q=loadCustom().find(x=>x.id===btn.dataset.customPractice);
+    const id=decodeURIComponent(btn.dataset.customPractice);
+    const source=btn.dataset.source;
+    const pool=source==='remote'?remoteItems:localItems;
+    const q=pool.find(x=>String(x.id)===id);
     if(!q)return;
     closeCustom();
-    loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:'自定义题'});
+    loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:source==='remote'?'仓库自定义题':'本地自定义题'});
   });
+
   document.querySelectorAll('[data-custom-delete]').forEach(btn=>btn.onclick=()=>{
-    const id=btn.dataset.customDelete;
-    if(confirm('删除这道自定义题？')){
-      saveCustom(loadCustom().filter(x=>x.id!==id));
+    const id=decodeURIComponent(btn.dataset.customDelete);
+    if(confirm('删除这道本地自定义题？')){
+      saveCustom(loadCustom().filter(x=>String(x.id)!==id));
       renderCustom();
     }
   });
@@ -1040,20 +1420,24 @@ function addCustomQuestion(){
   renderCustom();
 }
 function practiceRandomCustom(){
-  const items=loadCustom();
+  const items=combinedCustomQuestions();
   if(!items.length){
-    $('customError').textContent='请先添加至少一道自定义题。';
+    $('customError').textContent='当前没有可练习的自定义题。';
     return;
   }
   const q=items[Math.floor(Math.random()*items.length)];
   closeCustom();
-  loadQuestion({A:q.A,p:q.p,dir:q.dir,kind:'自定义题'});
+  loadQuestion({
+    A:q.A,p:q.p,dir:q.dir,
+    kind:q._source==='remote'?'仓库自定义题':'本地自定义题'
+  });
 }
 function openCustom(){
   $('customModal').classList.add('show');
   $('customModal').setAttribute('aria-hidden','false');
   $('customError').textContent='';
   renderCustom();
+  if(!remoteCustomLoaded) loadRemoteCustomQuestions();
 }
 function closeCustom(){
   $('customModal').classList.remove('show');
@@ -1062,6 +1446,7 @@ function closeCustom(){
 $('openCustom').onclick=openCustom;
 $('closeCustom').onclick=closeCustom;
 $('addCustom').onclick=addCustomQuestion;
+$('reloadRemoteCustom').onclick=()=>loadRemoteCustomQuestions(true);
 $('practiceRandomCustom').onclick=practiceRandomCustom;
 $('clearCustom').onclick=()=>{
   if(loadCustom().length&&confirm('清空全部自定义题？')){
@@ -1181,8 +1566,8 @@ $('historyModal').addEventListener('click',e=>{if(e.target===$('historyModal'))c
 
 /* 快捷键：输入框中不抢占数字键；Enter 可直接提交。 */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeHistory();closeCustom();return}
-  if($('historyModal').classList.contains('show')||$('customModal').classList.contains('show'))return;
+  if(e.key==='Escape'){closeHistory();closeCustom();closeData();return}
+  if($('historyModal').classList.contains('show')||$('customModal').classList.contains('show')||$('dataModal').classList.contains('show'))return;
 
   const editable=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName);
   if(e.key==='Enter'&&!submitted){
@@ -1200,7 +1585,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-showS();updateHistoryCount();updateCustomCount();newQ();
+showS();updateHistoryCount();updateCustomCount();newQ();loadRemoteCustomQuestions();
 </script>
 </body>
 </html>
