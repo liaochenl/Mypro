@@ -909,12 +909,112 @@ body.library-modal-open{
   .keyboardHint{display:none}
 }
 
+
+/* ========================= V6.2 Preview · 行测专项 / 言语理解 ========================= */
+.examHome,.verbalHome{padding:34px 20px 42px;max-width:1120px;margin:0 auto}
+.examHero,.verbalHomeHead{margin-bottom:22px}
+.examEyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#7c3aed;text-transform:uppercase;margin-bottom:7px}
+.examTitle{font-size:31px;font-weight:900;letter-spacing:-.03em;color:#111827}
+.examTitle .previewPill{font-size:12px;vertical-align:middle;margin-left:8px;padding:4px 8px;border-radius:999px;background:#f3e8ff;color:#7e22ce;letter-spacing:0}
+.examSub{margin-top:8px;color:#6b7280;font-size:14px;line-height:1.65}
+.subjectGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.subjectCard{appearance:none;text-align:left;border:1px solid #e5e7eb;background:#fff;border-radius:22px;padding:24px;cursor:pointer;transition:.18s;box-shadow:0 8px 26px rgba(15,23,42,.04)}
+.subjectCard:hover{transform:translateY(-2px);border-color:#c4b5fd;box-shadow:0 13px 34px rgba(76,29,149,.10)}
+.subjectIcon{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:900;margin-bottom:16px}
+.subjectIcon.data{background:#eff6ff;color:#1d4ed8}.subjectIcon.verbal{background:#f5f3ff;color:#7c3aed}
+.subjectName{font-size:20px;font-weight:900;color:#111827}.subjectDesc{margin-top:8px;color:#6b7280;line-height:1.6;font-size:13px}
+.subjectMeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.subjectMeta span{font-size:11px;padding:5px 8px;border-radius:999px;background:#f8fafc;color:#475569}
+.subjectEnter{margin-top:18px;font-size:13px;font-weight:800;color:#6d28d9}
+.homeBackRow{margin-bottom:12px}.homeBackBtn{border:0;background:transparent;color:#6b7280;font-weight:750;cursor:pointer;padding:4px 0}.homeBackBtn:hover{color:#111827}
+
+.verbalHomeTitle{font-size:28px;font-weight:900;color:#111827}.verbalHomeVersion{font-size:11px;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:4px 7px;vertical-align:middle}
+.verbalHomeSub{font-size:13px;color:#6b7280;margin-top:6px}
+.verbalGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.verbalCard{appearance:none;text-align:left;border:1px solid #e5e7eb;background:#fff;border-radius:18px;padding:18px;cursor:pointer;transition:.16s}
+.verbalCard:hover{border-color:#c4b5fd;transform:translateY(-1px)}
+.verbalCardIcon{font-size:20px;margin-bottom:9px}.verbalCardName{font-size:16px;font-weight:850;color:#111827}
+.verbalCardDesc{font-size:12px;line-height:1.55;color:#6b7280;margin-top:6px}.verbalCardMeta{font-size:11px;color:#7c3aed;margin-top:10px;font-weight:750}
+.verbalLibraryBar{margin-top:18px;padding:12px 14px;border:1px solid #ede9fe;background:#faf5ff;border-radius:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.verbalLibraryInfo{font-size:12px;color:#6b7280}.verbalLibraryInfo b{color:#4c1d95}.verbalSourceBadge{display:inline-flex;margin-left:6px;padding:3px 6px;border-radius:999px;background:#ede9fe;color:#6d28d9;font-size:10px;font-weight:800}
+.verbalMiniActions{display:flex;gap:7px;flex-wrap:wrap}.verbalMiniBtn{border:1px solid #ddd6fe;background:#fff;color:#6d28d9;border-radius:10px;padding:7px 10px;font-size:11px;font-weight:750;cursor:pointer}
+
+.verbalTrainer{max-width:920px;margin:0 auto;padding:18px 18px 42px}
+.verbalTopbar{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:15px}
+.verbalBrandLine{display:flex;align-items:center;gap:9px}.verbalBack{border:1px solid #e5e7eb;background:#fff;border-radius:10px;padding:7px 10px;cursor:pointer;color:#4b5563;font-weight:750}
+.verbalTitle{font-size:20px;font-weight:900;color:#111827}.verbalSubtitle{font-size:12px;color:#6b7280;margin-top:4px}
+.verbalModeTabs{display:flex;background:#f3f4f6;border-radius:11px;padding:3px;gap:2px}
+.verbalModeTab{border:0;background:transparent;padding:8px 12px;border-radius:9px;font-size:12px;font-weight:800;color:#6b7280;cursor:pointer}.verbalModeTab.active{background:#fff;color:#6d28d9;box-shadow:0 1px 5px rgba(0,0,0,.08)}
+.verbalStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:13px}.verbalStat{border:1px solid #e5e7eb;border-radius:13px;padding:10px 12px;background:#fff}.verbalStat span{display:block;font-size:10px;color:#9ca3af}.verbalStat b{display:block;font-size:17px;color:#111827;margin-top:3px}
+.verbalToolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}.verbalFilters{display:flex;gap:7px}.verbalSelect{border:1px solid #e5e7eb;background:#fff;border-radius:10px;padding:8px 10px;font-size:12px;color:#374151}
+.verbalProgressText{font-size:11px;color:#6b7280}
+
+.verbalQuestion{border:1px solid #e5e7eb;background:#fff;border-radius:20px;padding:22px;box-shadow:0 7px 24px rgba(15,23,42,.035)}
+.verbalBadge{display:inline-flex;font-size:10px;font-weight:800;color:#6d28d9;background:#f5f3ff;padding:5px 8px;border-radius:999px;margin-bottom:12px}
+.verbalPrompt{font-size:21px;line-height:1.65;font-weight:850;color:#111827}
+.verbalPrompt.term{font-size:34px;letter-spacing:.04em;text-align:center;padding:14px 0}
+.verbalPrompt.context{font-size:18px;font-weight:720}
+.verbalOptions{display:grid;gap:9px;margin-top:18px}.verbalOption{border:1px solid #e5e7eb;background:#fff;border-radius:13px;padding:12px 14px;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:.14s;color:#374151}
+.verbalOption:hover{border-color:#c4b5fd}.verbalOption.selected{border-color:#8b5cf6;background:#f5f3ff}.verbalOption.correct{border-color:#22c55e;background:#f0fdf4}.verbalOption.wrong{border-color:#ef4444;background:#fef2f2}
+.verbalLetter{width:23px;height:23px;border-radius:7px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex:0 0 auto}.verbalOption.selected .verbalLetter{background:#ddd6fe;color:#5b21b6}
+.verbalChoiceText{line-height:1.55;font-size:13px}
+.verbalActionRow{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}.verbalActionLeft{display:flex;gap:7px;flex-wrap:wrap}
+.verbalAction{border:1px solid #e5e7eb;background:#fff;border-radius:11px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer;color:#4b5563}.verbalAction.primary{background:#6d28d9;color:#fff;border-color:#6d28d9}.verbalAction:disabled{opacity:.45;cursor:not-allowed}
+.verbalFeedback{margin-top:16px;border-top:1px solid #f1f5f9;padding-top:15px}.verbalFeedbackHead{font-size:15px;font-weight:900}.verbalFeedbackHead.ok{color:#15803d}.verbalFeedbackHead.bad{color:#b91c1c}
+.verbalExplanation{font-size:13px;color:#4b5563;line-height:1.75;margin-top:8px}.verbalCompare{margin-top:12px;border:1px solid #e5e7eb;border-radius:13px;overflow:hidden}
+.verbalCompareHead{display:grid;grid-template-columns:92px 1fr 1fr;background:#f8fafc;border-bottom:1px solid #e5e7eb}
+.verbalCompareHead div,.verbalCompareRow div{padding:9px 10px;font-size:11px;line-height:1.55}
+.verbalCompareHead div{font-weight:850;color:#475569}.verbalCompareHead .right{color:#15803d}.verbalCompareHead .wrong{color:#b91c1c}
+.verbalCompareRow{display:grid;grid-template-columns:92px 1fr 1fr;border-bottom:1px solid #f1f5f9}.verbalCompareRow:last-child{border-bottom:0}
+.verbalCompareRow .label{font-weight:800;color:#9ca3af;background:#fafafa}
+.verbalCompareRow .value{color:#374151}
+.verbalMechanismNote{margin-top:10px;font-size:10px;color:#94a3b8;line-height:1.55}
+.verbalQuickRule{margin-top:10px;background:#faf5ff;border:1px solid #ede9fe;border-radius:11px;padding:10px 12px;font-size:12px;color:#5b21b6;line-height:1.6}
+.masteryChip{display:inline-flex;align-items:center;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:800;background:#f3f4f6;color:#4b5563}.masteryChip.m1{background:#fff7ed;color:#c2410c}.masteryChip.m2{background:#eff6ff;color:#1d4ed8}.masteryChip.m3{background:#ecfdf5;color:#047857}
+
+.studyReveal{display:grid;gap:11px}.studyTermHeader{text-align:center;padding:10px 0 3px}.studyTermHeader h2{font-size:34px;margin:0;color:#111827}.studyTermHeader .kind{font-size:11px;color:#7c3aed;margin-top:5px}
+.studySection{border-top:1px solid #f1f5f9;padding-top:11px}.studySection h4{font-size:11px;color:#9ca3af;margin:0 0 5px;text-transform:uppercase;letter-spacing:.06em}.studySection p{font-size:13px;color:#374151;line-height:1.7;margin:0}
+.studyTags{display:flex;gap:6px;flex-wrap:wrap}.studyTags span{padding:5px 7px;background:#f8fafc;border-radius:8px;font-size:11px;color:#475569}
+.contrastTable{width:100%;border-collapse:collapse;margin-top:12px}.contrastTable th,.contrastTable td{border-bottom:1px solid #f1f5f9;padding:9px 7px;text-align:left;vertical-align:top;font-size:12px;line-height:1.5}.contrastTable th{color:#6b7280;font-weight:800}.contrastTable td:first-child{font-weight:850;color:#111827}
+.emptyReview{text-align:center;padding:32px 10px;color:#6b7280}.emptyReview b{display:block;color:#111827;font-size:16px;margin-bottom:6px}
+.verbalHint{font-size:11px;color:#9ca3af;margin-top:10px;text-align:center}
+
+.verbalDbModal{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}.verbalDbModal.show{display:flex}
+.verbalDbPanel{width:min(650px,100%);background:#fff;border-radius:20px;padding:20px;max-height:86vh;overflow:auto}.verbalDbHead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.verbalDbHead h2{margin:0;font-size:18px}.verbalDbHead p{font-size:12px;color:#6b7280;margin:5px 0 0;line-height:1.55}
+.verbalDbClose{border:0;background:#f3f4f6;border-radius:9px;width:32px;height:32px;cursor:pointer;font-size:18px}.verbalDbBlock{margin-top:15px;border:1px solid #e5e7eb;border-radius:14px;padding:13px}.verbalDbBlock h3{font-size:13px;margin:0 0 7px}.verbalDbBlock p{font-size:12px;color:#6b7280;line-height:1.6;margin:0}.verbalDbActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.verbalDbStatus{font-size:12px;margin-top:10px;color:#4b5563;line-height:1.55}
+@media(max-width:720px){.subjectGrid,.verbalGrid{grid-template-columns:1fr}.verbalTopbar{flex-direction:column}.verbalStats{grid-template-columns:repeat(2,1fr)}.verbalQuestion{padding:17px}.verbalPrompt.term{font-size:29px}}
+
 </style>
 </head>
 <body>
 <div class="app">
-<section class="moduleHome" id="moduleHome">
+
+<section class="examHome" id="examHome">
+  <div class="examHero">
+    <div class="examEyebrow">Civil Service Aptitude Training</div>
+    <div class="examTitle">行测专项训练 <span class="previewPill">V6.2 Preview</span></div>
+    <div class="examSub">资料分析保留 V5.9 稳定内核；言语理解自动读取 data/verbal_vocab.json，读取失败时再回退到本地导入或内置示例词库。</div>
+  </div>
+  <div class="subjectGrid">
+    <button class="subjectCard" id="enterDataSubject">
+      <div class="subjectIcon data">Σ</div>
+      <div class="subjectName">资料分析</div>
+      <div class="subjectDesc">保留现有 8 个速算模块、选择/经典双模式、收藏、历史、筛选和数据备份。</div>
+      <div class="subjectMeta"><span>8 个模块</span><span>V5.9 稳定内核</span><span>速算训练</span></div>
+      <div class="subjectEnter">进入资料分析 →</div>
+    </button>
+    <button class="subjectCard" id="enterVerbalSubject">
+      <div class="subjectIcon verbal">词</div>
+      <div class="subjectName">言语理解</div>
+      <div class="subjectDesc">先搭建词汇训练：词义识记、近义辨析、语境选词与易错复习，后续直接替换正式词库。</div>
+      <div class="subjectMeta"><span>学习模式</span><span>练习模式</span><span>错词复习</span><span>掌握度</span></div>
+      <div class="subjectEnter">进入言语理解 →</div>
+    </button>
+  </div>
+</section>
+
+<section class="moduleHome" id="moduleHome" hidden>
   <div class="moduleHomeHead">
+    <div class="homeBackRow"><button class="homeBackBtn" id="backSubjectFromData">← 行测专项</button></div>
     <div class="moduleHomeTitle">资料分析速算 <span class="moduleHomeVersion">V5.9</span></div>
     <div class="moduleHomeSub">选择训练模块，再进入选择模式或经典模式。</div>
   </div>
@@ -977,6 +1077,119 @@ body.library-modal-open{
     </button>
   </div>
 </section>
+
+<section class="verbalHome" id="verbalHome" hidden>
+  <div class="verbalHomeHead">
+    <div class="homeBackRow"><button class="homeBackBtn" id="backSubjectFromVerbal">← 行测专项</button></div>
+    <div class="verbalHomeTitle">言语理解 · 词汇训练 <span class="verbalHomeVersion">Preview</span></div>
+    <div class="verbalHomeSub">默认自动加载 data/verbal_vocab.json；也保留手动导入、导出和示例词库回退。</div>
+  </div>
+  <div class="verbalGrid">
+    <button class="verbalCard" data-verbal-task="meaning">
+      <div class="verbalCardIcon">📖</div>
+      <div class="verbalCardName">词义识记</div>
+      <div class="verbalCardDesc">认识单个词语或成语，练核心释义、侧重点、搭配和常见误区。</div>
+      <div class="verbalCardMeta">认识 → 理解 → 掌握</div>
+    </button>
+    <button class="verbalCard" data-verbal-task="contrast">
+      <div class="verbalCardIcon">⇄</div>
+      <div class="verbalCardName">近义辨析</div>
+      <div class="verbalCardDesc">按辨析组训练侧重点、适用对象、固定搭配和高频混淆点。</div>
+      <div class="verbalCardMeta">抓核心区别 · 快速排除</div>
+    </button>
+    <button class="verbalCard" data-verbal-task="context">
+      <div class="verbalCardIcon">▣</div>
+      <div class="verbalCardName">语境选词</div>
+      <div class="verbalCardDesc">把词放回完整语境中，训练逻辑填空真正需要的搭配与语义判断。</div>
+      <div class="verbalCardMeta">四选一 · 答后看辨析</div>
+    </button>
+    <button class="verbalCard" data-verbal-task="review">
+      <div class="verbalCardIcon">↻</div>
+      <div class="verbalCardName">易错复习</div>
+      <div class="verbalCardDesc">自动汇总做错、掌握度低和主动收藏的词，集中进行重复强化。</div>
+      <div class="verbalCardMeta" id="reviewCountMeta">当前 0 个待复习词</div>
+    </button>
+  </div>
+  <div class="verbalLibraryBar">
+    <div class="verbalLibraryInfo" id="verbalLibraryInfo">正在读取示例词库…</div>
+    <div class="verbalMiniActions">
+      <button class="verbalMiniBtn" id="openVerbalDb">词库 JSON</button>
+      <button class="verbalMiniBtn" id="clearVerbalProgress">清空学习记录</button>
+    </div>
+  </div>
+</section>
+
+<section class="verbalTrainer" id="verbalTrainerView" hidden>
+  <div class="verbalTopbar">
+    <div>
+      <div class="verbalBrandLine">
+        <button class="verbalBack" id="backVerbalHome">← 词汇模块</button>
+        <div class="verbalTitle" id="verbalTaskTitle">词义识记</div>
+      </div>
+      <div class="verbalSubtitle" id="verbalTaskSub">识记核心词义与常见误区</div>
+    </div>
+    <div class="verbalModeTabs">
+      <button class="verbalModeTab active" id="verbalPracticeMode">练习模式</button>
+      <button class="verbalModeTab" id="verbalStudyMode">学习模式</button>
+    </div>
+  </div>
+
+  <div class="verbalStats">
+    <div class="verbalStat"><span>累计练习</span><b id="vStatTotal">0</b></div>
+    <div class="verbalStat"><span>正确率</span><b id="vStatRate">—</b></div>
+    <div class="verbalStat"><span>待复习词</span><b id="vStatReview">0</b></div>
+    <div class="verbalStat"><span>熟练词</span><b id="vStatMastered">0</b></div>
+  </div>
+
+  <div class="verbalToolbar">
+    <div class="verbalFilters">
+      <select class="verbalSelect" id="verbalKindFilter">
+        <option value="all">词语 + 成语</option>
+        <option value="word">只练词语</option>
+        <option value="idiom">只练成语</option>
+      </select>
+      <select class="verbalSelect" id="verbalScopeFilter">
+        <option value="all">全部</option>
+        <option value="unmastered">未熟练优先</option>
+        <option value="favorites">只看收藏</option>
+      </select>
+    </div>
+    <div class="verbalProgressText" id="verbalProgressText">—</div>
+  </div>
+
+  <div class="verbalQuestion" id="verbalQuestionCard">
+    <div id="verbalQuestionBody"></div>
+  </div>
+  <div class="verbalHint">练习模式：A–D / 1–4 选择，Enter 提交，N 下一题；学习模式可直接查看完整词卡和辨析卡。</div>
+</section>
+
+<div class="verbalDbModal" id="verbalDbModal" aria-hidden="true">
+  <div class="verbalDbPanel">
+    <div class="verbalDbHead">
+      <div>
+        <h2>言语词库 JSON</h2>
+        <p>部署时会优先自动读取 data/verbal_vocab.json；也可手动导入用于临时测试。学习记录按稳定词条 ID 单独保存。</p>
+      </div>
+      <button class="verbalDbClose" id="closeVerbalDb">×</button>
+    </div>
+    <div class="verbalDbBlock">
+      <h3>当前词库</h3>
+      <p id="verbalDbSummary">—</p>
+      <div class="verbalDbActions">
+        <button class="verbalAction" id="exportVerbalDb">导出当前词库</button>
+        <button class="verbalAction" id="restoreDemoDb">恢复示例词库</button>
+      </div>
+    </div>
+    <div class="verbalDbBlock">
+      <h3>导入正式词库</h3>
+      <p>支持 V1/V1.1 结构，也兼容原来的 word/pinyin/explanation 数组格式；导入前会统一规范化并校验 ID、组成员和题目答案关系。</p>
+      <input id="verbalDbFile" type="file" accept=".json,application/json" style="margin-top:10px">
+      <div class="verbalDbActions"><button class="verbalAction primary" id="importVerbalDb">导入并使用</button></div>
+      <div class="verbalDbStatus" id="verbalDbStatus"></div>
+    </div>
+  </div>
+</div>
+
 <div id="trainerView" hidden>
 <header class="topbar">
   <div class="brand">
@@ -1949,6 +2162,709 @@ body.library-modal-open{
 </div>
 </div>
 <script>
+
+/* ========================= V6.2 Preview · VERBAL VOCAB ========================= */
+const DEMO_VOCAB_DB={"schemaVersion":"1.0","metadata":{"name":"行测言语理解示例词库","description":"V6.2 Preview 示例数据，仅用于验证词义识记、近义辨析、语境选词和易错复习流程。","language":"zh-CN","updatedAt":"2026-08-20","notes":"示例词库后续可由正式 JSON 直接替换。"},"entries":[{"id":"w_ezhi","term":"遏制","kind":"word","definition":"制止、控制某种事物的发展势头，使其受到约束。","coreMeaning":"控制发展势头","focus":"强调控制、约束某种正在发展或蔓延的趋势。","targets":["势头","趋势","上涨","蔓延","污染"],"polarity":"中性偏负面对象","register":["书面","通用"],"collocations":["遏制上涨势头","遏制污染蔓延","遏制风险扩散"],"pitfalls":["常与“遏止”混淆；“遏制”更突出控制发展势头。"],"synonymIds":["w_ezhi_stop","w_yizhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析","逻辑填空"],"source":{"title":"","page":"","note":""}},{"id":"w_ezhi_stop","term":"遏止","kind":"word","definition":"阻止、使停止。","coreMeaning":"阻止并使之停止","focus":"强调阻止某种行为、现象继续发生。","targets":["行为","现象","事态"],"polarity":"中性偏负面对象","register":["书面"],"collocations":["遏止事态恶化","遏止不良现象"],"pitfalls":["比“遏制”更突出“止住”的结果。"],"synonymIds":["w_ezhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_yizhi","term":"抑制","kind":"word","definition":"压下去、控制住，使程度或活动受到限制。","coreMeaning":"压低或限制","focus":"常强调使某种活动、情绪、增长或反应减弱。","targets":["情绪","冲动","增长","反应","活性"],"polarity":"中性","register":["书面","通用"],"collocations":["抑制冲动","抑制需求","抑制增长"],"pitfalls":["不一定意味着完全停止，更强调减弱或压制。"],"synonymIds":["w_ezhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhizhi","term":"制止","kind":"word","definition":"强迫使停止；不允许继续。","coreMeaning":"使正在发生的行为停止","focus":"常直接作用于具体行为或行动。","targets":["违法行为","争执","冲突","行动"],"polarity":"中性","register":["通用"],"collocations":["制止违法行为","及时制止冲突"],"pitfalls":["对象通常更具体，不强调长期发展趋势。"],"synonymIds":["w_ezhi_stop"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo1","term":"推脱","kind":"word","definition":"推卸、开脱，多指把责任等推开。","coreMeaning":"推卸责任","focus":"对象常是责任、过错、义务等。","targets":["责任","过错","义务"],"polarity":"贬义","register":["通用"],"collocations":["推脱责任","百般推脱"],"pitfalls":["不要与“推托”混为一谈；“推托”更偏借故拒绝。"],"synonymIds":["w_tuituo2"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo2","term":"推托","kind":"word","definition":"借故拒绝或推辞。","coreMeaning":"借故推辞","focus":"强调找理由拒绝请求、安排或事务。","targets":["邀请","事务","请求","安排"],"polarity":"中性偏负面","register":["通用"],"collocations":["借故推托","推托不去"],"pitfalls":["“托”侧重托辞、借口；不是主要指推卸责任。"],"synonymIds":["w_tuituo1"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi","term":"质疑","kind":"word","definition":"提出疑问，表示怀疑。","coreMeaning":"提出疑问","focus":"可以直接带被怀疑、被追问的对象。","targets":["结论","观点","数据","做法"],"polarity":"中性","register":["书面","通用"],"collocations":["提出质疑","质疑结论","受到质疑"],"pitfalls":["“质疑”本身就是提出疑问，使用范围比“置疑”更常见。"],"synonymIds":["w_zhiyi2"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi2","term":"置疑","kind":"word","definition":"表示怀疑，多用于否定式。","coreMeaning":"加以怀疑","focus":"常见于“不容置疑”“无可置疑”等固定结构。","targets":["事实","结论","权威性"],"polarity":"中性","register":["书面"],"collocations":["不容置疑","无可置疑"],"pitfalls":["通常不说“提出置疑”；常见固定搭配是否定式。"],"synonymIds":["w_zhiyi"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析","固定搭配"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang","term":"不负众望","kind":"idiom","definition":"不辜负大家的期望。","coreMeaning":"没有辜负期待","focus":"结果符合或达到众人的期待。","targets":["人","团队","表现","成果"],"polarity":"褒义","register":["书面","通用"],"collocations":["不负众望，取得佳绩"],"pitfalls":["与“不孚众望”仅一字之差，意思相反。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang2"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang2","term":"不孚众望","kind":"idiom","definition":"不能使大家信服，未能符合众人的期望。","coreMeaning":"没有达到众人期待","focus":"“孚”有使人信服之意，整体表示未获信任或未达期待。","targets":["人","团队","表现"],"polarity":"贬义","register":["书面"],"collocations":["表现不佳，不孚众望"],"pitfalls":["不能误当成“不负众望”的同义词。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shoudangqichong","term":"首当其冲","kind":"idiom","definition":"最先受到攻击或遭受灾难、压力等。","coreMeaning":"最先受到冲击","focus":"强调最先承受不利影响，不是“第一个冲上去”。","targets":["地区","行业","群体","对象"],"polarity":"多用于不利情境","register":["书面","通用"],"collocations":["首当其冲受到影响","在冲击中首当其冲"],"pitfalls":["不能理解为“第一个冲在前面”。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shouquyizhi","term":"首屈一指","kind":"idiom","definition":"居第一位，数得上第一。","coreMeaning":"名列第一","focus":"强调水平、地位、成绩等非常突出。","targets":["人物","机构","水平","成绩"],"polarity":"褒义","register":["书面","通用"],"collocations":["业内首屈一指","技术水平首屈一指"],"pitfalls":["与“首当其冲”含义毫无相近之处。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_fuguang","term":"浮光掠影","kind":"idiom","definition":"像水面的反光和一闪而过的影子；比喻观察不细致、印象不深刻。","coreMeaning":"观察肤浅、印象不深","focus":"偏重认识或观察停留在表面。","targets":["观察","认识","印象","了解"],"polarity":"贬义","register":["书面"],"collocations":["浮光掠影地了解","只留下浮光掠影的印象"],"pitfalls":["与“走马观花”相近，但更突出印象浅、观察不深入。"],"synonymIds":["i_zouma"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"i_zouma","term":"走马观花","kind":"idiom","definition":"比喻粗略地观察事物。","coreMeaning":"快速、粗略地看","focus":"偏重浏览过程快速而不细看。","targets":["参观","浏览","考察","阅读"],"polarity":"中性偏贬","register":["书面","通用"],"collocations":["走马观花地参观","走马观花式调研"],"pitfalls":["更突出“看得快、看得粗”，不等同于专指印象浅。"],"synonymIds":["i_fuguang"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}}],"contrastGroups":[{"id":"g_ezhi","title":"遏制 / 遏止 / 抑制 / 制止","memberIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"summary":"四者都有控制、阻止之意，但关注点和常见对象不同。","quickRule":"趋势看“遏制”，止住看“遏止”，减弱看“抑制”，具体行为看“制止”。","dimensions":[{"name":"侧重点","notes":{"w_ezhi":"控制发展势头","w_ezhi_stop":"阻止并使停止","w_yizhi":"压低、减弱","w_zhizhi":"使具体行为停止"}},{"name":"典型对象","notes":{"w_ezhi":"趋势、上涨、蔓延","w_ezhi_stop":"事态、现象","w_yizhi":"情绪、需求、反应","w_zhizhi":"违法行为、冲突"}}],"commonTraps":["看到“增长/蔓延势头”时，通常优先考虑“遏制”。"],"tags":["近义辨析"]},{"id":"g_tuituo","title":"推脱 / 推托","memberIds":["w_tuituo1","w_tuituo2"],"summary":"“推脱”侧重推卸，“推托”侧重借故拒绝。","quickRule":"责任用“推脱”，事情/邀请用“推托”。","dimensions":[{"name":"对象","notes":{"w_tuituo1":"责任、过错、义务","w_tuituo2":"邀请、事务、请求"}}],"commonTraps":["“推脱责任”是高频固定搭配。"],"tags":["近义辨析","高频易混"]},{"id":"g_zhiyi","title":"质疑 / 置疑","memberIds":["w_zhiyi","w_zhiyi2"],"summary":"“质疑”是提出疑问；“置疑”常进入否定式固定搭配。","quickRule":"提出疑问用“质疑”，不容怀疑用“不容置疑”。","dimensions":[{"name":"句法习惯","notes":{"w_zhiyi":"可直接说“质疑某结论”","w_zhiyi2":"常见“不容置疑、无可置疑”"}}],"commonTraps":["一般不说“提出置疑”。"],"tags":["近义辨析","固定搭配"]},{"id":"g_bufu","title":"不负众望 / 不孚众望","memberIds":["i_bufuzhongwang","i_bufuzhongwang2"],"summary":"两者只有一字之差，但褒贬相反。","quickRule":"“负”=辜负，所以“不负”=没辜负；“孚”=信服，“不孚”=不能使人信服。","dimensions":[{"name":"意义","notes":{"i_bufuzhongwang":"达到期待，褒义","i_bufuzhongwang2":"未达期待，贬义"}}],"commonTraps":["把“不孚众望”误作褒义。"],"tags":["成语","易错成语"]},{"id":"g_shou","title":"首当其冲 / 首屈一指","memberIds":["i_shoudangqichong","i_shouquyizhi"],"summary":"两词都含“首”，但一个说受冲击，一个说排名第一。","quickRule":"受冲击用“首当其冲”，数第一用“首屈一指”。","dimensions":[{"name":"核心含义","notes":{"i_shoudangqichong":"最先受冲击","i_shouquyizhi":"名列第一"}}],"commonTraps":["“首当其冲”不是“冲在最前面”。"],"tags":["成语","易错成语"]},{"id":"g_fuguang","title":"浮光掠影 / 走马观花","memberIds":["i_fuguang","i_zouma"],"summary":"都可表示观察不深入，但一个偏结果印象浅，一个偏过程看得快。","quickRule":"印象浅看“浮光掠影”，浏览快看“走马观花”。","dimensions":[{"name":"侧重点","notes":{"i_fuguang":"观察肤浅、印象不深","i_zouma":"快速、粗略浏览"}}],"commonTraps":["语境强调“参观时间有限、快速浏览”时更偏“走马观花”。"],"tags":["成语","近义辨析"]}],"questions":[{"id":"q_contrast_01","type":"contrastChoice","groupId":"g_ezhi","stem":"强调“控制某种发展、蔓延的势头”，更准确的是：","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“遏制”更强调控制正在发展或蔓延的趋势；“制止”更偏具体行为，“抑制”强调减弱，“遏止”更突出止住。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_02","type":"contrastChoice","groupId":"g_tuituo","stem":"表示“把本应承担的责任推开、推卸”，应选：","optionIds":["w_tuituo1","w_tuituo2"],"answerId":"w_tuituo1","explanation":"“推脱”常与责任、过错、义务搭配；“推托”主要指借故拒绝。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_03","type":"contrastChoice","groupId":"g_zhiyi","stem":"与“提出疑问、表示怀疑”最直接对应的是：","optionIds":["w_zhiyi","w_zhiyi2"],"answerId":"w_zhiyi","explanation":"“质疑”可以直接表示提出疑问；“置疑”更常见于“不容置疑”等固定搭配。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_04","type":"contrastChoice","groupId":"g_bufu","stem":"表示“没有辜负大家的期望”，应选：","optionIds":["i_bufuzhongwang","i_bufuzhongwang2"],"answerId":"i_bufuzhongwang","explanation":"“不负众望”是没有辜负众人的期望；“不孚众望”表示不能使大家信服或未达期待。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_05","type":"contrastChoice","groupId":"g_shou","stem":"形容某机构在同行中水平突出、可以数得上第一，应选：","optionIds":["i_shoudangqichong","i_shouquyizhi"],"answerId":"i_shouquyizhi","explanation":"“首屈一指”表示居第一位；“首当其冲”表示最先受到冲击。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_06","type":"contrastChoice","groupId":"g_fuguang","stem":"如果语境强调“观察不深入，只留下肤浅印象”，更贴切的是：","optionIds":["i_fuguang","i_zouma"],"answerId":"i_fuguang","explanation":"“浮光掠影”更偏观察肤浅、印象不深；“走马观花”更偏浏览过程快速粗略。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_context_01","type":"contextChoice","groupId":"g_ezhi","stem":"面对部分商品价格过快上涨，有关部门需要及时采取措施，____其上涨势头。","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“上涨势头”强调发展趋势，和“遏制”搭配自然。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_02","type":"contextChoice","groupId":"g_ezhi","stem":"执法人员及时赶到现场，____了正在发生的违法行为。","optionIds":["w_zhizhi","w_ezhi","w_yizhi","w_ezhi_stop"],"answerId":"w_zhizhi","explanation":"对象是具体的“违法行为”，且强调使其停止，“制止”最直接。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_03","type":"contextChoice","groupId":"g_tuituo","stem":"面对工作失误，他没有查找原因，反而一再____责任。","optionIds":["w_tuituo1","w_tuituo2","w_zhiyi","w_ezhi"],"answerId":"w_tuituo1","explanation":"“责任”与“推脱”是典型搭配，表示推卸本应承担的责任。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_04","type":"contextChoice","groupId":"g_zhiyi","stem":"由于样本规模有限，这一结论的可靠性仍受到不少研究者的____。","optionIds":["w_zhiyi","w_zhiyi2","w_yizhi","w_tuituo2"],"answerId":"w_zhiyi","explanation":"“受到质疑”是常见搭配；“置疑”通常出现在“不容置疑”等结构中。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_05","type":"contextChoice","groupId":"g_bufu","stem":"经过数月攻关，团队最终按期完成核心任务，____，赢得了大家的认可。","optionIds":["i_bufuzhongwang","i_bufuzhongwang2","i_shoudangqichong","i_shouquyizhi"],"answerId":"i_bufuzhongwang","explanation":"语境是完成任务、符合大家期待，因此用褒义的“不负众望”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_06","type":"contextChoice","groupId":"g_shou","stem":"极端天气来袭时，地势低洼的沿江地区往往____，最先受到影响。","optionIds":["i_shoudangqichong","i_shouquyizhi","i_fuguang","i_zouma"],"answerId":"i_shoudangqichong","explanation":"“最先受到影响”正对应“首当其冲”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_07","type":"contextChoice","groupId":"g_fuguang","stem":"如果调查只停留在表面材料，难免形成____的认识，无法触及问题实质。","optionIds":["i_fuguang","i_zouma","i_shouquyizhi","i_bufuzhongwang"],"answerId":"i_fuguang","explanation":"这里强调认识停留在表面、印象不深，“浮光掠影”更贴切。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_08","type":"contextChoice","groupId":"g_fuguang","stem":"由于参观时间有限，一行人只能____地浏览各个展厅。","optionIds":["i_zouma","i_fuguang","i_shoudangqichong","i_bufuzhongwang2"],"answerId":"i_zouma","explanation":"语境突出时间有限、浏览很快，“走马观花”更符合过程特征。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}}]};
+const VERBAL_DB_KEY='verbalVocabLibraryV1';
+const VERBAL_PROGRESS_KEY='verbalVocabProgressV1';
+const VERBAL_REMOTE_PATH='./data/verbal_vocab.json';
+
+let verbalDb=null;
+let verbalDbSource='demo';
+let verbalDbLoadMessage='';
+let verbalTask='meaning';
+let verbalMode='practice';
+let verbalCurrent=null;
+let verbalSelected=-1;
+let verbalSubmitted=false;
+let verbalStartedAt=0;
+let verbalStudyIndex=0;
+let verbalRecentKeys=[];
+let verbalLastAnswerId=null;
+const verbalMemoryStore=new Map();
+function vStoreGet(key){
+  try{return localStorage.getItem(key)}catch(e){return verbalMemoryStore.get(key)??null}
+}
+function vStoreSet(key,value){
+  try{localStorage.setItem(key,value)}catch(e){verbalMemoryStore.set(key,String(value))}
+}
+function vStoreRemove(key){
+  try{localStorage.removeItem(key)}catch(e){verbalMemoryStore.delete(key)}
+}
+
+function escV(s){
+  return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function cloneJson(x){return JSON.parse(JSON.stringify(x))}
+function verbalEntryMap(){return new Map((verbalDb?.entries||[]).map(x=>[x.id,x]))}
+function verbalGroupMap(){return new Map((verbalDb?.contrastGroups||[]).map(x=>[x.id,x]))}
+
+
+function normalizeVerbalDbPayload(payload){
+  // Backward compatibility: old flat array [{word,pinyin,explanation}, ...]
+  if(Array.isArray(payload)){
+    const entries=payload.map((x,i)=>{
+      const term=String(x?.word||'').trim();
+      const key=term||`legacy_${i}`;
+      let hash=2166136261;
+      for(let j=0;j<key.length;j++){hash^=key.charCodeAt(j);hash=Math.imul(hash,16777619)}
+      const id='v_legacy_'+(hash>>>0).toString(16);
+      const n=[...term].filter(c=>/[\u4e00-\u9fff]/.test(c)).length;
+      return{
+        id,term,
+        pinyin:String(x?.pinyin||'').trim(),
+        kind:n===4?'idiom':'word',
+        definition:String(x?.explanation||'').trim(),
+        coreMeaning:'',
+        focus:'',
+        targets:[],
+        polarity:'',
+        register:[],
+        collocations:[],
+        pitfalls:[],
+        synonymIds:[],
+        antonymIds:[],
+        groupIds:[],
+        tags:[n===4?'成语':'实词','旧格式自动迁移'],
+        source:{title:'旧格式词库',originalIndex:i+1,note:'浏览器运行时自动迁移'}
+      };
+    });
+    return{
+      schemaVersion:'legacy-auto-1.0',
+      metadata:{
+        name:'旧格式词库（自动迁移）',
+        description:'由 word/pinyin/explanation 数组在浏览器中自动迁移。',
+        language:'zh-CN',
+        originalEntryCount:entries.length
+      },
+      entries,contrastGroups:[],questions:[]
+    };
+  }
+  const db=cloneJson(payload||{});
+  db.metadata=db.metadata||{};
+  db.entries=Array.isArray(db.entries)?db.entries:[];
+  db.contrastGroups=Array.isArray(db.contrastGroups)?db.contrastGroups:[];
+  db.questions=Array.isArray(db.questions)?db.questions:[];
+  // Normalize optional V1/V1.1 fields so old V1 files remain usable.
+  db.entries=db.entries.map((e,i)=>({
+    id:String(e?.id||`v_import_${i+1}`),
+    term:String(e?.term||e?.word||'').trim(),
+    pinyin:String(e?.pinyin||'').trim(),
+    kind:e?.kind==='idiom'?'idiom':'word',
+    definition:String(e?.definition||e?.explanation||'').trim(),
+    coreMeaning:String(e?.coreMeaning||'').trim(),
+    focus:String(e?.focus||'').trim(),
+    targets:Array.isArray(e?.targets)?e.targets:[],
+    polarity:String(e?.polarity||''),
+    register:Array.isArray(e?.register)?e.register:[],
+    collocations:Array.isArray(e?.collocations)?e.collocations:[],
+    pitfalls:Array.isArray(e?.pitfalls)?e.pitfalls:[],
+    synonymIds:Array.isArray(e?.synonymIds)?e.synonymIds:[],
+    antonymIds:Array.isArray(e?.antonymIds)?e.antonymIds:[],
+    groupIds:Array.isArray(e?.groupIds)?e.groupIds:[],
+    tags:Array.isArray(e?.tags)?e.tags:[],
+    source:e?.source&&typeof e.source==='object'?e.source:{title:'',page:'',note:''}
+  }));
+  return db;
+}
+
+function validateVerbalDb(db){
+  if(!db||typeof db!=='object')throw new Error('JSON 顶层必须是对象。');
+  if(!Array.isArray(db.entries)||!Array.isArray(db.contrastGroups)||!Array.isArray(db.questions))throw new Error('必须包含 entries、contrastGroups、questions 三个数组。');
+  if(!db.entries.length)throw new Error('entries 不能为空。');
+  const ids=new Set();
+  for(const e of db.entries){
+    if(!e||!e.id||!e.term||!e.definition)throw new Error('每个词条至少需要 id、term、definition。');
+    if(ids.has(e.id))throw new Error(`词条 ID 重复：${e.id}`);
+    ids.add(e.id);
+  }
+  const gids=new Set();
+  for(const g of db.contrastGroups){
+    if(!g||!g.id||!Array.isArray(g.memberIds)||g.memberIds.length<2)throw new Error('辨析组需要 id 和至少2个 memberIds。');
+    if(gids.has(g.id))throw new Error(`辨析组 ID 重复：${g.id}`);
+    gids.add(g.id);
+    for(const id of g.memberIds)if(!ids.has(id))throw new Error(`辨析组 ${g.id} 引用了不存在的词条 ${id}`);
+  }
+  const qids=new Set();
+  for(const q of db.questions){
+    if(!q||!q.id||!q.type)throw new Error('每道题需要 id 和 type。');
+    if(qids.has(q.id))throw new Error(`题目 ID 重复：${q.id}`);
+    qids.add(q.id);
+    if(['contextChoice','contrastChoice'].includes(q.type)){
+      if(!Array.isArray(q.optionIds)||q.optionIds.length<2)throw new Error(`题目 ${q.id} 缺少有效 optionIds`);
+      for(const id of q.optionIds)if(!ids.has(id))throw new Error(`题目 ${q.id} 引用了不存在的词条 ${id}`);
+      if(!q.optionIds.includes(q.answerId))throw new Error(`题目 ${q.id} 的 answerId 不在 optionIds 中`);
+    }
+  }
+  return true;
+}
+function loadVerbalDb(){
+  try{
+    const raw=vStoreGet(VERBAL_DB_KEY);
+    if(raw){
+      const db=normalizeVerbalDbPayload(JSON.parse(raw));validateVerbalDb(db);return db;
+    }
+  }catch(e){console.warn('verbal db fallback',e)}
+  return cloneJson(DEMO_VOCAB_DB);
+}
+function saveVerbalDb(db){
+  db=normalizeVerbalDbPayload(db);validateVerbalDb(db);
+  vStoreSet(VERBAL_DB_KEY,JSON.stringify(db));verbalDb=db;verbalDbSource='local';verbalDbLoadMessage='手动导入';
+}
+
+async function initVerbalDb(){
+  verbalDbLoadMessage='正在读取 '+VERBAL_REMOTE_PATH;
+  updateVerbalLibraryInfo();
+  try{
+    const res=await fetch(VERBAL_REMOTE_PATH,{cache:'no-store'});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const payload=await res.json();
+    const db=normalizeVerbalDbPayload(payload);
+    validateVerbalDb(db);
+    verbalDb=db;verbalDbSource='data';verbalDbLoadMessage='data 自动加载';
+  }catch(e){
+    console.info('remote verbal db unavailable; using fallback',e);
+    const raw=vStoreGet(VERBAL_DB_KEY);
+    if(raw){
+      try{
+        const db=normalizeVerbalDbPayload(JSON.parse(raw));validateVerbalDb(db);
+        verbalDb=db;verbalDbSource='local';verbalDbLoadMessage='data 读取失败 · 使用本地导入';
+      }catch(_){
+        verbalDb=cloneJson(DEMO_VOCAB_DB);verbalDbSource='demo';verbalDbLoadMessage='data 读取失败 · 使用内置示例';
+      }
+    }else{
+      verbalDb=cloneJson(DEMO_VOCAB_DB);verbalDbSource='demo';verbalDbLoadMessage='data 读取失败 · 使用内置示例';
+    }
+  }
+  updateVerbalStats();updateVerbalLibraryInfo();
+  if(!$('verbalTrainerView').hidden)newVerbalItem();
+}
+
+function defaultVerbalProgress(){return{stats:{total:0,correct:0,timeSum:0},terms:{},groups:{}}}
+function loadVerbalProgress(){
+  try{
+    const x=JSON.parse(vStoreGet(VERBAL_PROGRESS_KEY))||defaultVerbalProgress();
+    x.stats=x.stats||{total:0,correct:0,timeSum:0};x.terms=x.terms||{};x.groups=x.groups||{};
+    return x;
+  }catch(e){return defaultVerbalProgress()}
+}
+function saveVerbalProgress(p){vStoreSet(VERBAL_PROGRESS_KEY,JSON.stringify(p))}
+function termState(id,p=null){
+  p=p||loadVerbalProgress();
+  return p.terms[id]||{attempts:0,correct:0,wrong:0,streak:0,mastery:0,favorite:false,lastSeen:0,timeSum:0};
+}
+function masteryText(m){return ['未学','模糊','基本掌握','熟练'][Math.max(0,Math.min(3,Number(m)||0))]}
+function updateTermResult(ids,correct,elapsed){
+  const p=loadVerbalProgress();
+  p.stats.total=(p.stats.total||0)+1;
+  p.stats.correct=(p.stats.correct||0)+(correct?1:0);
+  p.stats.timeSum=(p.stats.timeSum||0)+(Number(elapsed)||0);
+  [...new Set(ids.filter(Boolean))].forEach(id=>{
+    const s={...termState(id,p)};
+    s.attempts++;s.lastSeen=Date.now();s.timeSum=(s.timeSum||0)+(Number(elapsed)||0);
+    if(correct){
+      s.correct++;s.streak=(s.streak||0)+1;
+      if(s.streak>=4)s.mastery=3;
+      else if(s.streak>=2)s.mastery=Math.max(s.mastery||0,2);
+      else s.mastery=Math.max(s.mastery||0,1);
+    }else{
+      s.wrong++;s.streak=0;s.mastery=Math.min(Number(s.mastery)||0,1);
+    }
+    p.terms[id]=s;
+  });
+  saveVerbalProgress(p);updateVerbalStats();
+}
+function setTermSelfRating(id,level){
+  const p=loadVerbalProgress(),s={...termState(id,p)};
+  s.mastery=Math.max(0,Math.min(3,level));s.lastSeen=Date.now();p.terms[id]=s;saveVerbalProgress(p);updateVerbalStats();
+}
+function toggleTermFavorite(id){
+  const p=loadVerbalProgress(),s={...termState(id,p)};s.favorite=!s.favorite;p.terms[id]=s;saveVerbalProgress(p);updateVerbalStats();return s.favorite;
+}
+function toggleGroupFavorite(id){
+  const p=loadVerbalProgress();p.groups[id]=p.groups[id]||{favorite:false};p.groups[id].favorite=!p.groups[id].favorite;saveVerbalProgress(p);return p.groups[id].favorite;
+}
+function isGroupFavorite(id){return !!loadVerbalProgress().groups?.[id]?.favorite}
+function reviewTermIds(){
+  const p=loadVerbalProgress();
+  return (verbalDb?.entries||[]).filter(e=>{
+    const s=termState(e.id,p);
+    return s.favorite||(s.wrong||0)>0||(s.attempts>0&&(s.mastery||0)<2);
+  }).sort((a,b)=>{
+    const sa=termState(a.id,p),sb=termState(b.id,p);
+    return Number(sb.favorite)-Number(sa.favorite)||(sb.wrong||0)-(sa.wrong||0)||(sa.mastery||0)-(sb.mastery||0);
+  }).map(e=>e.id);
+}
+function updateVerbalStats(){
+  const p=loadVerbalProgress(),entries=verbalDb?.entries||[];
+  const reviewed=reviewTermIds().length;
+  const mastered=entries.filter(e=>(termState(e.id,p).mastery||0)>=3).length;
+  if($('vStatTotal'))$('vStatTotal').textContent=p.stats.total||0;
+  if($('vStatRate'))$('vStatRate').textContent=p.stats.total?fmtPct(100*(p.stats.correct||0)/p.stats.total,1):'—';
+  if($('vStatReview'))$('vStatReview').textContent=reviewed;
+  if($('vStatMastered'))$('vStatMastered').textContent=mastered;
+  if($('reviewCountMeta'))$('reviewCountMeta').textContent=`当前 ${reviewed} 个待复习词`;
+}
+function updateVerbalLibraryInfo(){
+  if(!verbalDb)return;
+  const name=verbalDb.metadata?.name||'未命名词库';
+  const sourceText=verbalDbSource==='data'?'data 自动加载':verbalDbSource==='local'?'本地导入':'内置示例';
+  $('verbalLibraryInfo').innerHTML=`当前：<b>${escV(name)}</b><span class="verbalSourceBadge">${escV(sourceText)}</span> · ${verbalDb.entries.length} 词条 · ${verbalDb.contrastGroups.length} 辨析组 · ${verbalDb.questions.length} 道语境/辨析题`;
+  $('verbalDbSummary').textContent=`${name}；schema ${verbalDb.schemaVersion||'—'}；${verbalDb.entries.length} 个词条，${verbalDb.contrastGroups.length} 个辨析组，${verbalDb.questions.length} 道题；来源：${sourceText}${verbalDbLoadMessage?`（${verbalDbLoadMessage}）`:''}。`;
+}
+
+function showExamHome(){
+  setFocusMode(false);clearInterval(timerId);timerStarted=false;currentModule=null;
+  $('examHome').hidden=false;$('moduleHome').hidden=true;$('trainerView').hidden=true;
+  $('verbalHome').hidden=true;$('verbalTrainerView').hidden=true;
+  window.scrollTo({top:0});
+}
+function showVerbalHome(){
+  setFocusMode(false);$('examHome').hidden=true;$('moduleHome').hidden=true;$('trainerView').hidden=true;
+  $('verbalHome').hidden=false;$('verbalTrainerView').hidden=true;
+  updateVerbalStats();updateVerbalLibraryInfo();window.scrollTo({top:0});
+}
+function enterDataSubject(){
+  $('examHome').hidden=true;$('verbalHome').hidden=true;$('verbalTrainerView').hidden=true;
+  $('trainerView').hidden=true;$('moduleHome').hidden=false;window.scrollTo({top:0});
+}
+function verbalTaskMeta(task){
+  return {
+    meaning:['词义识记','双向识记词义，优先使用近义/语义近邻作为干扰'],
+    contrast:['近义辨析','近义选项随机排布，错答后直接对照正确词与误选词'],
+    context:['语境选词','语境题自适应抽取，错词与未熟练词优先出现'],
+    review:['易错复习','按错误次数、掌握度和收藏状态自适应安排复习']
+  }[task]||['词汇训练',''];
+}
+function enterVerbalTask(task){
+  verbalTask=task;verbalMode='practice';verbalStudyIndex=0;
+  $('examHome').hidden=true;$('moduleHome').hidden=true;$('trainerView').hidden=true;$('verbalHome').hidden=true;$('verbalTrainerView').hidden=false;
+  const meta=verbalTaskMeta(task);$('verbalTaskTitle').textContent=meta[0];$('verbalTaskSub').textContent=meta[1];
+  $('verbalPracticeMode').classList.add('active');$('verbalStudyMode').classList.remove('active');
+  $('verbalKindFilter').disabled=(task==='contrast'||task==='context');
+  updateVerbalStats();newVerbalItem();window.scrollTo({top:0});
+}
+function setVerbalMode(mode){
+  verbalMode=mode;
+  $('verbalPracticeMode').classList.toggle('active',mode==='practice');
+  $('verbalStudyMode').classList.toggle('active',mode==='study');
+  verbalStudyIndex=0;newVerbalItem();
+}
+function filteredVerbalEntries(reviewOnly=false){
+  let entries=verbalDb?.entries||[];
+  const kind=$('verbalKindFilter')?.value||'all',scope=$('verbalScopeFilter')?.value||'all',p=loadVerbalProgress();
+  if(reviewOnly){
+    const ids=new Set(reviewTermIds());entries=entries.filter(e=>ids.has(e.id));
+  }
+  if(kind!=='all')entries=entries.filter(e=>e.kind===kind);
+  if(scope==='favorites')entries=entries.filter(e=>termState(e.id,p).favorite);
+  if(scope==='unmastered')entries=[...entries].sort((a,b)=>(termState(a.id,p).mastery||0)-(termState(b.id,p).mastery||0)||(termState(b.id,p).wrong||0)-(termState(a.id,p).wrong||0));
+  return entries;
+}
+function shuffleV(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function masteryChipHtml(id){
+  const s=termState(id),m=s.mastery||0;
+  return `<span class="masteryChip m${m}">${masteryText(m)}</span>`;
+}
+function currentTermStudyPool(){
+  return filteredVerbalEntries(verbalTask==='review');
+}
+function currentGroupStudyPool(){
+  let groups=verbalDb?.contrastGroups||[];
+  const scope=$('verbalScopeFilter')?.value||'all',p=loadVerbalProgress();
+  if(scope==='favorites')groups=groups.filter(g=>p.groups?.[g.id]?.favorite);
+  return groups;
+}
+function currentQuestionPool(){
+  let qs=(verbalDb?.questions||[]).filter(q=>verbalTask==='contrast'?q.type==='contrastChoice':q.type==='contextChoice');
+  const scope=$('verbalScopeFilter')?.value||'all',p=loadVerbalProgress();
+  if(scope==='favorites'){
+    qs=qs.filter(q=>q.optionIds?.some(id=>termState(id,p).favorite)||p.groups?.[q.groupId]?.favorite);
+  }
+  return qs;
+}
+function entrySourceIndex(e){
+  const n=Number(e?.source?.originalIndex);
+  return Number.isFinite(n)?n:null;
+}
+function meaningfulTags(e){
+  const skip=new Set(['成语','实词','近义辨析','旧格式自动迁移','来源词库相邻语义组','书面','褒义','贬义','中性']);
+  return new Set((e?.tags||[]).filter(x=>x&&!skip.has(x)));
+}
+function semanticDistractorScore(target,cand){
+  if(!target||!cand||target.id===cand.id)return -Infinity;
+  let s=0;
+  const tg=new Set(target.groupIds||[]);
+  const cg=new Set(cand.groupIds||[]);
+  let sameGroup=false;
+  for(const g of tg)if(cg.has(g)){sameGroup=true;break}
+  if(sameGroup)s+=150;
+  const ti=entrySourceIndex(target),ci=entrySourceIndex(cand);
+  if(ti!==null&&ci!==null){
+    const d=Math.abs(ti-ci);
+    if(d===1)s+=70;
+    else if(d<=3)s+=52;
+    else if(d<=6)s+=36;
+    else if(d<=12)s+=22;
+    else if(d<=20)s+=10;
+  }
+  if(target.kind===cand.kind)s+=10;
+  if(target.polarity&&cand.polarity&&target.polarity===cand.polarity)s+=3;
+  const tt=meaningfulTags(target),ct=meaningfulTags(cand);
+  for(const t of tt)if(ct.has(t))s+=8;
+  const tl=[...String(target.term||'')].length,cl=[...String(cand.term||'')].length;
+  if(tl===cl)s+=2;
+  return s;
+}
+function smartDistractors(entry,n=3){
+  const all=(verbalDb?.entries||[]).filter(e=>e.id!==entry.id);
+  const sameGroup=all.filter(e=>(entry.groupIds||[]).some(g=>(e.groupIds||[]).includes(g)));
+  const chosen=[];
+  shuffleV([...sameGroup]).forEach(e=>{if(chosen.length<n&&!chosen.some(x=>x.id===e.id))chosen.push(e)});
+  if(chosen.length<n){
+    const ranked=all.filter(e=>!chosen.some(x=>x.id===e.id))
+      .map(e=>({e,score:semanticDistractorScore(entry,e)}))
+      .sort((a,b)=>b.score-a.score);
+    // Randomize within the strongest semantic neighborhood instead of always taking fixed top-3.
+    const top=ranked.slice(0,Math.max(10,n*4));
+    while(chosen.length<n&&top.length){
+      const weights=top.map((x,i)=>Math.max(1,x.score+16)/(1+i*0.06));
+      const total=weights.reduce((a,b)=>a+b,0);
+      let r=Math.random()*total,idx=0;
+      for(;idx<weights.length-1;idx++){r-=weights[idx];if(r<=0)break}
+      const pick=top.splice(idx,1)[0].e;
+      if(!chosen.some(x=>x.id===pick.id))chosen.push(pick);
+    }
+  }
+  if(chosen.length<n){
+    shuffleV(all.filter(e=>!chosen.some(x=>x.id===e.id))).slice(0,n-chosen.length).forEach(e=>chosen.push(e));
+  }
+  return chosen.slice(0,n);
+}
+function verbalEntryPriority(e,reviewOnly=false){
+  const s=termState(e.id);
+  let w=1;
+  if((s.attempts||0)===0)w+=4.5;
+  w+=(3-Math.min(3,s.mastery||0))*1.4;
+  w+=Math.min(7,(s.wrong||0)*1.8);
+  if(s.favorite)w+=1.6;
+  if(reviewOnly)w+=Math.min(5,(s.wrong||0)*2.1)+(s.favorite?1.5:0);
+  if((s.mastery||0)>=3&&!(s.wrong||0))w*=0.3;
+  if(verbalRecentKeys.includes('e:'+e.id))w*=0.07;
+  return Math.max(.05,w);
+}
+function verbalQuestionPriority(q){
+  const ids=q.optionIds||[];
+  const answer=termState(q.answerId);
+  let w=1+(3-Math.min(3,answer.mastery||0))*1.5+Math.min(7,(answer.wrong||0)*1.8);
+  if((answer.attempts||0)===0)w+=4;
+  const weak=ids.map(id=>termState(id)).filter(Boolean);
+  if(weak.length)w+=weak.reduce((s,x)=>s+(3-Math.min(3,x.mastery||0))*.22,0);
+  if(isGroupFavorite(q.groupId))w+=1.5;
+  if(verbalRecentKeys.includes('q:'+q.id))w*=0.06;
+  return Math.max(.05,w);
+}
+function weightedPickVerbal(arr,weightFn){
+  if(!arr.length)return null;
+  const weights=arr.map(x=>Math.max(.001,Number(weightFn(x))||.001));
+  const total=weights.reduce((a,b)=>a+b,0);
+  let r=Math.random()*total;
+  for(let i=0;i<arr.length;i++){r-=weights[i];if(r<=0)return arr[i]}
+  return arr[arr.length-1];
+}
+function rememberVerbalKey(key){
+  if(!key)return;
+  verbalRecentKeys=verbalRecentKeys.filter(x=>x!==key);
+  verbalRecentKeys.push(key);
+  if(verbalRecentKeys.length>10)verbalRecentKeys=verbalRecentKeys.slice(-10);
+}
+function pickVerbalEntry(arr,reviewOnly=false){
+  if(!arr.length)return null;
+  const scope=$('verbalScopeFilter')?.value||'all';
+  return weightedPickVerbal(arr,e=>{
+    let w=verbalEntryPriority(e,reviewOnly);
+    if(scope==='unmastered')w*=1+(3-Math.min(3,termState(e.id).mastery||0))*1.5;
+    return w;
+  });
+}
+function pickVerbalQuestion(arr){
+  if(!arr.length)return null;
+  const scope=$('verbalScopeFilter')?.value||'all';
+  return weightedPickVerbal(arr,q=>{
+    let w=verbalQuestionPriority(q);
+    if(scope==='unmastered')w*=1+(3-Math.min(3,termState(q.answerId).mastery||0))*1.5;
+    return w;
+  });
+}
+function prepareVerbalQuestion(q){
+  const x=cloneJson(q);
+  if(Array.isArray(x.optionIds))shuffleV(x.optionIds);
+  return x;
+}
+function meaningQuestion(entry){
+  const distract=smartDistractors(entry,3);
+  const direction=Math.random()<0.52?'termToDefinition':'definitionToTerm';
+  let options,prompt;
+  if(direction==='termToDefinition'){
+    options=shuffleV([{id:entry.id,text:entry.definition},...distract.map(e=>({id:e.id,text:e.definition}))]);
+    prompt=entry.term;
+  }else{
+    options=shuffleV([{id:entry.id,text:entry.term},...distract.map(e=>({id:e.id,text:e.term}))]);
+    prompt=entry.definition;
+  }
+  const sameGroupCount=distract.filter(e=>(entry.groupIds||[]).some(g=>(e.groupIds||[]).includes(g))).length;
+  const nearCount=distract.filter(e=>{
+    const a=entrySourceIndex(entry),b=entrySourceIndex(e);
+    return a!==null&&b!==null&&Math.abs(a-b)<=12;
+  }).length;
+  return{
+    type:'meaning',entryId:entry.id,prompt,options,answerId:entry.id,direction,
+    distractorMeta:{sameGroupCount,nearCount}
+  };
+}
+function reviewQuestion(entry){
+  return meaningQuestion(entry);
+}
+function verbalItemTermIds(item){
+  if(!item)return[];
+  if(item.type==='meaning')return[item.entryId];
+  if(item.answerId)return[item.answerId];
+  return[];
+}
+function renderVerbalEmpty(title,msg){
+  $('verbalQuestionBody').innerHTML=`<div class="emptyReview"><b>${escV(title)}</b>${escV(msg)}<div style="margin-top:14px"><button class="verbalAction" id="verbalEmptyBack">返回词汇模块</button></div></div>`;
+  $('verbalProgressText').textContent='暂无可训练内容';
+  $('verbalEmptyBack').onclick=showVerbalHome;
+}
+function newVerbalItem(){
+  verbalSelected=-1;verbalSubmitted=false;verbalStartedAt=performance.now();
+  if(verbalMode==='study'){renderVerbalStudy();return}
+  if(verbalTask==='meaning'||verbalTask==='review'){
+    const reviewOnly=verbalTask==='review';
+    const pool=filteredVerbalEntries(reviewOnly);
+    if(!pool.length){renderVerbalEmpty(reviewOnly?'暂无待复习词':'当前筛选下没有词条',reviewOnly?'做错、低掌握度或收藏的词会自动进入这里。':'调整筛选条件后再试。');return}
+    const e=pickVerbalEntry(pool,reviewOnly);
+    verbalCurrent=reviewOnly?reviewQuestion(e):meaningQuestion(e);
+    rememberVerbalKey('e:'+e.id);
+  }else{
+    const pool=currentQuestionPool();
+    if(!pool.length){renderVerbalEmpty('当前没有可用题目','正式词库中补充对应题型后即可训练。');return}
+    const q=pickVerbalQuestion(pool);
+    verbalCurrent=prepareVerbalQuestion(q);
+    rememberVerbalKey('q:'+q.id);
+  }
+  renderVerbalPractice();
+}
+function renderVerbalPractice(){
+  const body=$('verbalQuestionBody'),m=verbalEntryMap(),gmap=verbalGroupMap(),q=verbalCurrent;
+  if(!q)return;
+  let badge='',prompt='',options=[];
+  if(q.type==='meaning'){
+    const e=m.get(q.entryId);
+    if(q.direction==='definitionToTerm'){
+      badge=`词义识记 · 释义 → 词语`;
+      prompt=`<div class="verbalPrompt context">${escV(q.prompt)}</div><div style="text-align:center;margin-top:10px">${masteryChipHtml(q.entryId)}</div>`;
+    }else{
+      badge=`词义识记 · 词语 → 释义`;
+      prompt=`<div class="verbalPrompt term">${escV(q.prompt)}</div>`+
+        (e?.pinyin?`<div style="text-align:center;font-size:12px;color:#9ca3af;margin-top:-8px;margin-bottom:8px">${escV(e.pinyin)}</div>`:'')+
+        `<div style="text-align:center">${masteryChipHtml(q.entryId)}</div>`;
+    }
+    options=q.options.map(o=>({id:o.id,text:o.text}));
+  }else{
+    const group=gmap.get(q.groupId);badge=q.type==='contrastChoice'?'近义辨析':'语境选词';
+    prompt=`<div class="verbalPrompt ${q.type==='contextChoice'?'context':''}">${escV(q.stem).replace('____','<u style="text-decoration-thickness:2px;text-underline-offset:4px">____</u>')}</div>`+
+      (group?`<div style="font-size:11px;color:#9ca3af;margin-top:7px">辨析组：${escV(group.title)}</div>`:'');
+    options=(q.optionIds||[]).map(id=>({id,text:m.get(id)?.term||id}));
+  }
+  body.innerHTML=`<div class="verbalBadge">${escV(badge)}</div>${prompt}
+    <div class="verbalOptions">${options.map((o,i)=>`<button class="verbalOption" data-vi="${i}"><span class="verbalLetter">${'ABCD'[i]||i+1}</span><span class="verbalChoiceText">${escV(o.text)}</span></button>`).join('')}</div>
+    <div class="verbalActionRow">
+      <div class="verbalActionLeft"><button class="verbalAction" id="verbalFavorite">${verbalFavoriteLabel()}</button></div>
+      <button class="verbalAction primary" id="verbalSubmit" disabled>提交</button>
+    </div>
+    <div class="verbalFeedback" id="verbalFeedback" hidden></div>`;
+  body.querySelectorAll('.verbalOption').forEach(btn=>btn.onclick=()=>selectVerbalOption(Number(btn.dataset.vi)));
+  $('verbalSubmit').onclick=submitVerbalAnswer;$('verbalFavorite').onclick=toggleVerbalFavoriteCurrent;
+  $('verbalProgressText').textContent=verbalTask==='review'
+    ?`自适应复习 · ${reviewTermIds().length} 个待复习词`
+    :`智能选题 · 错词/未熟练优先 · ${verbalDb.entries.length} 词条`;
+}
+function verbalFavoriteTarget(){
+  if(!verbalCurrent)return null;
+  if(verbalCurrent.type==='meaning')return{kind:'term',id:verbalCurrent.entryId};
+  if(verbalCurrent.groupId)return{kind:'group',id:verbalCurrent.groupId};
+  return verbalCurrent.answerId?{kind:'term',id:verbalCurrent.answerId}:null;
+}
+function verbalFavoriteLabel(){
+  const t=verbalFavoriteTarget();if(!t)return'☆ 收藏';
+  const on=t.kind==='group'?isGroupFavorite(t.id):termState(t.id).favorite;
+  return on?'★ 已收藏':'☆ 收藏';
+}
+function toggleVerbalFavoriteCurrent(){
+  const t=verbalFavoriteTarget();if(!t)return;
+  if(t.kind==='group')toggleGroupFavorite(t.id);else toggleTermFavorite(t.id);
+  if($('verbalFavorite'))$('verbalFavorite').textContent=verbalFavoriteLabel();
+}
+function selectVerbalOption(i){
+  if(verbalSubmitted)return;verbalSelected=i;
+  document.querySelectorAll('#verbalQuestionBody .verbalOption').forEach((b,j)=>b.classList.toggle('selected',i===j));
+  $('verbalSubmit').disabled=false;
+}
+function verbalCorrectIndex(){
+  const q=verbalCurrent;if(!q)return-1;
+  if(q.type==='meaning')return q.options.findIndex(o=>o.id===q.answerId);
+  return (q.optionIds||[]).indexOf(q.answerId);
+}
+function verbalCompareHtml(correctEntry,selectedEntry){
+  if(!correctEntry||!selectedEntry||correctEntry.id===selectedEntry.id)return'';
+  const short=(s,n=110)=>{s=String(s||'').trim();return s.length>n?s.slice(0,n-1)+'…':s||'—'};
+  const cFocus=correctEntry.focus||correctEntry.coreMeaning||correctEntry.definition;
+  const sFocus=selectedEntry.focus||selectedEntry.coreMeaning||selectedEntry.definition;
+  const cPit=(correctEntry.pitfalls||[]).join('；')||'—';
+  const sPit=(selectedEntry.pitfalls||[]).join('；')||'—';
+  return `<div class="verbalCompare">
+    <div class="verbalCompareHead"><div>对照</div><div class="right">✓ ${escV(correctEntry.term)}</div><div class="wrong">你选：${escV(selectedEntry.term)}</div></div>
+    <div class="verbalCompareRow"><div class="label">核心区别</div><div class="value">${escV(short(cFocus))}</div><div class="value">${escV(short(sFocus))}</div></div>
+    <div class="verbalCompareRow"><div class="label">易错提示</div><div class="value">${escV(short(cPit))}</div><div class="value">${escV(short(sPit))}</div></div>
+  </div>`;
+}
+
+function submitVerbalAnswer(){
+  if(verbalSubmitted||verbalSelected<0)return;
+  verbalSubmitted=true;
+  const ci=verbalCorrectIndex(),correct=verbalSelected===ci,elapsed=(performance.now()-verbalStartedAt)/1000;
+  document.querySelectorAll('#verbalQuestionBody .verbalOption').forEach((b,j)=>{
+    b.disabled=true;if(j===ci)b.classList.add('correct');if(j===verbalSelected&&!correct)b.classList.add('wrong');
+  });
+  const q=verbalCurrent,m=verbalEntryMap(),g=verbalGroupMap().get(q.groupId);
+  const answerId=q.answerId||(q.type==='meaning'?q.entryId:null);
+  let selectedId=null;
+  if(q.type==='meaning')selectedId=q.options?.[verbalSelected]?.id||null;
+  else selectedId=q.optionIds?.[verbalSelected]||null;
+  const touched=correct?[answerId]:[answerId,selectedId];
+  updateTermResult(touched.filter(Boolean),correct,elapsed);
+  verbalLastAnswerId=answerId;
+  const correctEntry=m.get(answerId),selectedEntry=m.get(selectedId);
+  let explanation='';
+  if(q.type==='meaning'){
+    const e=m.get(q.entryId);
+    explanation=`<b>${escV(e.term)}：</b>${escV(e.definition)}`+
+      (e.focus?`<br><b>侧重点：</b>${escV(e.focus)}`:'')+
+      (e.pitfalls?.length?`<br><b>易错：</b>${escV(e.pitfalls.join('；'))}`:'');
+  }else{
+    explanation=escV(q.explanation||'');
+  }
+  const compare=!correct?verbalCompareHtml(correctEntry,selectedEntry):'';
+  let mechanism='';
+  if(q.type==='meaning'&&q.distractorMeta){
+    const bits=[];
+    if(q.distractorMeta.sameGroupCount)bits.push(`${q.distractorMeta.sameGroupCount} 个同辨析组干扰`);
+    if(q.distractorMeta.nearCount)bits.push(`${q.distractorMeta.nearCount} 个原词库语义近邻`);
+    if(bits.length)mechanism=`<div class="verbalMechanismNote">本题智能干扰：${bits.join(' · ')}</div>`;
+  }
+  $('verbalFeedback').hidden=false;
+  $('verbalFeedback').innerHTML=`<div class="verbalFeedbackHead ${correct?'ok':'bad'}">${correct?'✓ 回答正确':'✗ 需要复习'} <span style="font-size:11px;font-weight:600;color:#9ca3af">· ${elapsed.toFixed(1)} s</span></div>
+    <div class="verbalExplanation">${explanation}</div>
+    ${compare}
+    ${g?.quickRule?`<div class="verbalQuickRule"><b>快速辨析：</b>${escV(g.quickRule)}</div>`:''}
+    ${mechanism}
+    <div class="verbalActionRow"><div>${answerId?masteryChipHtml(answerId):''}</div><button class="verbalAction primary" id="verbalNext">下一题（N）</button></div>`;
+  $('verbalNext').onclick=newVerbalItem;$('verbalSubmit').disabled=true;
+}
+function renderTermStudy(e){
+  const s=termState(e.id);
+  return `<div class="studyReveal">
+    <div class="studyTermHeader"><h2>${escV(e.term)}</h2>${e.pinyin?`<div style="font-size:13px;color:#9ca3af;margin-top:4px">${escV(e.pinyin)}</div>`:''}<div class="kind">${e.kind==='idiom'?'成语':'词语'} · ${masteryChipHtml(e.id)}</div></div>
+    <div class="studySection"><h4>核心释义</h4><p>${escV(e.definition)}</p></div>
+    ${e.focus?`<div class="studySection"><h4>侧重点</h4><p>${escV(e.focus)}</p></div>`:''}
+    ${e.targets?.length?`<div class="studySection"><h4>常见对象</h4><div class="studyTags">${e.targets.map(x=>`<span>${escV(x)}</span>`).join('')}</div></div>`:''}
+    ${e.collocations?.length?`<div class="studySection"><h4>常见搭配</h4><div class="studyTags">${e.collocations.map(x=>`<span>${escV(x)}</span>`).join('')}</div></div>`:''}
+    ${e.pitfalls?.length?`<div class="studySection"><h4>易错点</h4><p>${escV(e.pitfalls.join('；'))}</p></div>`:''}
+    <div class="verbalActionRow">
+      <div class="verbalActionLeft">
+        <button class="verbalAction" data-rate="1">模糊</button>
+        <button class="verbalAction" data-rate="2">基本掌握</button>
+        <button class="verbalAction" data-rate="3">熟练</button>
+        <button class="verbalAction" id="verbalStudyFav">${s.favorite?'★ 已收藏':'☆ 收藏'}</button>
+      </div>
+      <button class="verbalAction primary" id="verbalStudyNext">下一条</button>
+    </div>
+  </div>`;
+}
+function renderGroupStudy(g){
+  const em=verbalEntryMap();
+  const dimensions=(g.dimensions||[]);
+  let table='';
+  if(dimensions.length){
+    table=`<table class="contrastTable"><thead><tr><th>词语</th>${dimensions.map(d=>`<th>${escV(d.name)}</th>`).join('')}</tr></thead><tbody>`+
+      g.memberIds.map(id=>`<tr><td>${escV(em.get(id)?.term||id)}</td>${dimensions.map(d=>`<td>${escV(d.notes?.[id]||'—')}</td>`).join('')}</tr>`).join('')+`</tbody></table>`;
+  }
+  return `<div class="studyReveal">
+    <div class="verbalBadge">近义辨析卡</div>
+    <div class="verbalPrompt">${escV(g.title)}</div>
+    <div class="studySection"><h4>核心区别</h4><p>${escV(g.summary||'')}</p></div>
+    <div class="verbalQuickRule"><b>快速辨析：</b>${escV(g.quickRule||'')}</div>
+    ${table}
+    ${g.commonTraps?.length?`<div class="studySection"><h4>常见陷阱</h4><p>${escV(g.commonTraps.join('；'))}</p></div>`:''}
+    <div class="verbalActionRow"><button class="verbalAction" id="verbalStudyFav">${isGroupFavorite(g.id)?'★ 已收藏':'☆ 收藏'}</button><button class="verbalAction primary" id="verbalStudyNext">下一组</button></div>
+  </div>`;
+}
+function renderQuestionStudy(q){
+  const em=verbalEntryMap(),g=verbalGroupMap().get(q.groupId);
+  return `<div class="studyReveal">
+    <div class="verbalBadge">${q.type==='contextChoice'?'语境示例':'辨析示例'}</div>
+    <div class="verbalPrompt context">${escV(q.stem).replace('____','<u>____</u>')}</div>
+    <div class="studySection"><h4>正确答案</h4><p><b>${escV(em.get(q.answerId)?.term||q.answerId)}</b></p></div>
+    <div class="studySection"><h4>解析</h4><p>${escV(q.explanation||'')}</p></div>
+    ${g?.quickRule?`<div class="verbalQuickRule"><b>快速辨析：</b>${escV(g.quickRule)}</div>`:''}
+    <div class="verbalActionRow"><button class="verbalAction" id="verbalStudyFav">${q.groupId&&isGroupFavorite(q.groupId)?'★ 已收藏':'☆ 收藏'}</button><button class="verbalAction primary" id="verbalStudyNext">下一条</button></div>
+  </div>`;
+}
+function renderVerbalStudy(){
+  let pool,item;
+  if(verbalTask==='meaning'||verbalTask==='review'){
+    pool=currentTermStudyPool();
+    if(!pool.length){renderVerbalEmpty(verbalTask==='review'?'暂无待复习词':'当前筛选下没有词条','调整筛选或先完成一些练习。');return}
+    verbalStudyIndex=((verbalStudyIndex%pool.length)+pool.length)%pool.length;item=pool[verbalStudyIndex];verbalCurrent={type:'studyTerm',entryId:item.id};
+    $('verbalQuestionBody').innerHTML=renderTermStudy(item);
+    document.querySelectorAll('#verbalQuestionBody [data-rate]').forEach(btn=>btn.onclick=()=>{setTermSelfRating(item.id,Number(btn.dataset.rate));renderVerbalStudy()});
+    $('verbalStudyFav').onclick=()=>{toggleTermFavorite(item.id);renderVerbalStudy()};
+  }else if(verbalTask==='contrast'){
+    pool=currentGroupStudyPool();
+    if(!pool.length){renderVerbalEmpty('当前没有辨析组','导入正式词库后可继续扩充。');return}
+    verbalStudyIndex=((verbalStudyIndex%pool.length)+pool.length)%pool.length;item=pool[verbalStudyIndex];verbalCurrent={type:'studyGroup',groupId:item.id};
+    $('verbalQuestionBody').innerHTML=renderGroupStudy(item);
+    $('verbalStudyFav').onclick=()=>{toggleGroupFavorite(item.id);renderVerbalStudy()};
+  }else{
+    pool=currentQuestionPool();
+    if(!pool.length){renderVerbalEmpty('当前没有语境题','导入正式词库后可继续扩充。');return}
+    verbalStudyIndex=((verbalStudyIndex%pool.length)+pool.length)%pool.length;item=pool[verbalStudyIndex];verbalCurrent=cloneJson(item);
+    $('verbalQuestionBody').innerHTML=renderQuestionStudy(item);
+    $('verbalStudyFav').onclick=()=>{if(item.groupId)toggleGroupFavorite(item.groupId);else if(item.answerId)toggleTermFavorite(item.answerId);renderVerbalStudy()};
+  }
+  $('verbalStudyNext').onclick=()=>{verbalStudyIndex++;renderVerbalStudy()};
+  $('verbalProgressText').textContent=`学习卡 ${verbalStudyIndex+1} / ${pool.length}`;
+}
+function nextVerbalStudy(){if(verbalMode==='study'){verbalStudyIndex++;renderVerbalStudy()}else newVerbalItem()}
+
+function openVerbalDb(){
+  updateVerbalLibraryInfo();$('verbalDbStatus').textContent='';$('verbalDbModal').classList.add('show');$('verbalDbModal').setAttribute('aria-hidden','false');
+}
+function closeVerbalDb(){$('verbalDbModal').classList.remove('show');$('verbalDbModal').setAttribute('aria-hidden','true')}
+function downloadJsonV(obj,name){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},0);
+}
+async function importVerbalDbFile(){
+  const file=$('verbalDbFile').files?.[0];if(!file){$('verbalDbStatus').textContent='请先选择 JSON 文件。';return}
+  try{
+    const db=normalizeVerbalDbPayload(JSON.parse(await file.text()));validateVerbalDb(db);saveVerbalDb(db);
+    $('verbalDbStatus').textContent=`导入成功：${db.entries.length} 词条，${db.contrastGroups.length} 辨析组，${db.questions.length} 道题。`;
+    updateVerbalLibraryInfo();updateVerbalStats();if(!$('verbalTrainerView').hidden)newVerbalItem();
+  }catch(e){$('verbalDbStatus').textContent='导入失败：'+e.message}
+}
+
 const HISTORY_KEY='growthTrainerHistoryV2';
 const STATS_KEY='growthTrainerStats';
 const CUSTOM_KEY='growthTrainerCustomQuestionsV1';
@@ -5197,6 +6113,7 @@ function updateModuleUI(){
 }
 function enterModule(module){
   currentModule=module;
+  $('examHome').hidden=true;$('verbalHome').hidden=true;$('verbalTrainerView').hidden=true;
   $('moduleHome').hidden=true;$('trainerView').hidden=false;
   appMode='choice';classicSource='random';choiceSource='random';
   favoriteSession={type:null,queue:[],index:-1,complete:false};
@@ -5207,6 +6124,7 @@ function enterModule(module){
 }
 function showModuleHome(){
   setFocusMode(false);clearInterval(timerId);timerStarted=false;currentModule=null;
+  $('examHome').hidden=true;$('verbalHome').hidden=true;$('verbalTrainerView').hidden=true;
   $('trainerView').hidden=true;$('moduleHome').hidden=false;
   closeFilterPopover();closeDivFilterPopover();closeBaseFilterPopover();closeShareDiffFilterPopover();closeAverageFilterPopover();closeIntervalFilterPopover();closeAnnualFilterPopover();closeMixFilterPopover();closeTopMenus();window.scrollTo({top:0});
 }
@@ -7840,6 +8758,19 @@ $('clearHistory').onclick=()=>{
 
 /* 快捷键：输入框中不抢占数字键；Enter 可直接提交。 */
 document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('verbalDbModal').classList.contains('show')){closeVerbalDb();return}
+  if(!$('verbalTrainerView').hidden){
+    const editable=['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName);
+    if(e.key==='Escape'){closeVerbalDb();return}
+    if(!editable&&verbalMode==='practice'&&!verbalSubmitted){
+      const vm={'1':0,'2':1,'3':2,'4':3,'a':0,'A':0,'b':1,'B':1,'c':2,'C':2,'d':3,'D':3};
+      if(Object.prototype.hasOwnProperty.call(vm,e.key)){e.preventDefault();selectVerbalOption(vm[e.key]);return}
+      if(e.key==='Enter'&&verbalSelected>=0){e.preventDefault();submitVerbalAnswer();return}
+    }
+    if(!editable&&verbalMode==='practice'&&verbalSubmitted&&(e.key==='n'||e.key==='N')){e.preventDefault();newVerbalItem();return}
+    if(!editable&&verbalMode==='study'&&(e.key==='n'||e.key==='N'||e.key==='Enter')){e.preventDefault();nextVerbalStudy();return}
+    return;
+  }
   if(e.key==='Escape'){closeLibrary();closeData();closeFilterPopover();closeDivFilterPopover();closeBaseFilterPopover();closeShareDiffFilterPopover();closeAverageFilterPopover();closeIntervalFilterPopover();closeAnnualFilterPopover();closeMixFilterPopover();setFocusMode(false);return}
   if($('libraryModal').classList.contains('show')||$('dataModal').classList.contains('show'))return;
 
@@ -7891,8 +8822,37 @@ document.addEventListener('keydown',e=>{
   }
 });
 
+verbalDb=cloneJson(DEMO_VOCAB_DB);verbalDbSource='demo';verbalDbLoadMessage='初始化';
 showS();updateHistoryCount();updateCustomCount();updateFilterLabel();updateDivFilterLabel();updateBaseFilterLabel();updateShareDiffFilterLabel();updateAverageFilterLabel();updateIntervalFilterLabel();updateAnnualFilterLabel();updateMixFilterLabel();
+updateVerbalStats();updateVerbalLibraryInfo();initVerbalDb();
 appMode='choice';classicSource='random';choiceSource='random';
+$('enterDataSubject').onclick=enterDataSubject;
+$('enterVerbalSubject').onclick=showVerbalHome;
+$('backSubjectFromData').onclick=showExamHome;
+$('backSubjectFromVerbal').onclick=showExamHome;
+document.querySelectorAll('[data-verbal-task]').forEach(b=>b.onclick=()=>enterVerbalTask(b.dataset.verbalTask));
+$('backVerbalHome').onclick=showVerbalHome;
+$('verbalPracticeMode').onclick=()=>setVerbalMode('practice');
+$('verbalStudyMode').onclick=()=>setVerbalMode('study');
+$('verbalKindFilter').onchange=newVerbalItem;
+$('verbalScopeFilter').onchange=newVerbalItem;
+$('openVerbalDb').onclick=openVerbalDb;
+$('closeVerbalDb').onclick=closeVerbalDb;
+$('verbalDbModal').onclick=e=>{if(e.target===$('verbalDbModal'))closeVerbalDb()};
+$('exportVerbalDb').onclick=()=>downloadJsonV(verbalDb,'verbal_vocab_library.json');
+$('restoreDemoDb').onclick=()=>{
+  if(confirm('恢复示例词库？当前导入的词库将被替换，但学习记录会保留。')){
+    vStoreRemove(VERBAL_DB_KEY);verbalDb=cloneJson(DEMO_VOCAB_DB);verbalDbSource='demo';verbalDbLoadMessage='手动恢复示例';updateVerbalLibraryInfo();updateVerbalStats();
+    $('verbalDbStatus').textContent='已恢复示例词库。刷新页面后仍会优先尝试 data/verbal_vocab.json。';if(!$('verbalTrainerView').hidden)newVerbalItem();
+  }
+};
+$('importVerbalDb').onclick=importVerbalDbFile;
+$('clearVerbalProgress').onclick=()=>{
+  if(confirm('清空言语词汇的学习记录、错词、掌握度和收藏？词库本身不会删除。')){
+    vStoreRemove(VERBAL_PROGRESS_KEY);updateVerbalStats();showVerbalHome();
+  }
+};
+
 $('enterGrowthModule').onclick=()=>enterModule('growth');
 $('enterDivisionModule').onclick=()=>enterModule('division');
 $('enterBaseModule').onclick=()=>enterModule('base');
@@ -7911,7 +8871,7 @@ $('enterIntervalModule').onclick=()=>{
 $('enterMixModule').onclick=()=>enterModule('mix');
 $('enterBasicModule').onclick=()=>{ $('basicTask').value='fraction'; enterModule('basic'); };
 $('backModules').onclick=showModuleHome;
-$('trainerView').hidden=true;$('moduleHome').hidden=false;
+$('trainerView').hidden=true;$('moduleHome').hidden=true;$('verbalHome').hidden=true;$('verbalTrainerView').hidden=true;$('examHome').hidden=false;
 updateClassicSourceUI();updateChoiceSourceUI();updateFavoriteSessionUI();updateMobileActions();
 loadRemoteCustomQuestions();
 </script>
