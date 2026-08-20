@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>行测专项训练 V6.8 Preview</title>
+<title>行测专项训练 V7.0 Preview</title>
 <style>
 :root{
   --bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#e5e7eb;
@@ -910,7 +910,7 @@ body.library-modal-open{
 }
 
 
-/* ========================= V6.8 Preview · 行测专项 / 言语理解 ========================= */
+/* ========================= V7.0 Preview · 行测专项 / 言语理解 ========================= */
 .examHome,.verbalHome{padding:34px 20px 42px;max-width:1120px;margin:0 auto}
 .examHero,.verbalHomeHead{margin-bottom:22px}
 .examEyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#7c3aed;text-transform:uppercase;margin-bottom:7px}
@@ -967,6 +967,20 @@ body.library-modal-open{
 .verbalCompareRow{display:grid;grid-template-columns:92px 1fr 1fr;border-bottom:1px solid #f1f5f9}.verbalCompareRow:last-child{border-bottom:0}
 .verbalCompareRow .label{font-weight:800;color:#9ca3af;background:#fafafa}
 .verbalCompareRow .value{color:#374151}
+.verbalAnalysisBox{margin-top:12px;border:1px solid #e5e7eb;border-radius:13px;overflow:hidden;background:#fff}
+.verbalAnalysisTitle{padding:9px 11px;font-size:11px;font-weight:900;color:#374151;background:#f8fafc;border-bottom:1px solid #e5e7eb}
+.verbalReason{padding:10px 11px;font-size:12px;line-height:1.7;color:#374151;border-bottom:1px solid #f1f5f9}
+.verbalMeaningHead,.verbalMeaningRow{display:grid;grid-template-columns:34px minmax(90px,150px) 1fr}
+.verbalMeaningHead{background:#fafafa;border-bottom:1px solid #f1f5f9}
+.verbalMeaningHead div{padding:7px 9px;font-size:9px;font-weight:850;color:#9ca3af}
+.verbalMeaningRow{border-bottom:1px solid #f1f5f9}
+.verbalMeaningRow:last-child{border-bottom:0}
+.verbalMeaningRow.correct{background:#f0fdf4}
+.verbalMeaningRow div{padding:8px 9px;font-size:11px;line-height:1.55;color:#475569}
+.verbalMeaningRow .letter{font-weight:950;color:#64748b}
+.verbalMeaningRow.correct .letter{color:#15803d}
+.verbalMeaningRow .optionText{font-weight:800;color:#334155}
+.verbalAnalysisNote{padding:8px 10px;font-size:9px;line-height:1.55;color:#9ca3af;background:#fafafa;border-top:1px solid #f1f5f9}
 .verbalMechanismNote{margin-top:10px;font-size:10px;color:#94a3b8;line-height:1.55}
 .semanticGroupBox{margin-top:11px;padding:11px 12px;border:1px solid #e0e7ff;background:#f8faff;border-radius:12px}
 .semanticGroupTitle{font-size:12px;font-weight:850;color:#3730a3}
@@ -990,7 +1004,7 @@ body.library-modal-open{
 @media(max-width:720px){.subjectGrid,.verbalGrid{grid-template-columns:1fr}.verbalTopbar{flex-direction:column}.verbalStats{grid-template-columns:repeat(2,1fr)}.verbalQuestion{padding:17px}.verbalPrompt.term{font-size:29px}}
 
 
-/* ========================= V6.8 Preview · 常识判断 ========================= */
+/* ========================= V7.0 Preview · 常识判断 ========================= */
 .commonHome,.commonTrainer{max-width:980px;margin:0 auto}
 .commonHomeHead{padding:8px 0 20px}.commonHomeTitle{font-size:26px;font-weight:950;color:#111827}.commonHomeVersion{font-size:10px;background:#fff7ed;color:#c2410c;border-radius:999px;padding:4px 7px;vertical-align:middle}
 .commonHomeSub{font-size:12px;color:#6b7280;margin-top:7px;line-height:1.6}
@@ -1022,7 +1036,7 @@ body.library-modal-open{
 <section class="examHome" id="examHome">
   <div class="examHero">
     <div class="examEyebrow">Civil Service Aptitude Training</div>
-    <div class="examTitle">行测专项训练 <span class="previewPill">V6.8 Preview</span></div>
+    <div class="examTitle">行测专项训练 <span class="previewPill">V7.0 Preview</span></div>
     <div class="examSub">资料分析保留 V5.9 稳定内核；言语理解与常识判断均采用独立 JSON 题源加载，学习记录与题库内容分离。</div>
   </div>
   <div class="subjectGrid">
@@ -1201,6 +1215,7 @@ body.library-modal-open{
       <select class="verbalSelect" id="verbalContextOriginFilter" hidden>
         <option value="all">全部语境</option>
         <option value="exam">只练真题</option>
+        <option value="peopleDaily">人民日报原句</option>
         <option value="training">训练题（语境+搭配）</option>
       </select>
     </div>
@@ -1232,7 +1247,7 @@ body.library-modal-open{
     </div>
     <div class="verbalDbBlock">
       <h3>导入正式词库</h3>
-      <p>支持 V1–V1.4 结构，也兼容原来的 word/pinyin/explanation 数组格式；导入前会统一规范化并校验 ID、组成员、真题选项和题目答案关系。</p>
+      <p>支持 V1–V1.6 结构，也兼容原来的 word/pinyin/explanation 数组格式；导入前会统一规范化并校验 ID、组成员、真题选项和题目答案关系。</p>
       <input id="verbalDbFile" type="file" accept=".json,application/json" style="margin-top:10px">
       <div class="verbalDbActions"><button class="verbalAction primary" id="importVerbalDb">导入并使用</button></div>
       <div class="verbalDbStatus" id="verbalDbStatus"></div>
@@ -2319,8 +2334,8 @@ body.library-modal-open{
 </div>
 <script>
 
-/* ========================= V6.8 Preview · VERBAL VOCAB ========================= */
-const DEMO_VOCAB_DB={"schemaVersion":"1.0","metadata":{"name":"行测言语理解示例词库","description":"V6.8 Preview 示例数据，仅用于验证词义识记、近义辨析、语境选词和易错复习流程。","language":"zh-CN","updatedAt":"2026-08-20","notes":"示例词库后续可由正式 JSON 直接替换。"},"entries":[{"id":"w_ezhi","term":"遏制","kind":"word","definition":"制止、控制某种事物的发展势头，使其受到约束。","coreMeaning":"控制发展势头","focus":"强调控制、约束某种正在发展或蔓延的趋势。","targets":["势头","趋势","上涨","蔓延","污染"],"polarity":"中性偏负面对象","register":["书面","通用"],"collocations":["遏制上涨势头","遏制污染蔓延","遏制风险扩散"],"pitfalls":["常与“遏止”混淆；“遏制”更突出控制发展势头。"],"synonymIds":["w_ezhi_stop","w_yizhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析","逻辑填空"],"source":{"title":"","page":"","note":""}},{"id":"w_ezhi_stop","term":"遏止","kind":"word","definition":"阻止、使停止。","coreMeaning":"阻止并使之停止","focus":"强调阻止某种行为、现象继续发生。","targets":["行为","现象","事态"],"polarity":"中性偏负面对象","register":["书面"],"collocations":["遏止事态恶化","遏止不良现象"],"pitfalls":["比“遏制”更突出“止住”的结果。"],"synonymIds":["w_ezhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_yizhi","term":"抑制","kind":"word","definition":"压下去、控制住，使程度或活动受到限制。","coreMeaning":"压低或限制","focus":"常强调使某种活动、情绪、增长或反应减弱。","targets":["情绪","冲动","增长","反应","活性"],"polarity":"中性","register":["书面","通用"],"collocations":["抑制冲动","抑制需求","抑制增长"],"pitfalls":["不一定意味着完全停止，更强调减弱或压制。"],"synonymIds":["w_ezhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhizhi","term":"制止","kind":"word","definition":"强迫使停止；不允许继续。","coreMeaning":"使正在发生的行为停止","focus":"常直接作用于具体行为或行动。","targets":["违法行为","争执","冲突","行动"],"polarity":"中性","register":["通用"],"collocations":["制止违法行为","及时制止冲突"],"pitfalls":["对象通常更具体，不强调长期发展趋势。"],"synonymIds":["w_ezhi_stop"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo1","term":"推脱","kind":"word","definition":"推卸、开脱，多指把责任等推开。","coreMeaning":"推卸责任","focus":"对象常是责任、过错、义务等。","targets":["责任","过错","义务"],"polarity":"贬义","register":["通用"],"collocations":["推脱责任","百般推脱"],"pitfalls":["不要与“推托”混为一谈；“推托”更偏借故拒绝。"],"synonymIds":["w_tuituo2"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo2","term":"推托","kind":"word","definition":"借故拒绝或推辞。","coreMeaning":"借故推辞","focus":"强调找理由拒绝请求、安排或事务。","targets":["邀请","事务","请求","安排"],"polarity":"中性偏负面","register":["通用"],"collocations":["借故推托","推托不去"],"pitfalls":["“托”侧重托辞、借口；不是主要指推卸责任。"],"synonymIds":["w_tuituo1"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi","term":"质疑","kind":"word","definition":"提出疑问，表示怀疑。","coreMeaning":"提出疑问","focus":"可以直接带被怀疑、被追问的对象。","targets":["结论","观点","数据","做法"],"polarity":"中性","register":["书面","通用"],"collocations":["提出质疑","质疑结论","受到质疑"],"pitfalls":["“质疑”本身就是提出疑问，使用范围比“置疑”更常见。"],"synonymIds":["w_zhiyi2"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi2","term":"置疑","kind":"word","definition":"表示怀疑，多用于否定式。","coreMeaning":"加以怀疑","focus":"常见于“不容置疑”“无可置疑”等固定结构。","targets":["事实","结论","权威性"],"polarity":"中性","register":["书面"],"collocations":["不容置疑","无可置疑"],"pitfalls":["通常不说“提出置疑”；常见固定搭配是否定式。"],"synonymIds":["w_zhiyi"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析","固定搭配"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang","term":"不负众望","kind":"idiom","definition":"不辜负大家的期望。","coreMeaning":"没有辜负期待","focus":"结果符合或达到众人的期待。","targets":["人","团队","表现","成果"],"polarity":"褒义","register":["书面","通用"],"collocations":["不负众望，取得佳绩"],"pitfalls":["与“不孚众望”仅一字之差，意思相反。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang2"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang2","term":"不孚众望","kind":"idiom","definition":"不能使大家信服，未能符合众人的期望。","coreMeaning":"没有达到众人期待","focus":"“孚”有使人信服之意，整体表示未获信任或未达期待。","targets":["人","团队","表现"],"polarity":"贬义","register":["书面"],"collocations":["表现不佳，不孚众望"],"pitfalls":["不能误当成“不负众望”的同义词。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shoudangqichong","term":"首当其冲","kind":"idiom","definition":"最先受到攻击或遭受灾难、压力等。","coreMeaning":"最先受到冲击","focus":"强调最先承受不利影响，不是“第一个冲上去”。","targets":["地区","行业","群体","对象"],"polarity":"多用于不利情境","register":["书面","通用"],"collocations":["首当其冲受到影响","在冲击中首当其冲"],"pitfalls":["不能理解为“第一个冲在前面”。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shouquyizhi","term":"首屈一指","kind":"idiom","definition":"居第一位，数得上第一。","coreMeaning":"名列第一","focus":"强调水平、地位、成绩等非常突出。","targets":["人物","机构","水平","成绩"],"polarity":"褒义","register":["书面","通用"],"collocations":["业内首屈一指","技术水平首屈一指"],"pitfalls":["与“首当其冲”含义毫无相近之处。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_fuguang","term":"浮光掠影","kind":"idiom","definition":"像水面的反光和一闪而过的影子；比喻观察不细致、印象不深刻。","coreMeaning":"观察肤浅、印象不深","focus":"偏重认识或观察停留在表面。","targets":["观察","认识","印象","了解"],"polarity":"贬义","register":["书面"],"collocations":["浮光掠影地了解","只留下浮光掠影的印象"],"pitfalls":["与“走马观花”相近，但更突出印象浅、观察不深入。"],"synonymIds":["i_zouma"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"i_zouma","term":"走马观花","kind":"idiom","definition":"比喻粗略地观察事物。","coreMeaning":"快速、粗略地看","focus":"偏重浏览过程快速而不细看。","targets":["参观","浏览","考察","阅读"],"polarity":"中性偏贬","register":["书面","通用"],"collocations":["走马观花地参观","走马观花式调研"],"pitfalls":["更突出“看得快、看得粗”，不等同于专指印象浅。"],"synonymIds":["i_fuguang"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}}],"contrastGroups":[{"id":"g_ezhi","title":"遏制 / 遏止 / 抑制 / 制止","memberIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"summary":"四者都有控制、阻止之意，但关注点和常见对象不同。","quickRule":"趋势看“遏制”，止住看“遏止”，减弱看“抑制”，具体行为看“制止”。","dimensions":[{"name":"侧重点","notes":{"w_ezhi":"控制发展势头","w_ezhi_stop":"阻止并使停止","w_yizhi":"压低、减弱","w_zhizhi":"使具体行为停止"}},{"name":"典型对象","notes":{"w_ezhi":"趋势、上涨、蔓延","w_ezhi_stop":"事态、现象","w_yizhi":"情绪、需求、反应","w_zhizhi":"违法行为、冲突"}}],"commonTraps":["看到“增长/蔓延势头”时，通常优先考虑“遏制”。"],"tags":["近义辨析"]},{"id":"g_tuituo","title":"推脱 / 推托","memberIds":["w_tuituo1","w_tuituo2"],"summary":"“推脱”侧重推卸，“推托”侧重借故拒绝。","quickRule":"责任用“推脱”，事情/邀请用“推托”。","dimensions":[{"name":"对象","notes":{"w_tuituo1":"责任、过错、义务","w_tuituo2":"邀请、事务、请求"}}],"commonTraps":["“推脱责任”是高频固定搭配。"],"tags":["近义辨析","高频易混"]},{"id":"g_zhiyi","title":"质疑 / 置疑","memberIds":["w_zhiyi","w_zhiyi2"],"summary":"“质疑”是提出疑问；“置疑”常进入否定式固定搭配。","quickRule":"提出疑问用“质疑”，不容怀疑用“不容置疑”。","dimensions":[{"name":"句法习惯","notes":{"w_zhiyi":"可直接说“质疑某结论”","w_zhiyi2":"常见“不容置疑、无可置疑”"}}],"commonTraps":["一般不说“提出置疑”。"],"tags":["近义辨析","固定搭配"]},{"id":"g_bufu","title":"不负众望 / 不孚众望","memberIds":["i_bufuzhongwang","i_bufuzhongwang2"],"summary":"两者只有一字之差，但褒贬相反。","quickRule":"“负”=辜负，所以“不负”=没辜负；“孚”=信服，“不孚”=不能使人信服。","dimensions":[{"name":"意义","notes":{"i_bufuzhongwang":"达到期待，褒义","i_bufuzhongwang2":"未达期待，贬义"}}],"commonTraps":["把“不孚众望”误作褒义。"],"tags":["成语","易错成语"]},{"id":"g_shou","title":"首当其冲 / 首屈一指","memberIds":["i_shoudangqichong","i_shouquyizhi"],"summary":"两词都含“首”，但一个说受冲击，一个说排名第一。","quickRule":"受冲击用“首当其冲”，数第一用“首屈一指”。","dimensions":[{"name":"核心含义","notes":{"i_shoudangqichong":"最先受冲击","i_shouquyizhi":"名列第一"}}],"commonTraps":["“首当其冲”不是“冲在最前面”。"],"tags":["成语","易错成语"]},{"id":"g_fuguang","title":"浮光掠影 / 走马观花","memberIds":["i_fuguang","i_zouma"],"summary":"都可表示观察不深入，但一个偏结果印象浅，一个偏过程看得快。","quickRule":"印象浅看“浮光掠影”，浏览快看“走马观花”。","dimensions":[{"name":"侧重点","notes":{"i_fuguang":"观察肤浅、印象不深","i_zouma":"快速、粗略浏览"}}],"commonTraps":["语境强调“参观时间有限、快速浏览”时更偏“走马观花”。"],"tags":["成语","近义辨析"]}],"questions":[{"id":"q_contrast_01","type":"contrastChoice","groupId":"g_ezhi","stem":"强调“控制某种发展、蔓延的势头”，更准确的是：","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“遏制”更强调控制正在发展或蔓延的趋势；“制止”更偏具体行为，“抑制”强调减弱，“遏止”更突出止住。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_02","type":"contrastChoice","groupId":"g_tuituo","stem":"表示“把本应承担的责任推开、推卸”，应选：","optionIds":["w_tuituo1","w_tuituo2"],"answerId":"w_tuituo1","explanation":"“推脱”常与责任、过错、义务搭配；“推托”主要指借故拒绝。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_03","type":"contrastChoice","groupId":"g_zhiyi","stem":"与“提出疑问、表示怀疑”最直接对应的是：","optionIds":["w_zhiyi","w_zhiyi2"],"answerId":"w_zhiyi","explanation":"“质疑”可以直接表示提出疑问；“置疑”更常见于“不容置疑”等固定搭配。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_04","type":"contrastChoice","groupId":"g_bufu","stem":"表示“没有辜负大家的期望”，应选：","optionIds":["i_bufuzhongwang","i_bufuzhongwang2"],"answerId":"i_bufuzhongwang","explanation":"“不负众望”是没有辜负众人的期望；“不孚众望”表示不能使大家信服或未达期待。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_05","type":"contrastChoice","groupId":"g_shou","stem":"形容某机构在同行中水平突出、可以数得上第一，应选：","optionIds":["i_shoudangqichong","i_shouquyizhi"],"answerId":"i_shouquyizhi","explanation":"“首屈一指”表示居第一位；“首当其冲”表示最先受到冲击。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_06","type":"contrastChoice","groupId":"g_fuguang","stem":"如果语境强调“观察不深入，只留下肤浅印象”，更贴切的是：","optionIds":["i_fuguang","i_zouma"],"answerId":"i_fuguang","explanation":"“浮光掠影”更偏观察肤浅、印象不深；“走马观花”更偏浏览过程快速粗略。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_context_01","type":"contextChoice","groupId":"g_ezhi","stem":"面对部分商品价格过快上涨，有关部门需要及时采取措施，____其上涨势头。","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“上涨势头”强调发展趋势，和“遏制”搭配自然。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_02","type":"contextChoice","groupId":"g_ezhi","stem":"执法人员及时赶到现场，____了正在发生的违法行为。","optionIds":["w_zhizhi","w_ezhi","w_yizhi","w_ezhi_stop"],"answerId":"w_zhizhi","explanation":"对象是具体的“违法行为”，且强调使其停止，“制止”最直接。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_03","type":"contextChoice","groupId":"g_tuituo","stem":"面对工作失误，他没有查找原因，反而一再____责任。","optionIds":["w_tuituo1","w_tuituo2","w_zhiyi","w_ezhi"],"answerId":"w_tuituo1","explanation":"“责任”与“推脱”是典型搭配，表示推卸本应承担的责任。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_04","type":"contextChoice","groupId":"g_zhiyi","stem":"由于样本规模有限，这一结论的可靠性仍受到不少研究者的____。","optionIds":["w_zhiyi","w_zhiyi2","w_yizhi","w_tuituo2"],"answerId":"w_zhiyi","explanation":"“受到质疑”是常见搭配；“置疑”通常出现在“不容置疑”等结构中。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_05","type":"contextChoice","groupId":"g_bufu","stem":"经过数月攻关，团队最终按期完成核心任务，____，赢得了大家的认可。","optionIds":["i_bufuzhongwang","i_bufuzhongwang2","i_shoudangqichong","i_shouquyizhi"],"answerId":"i_bufuzhongwang","explanation":"语境是完成任务、符合大家期待，因此用褒义的“不负众望”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_06","type":"contextChoice","groupId":"g_shou","stem":"极端天气来袭时，地势低洼的沿江地区往往____，最先受到影响。","optionIds":["i_shoudangqichong","i_shouquyizhi","i_fuguang","i_zouma"],"answerId":"i_shoudangqichong","explanation":"“最先受到影响”正对应“首当其冲”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_07","type":"contextChoice","groupId":"g_fuguang","stem":"如果调查只停留在表面材料，难免形成____的认识，无法触及问题实质。","optionIds":["i_fuguang","i_zouma","i_shouquyizhi","i_bufuzhongwang"],"answerId":"i_fuguang","explanation":"这里强调认识停留在表面、印象不深，“浮光掠影”更贴切。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_08","type":"contextChoice","groupId":"g_fuguang","stem":"由于参观时间有限，一行人只能____地浏览各个展厅。","optionIds":["i_zouma","i_fuguang","i_shoudangqichong","i_bufuzhongwang2"],"answerId":"i_zouma","explanation":"语境突出时间有限、浏览很快，“走马观花”更符合过程特征。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}}]};
+/* ========================= V7.0 Preview · VERBAL VOCAB ========================= */
+const DEMO_VOCAB_DB={"schemaVersion":"1.0","metadata":{"name":"行测言语理解示例词库","description":"V7.0 Preview 示例数据，仅用于验证词义识记、近义辨析、语境选词和易错复习流程。","language":"zh-CN","updatedAt":"2026-08-20","notes":"示例词库后续可由正式 JSON 直接替换。"},"entries":[{"id":"w_ezhi","term":"遏制","kind":"word","definition":"制止、控制某种事物的发展势头，使其受到约束。","coreMeaning":"控制发展势头","focus":"强调控制、约束某种正在发展或蔓延的趋势。","targets":["势头","趋势","上涨","蔓延","污染"],"polarity":"中性偏负面对象","register":["书面","通用"],"collocations":["遏制上涨势头","遏制污染蔓延","遏制风险扩散"],"pitfalls":["常与“遏止”混淆；“遏制”更突出控制发展势头。"],"synonymIds":["w_ezhi_stop","w_yizhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析","逻辑填空"],"source":{"title":"","page":"","note":""}},{"id":"w_ezhi_stop","term":"遏止","kind":"word","definition":"阻止、使停止。","coreMeaning":"阻止并使之停止","focus":"强调阻止某种行为、现象继续发生。","targets":["行为","现象","事态"],"polarity":"中性偏负面对象","register":["书面"],"collocations":["遏止事态恶化","遏止不良现象"],"pitfalls":["比“遏制”更突出“止住”的结果。"],"synonymIds":["w_ezhi","w_zhizhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_yizhi","term":"抑制","kind":"word","definition":"压下去、控制住，使程度或活动受到限制。","coreMeaning":"压低或限制","focus":"常强调使某种活动、情绪、增长或反应减弱。","targets":["情绪","冲动","增长","反应","活性"],"polarity":"中性","register":["书面","通用"],"collocations":["抑制冲动","抑制需求","抑制增长"],"pitfalls":["不一定意味着完全停止，更强调减弱或压制。"],"synonymIds":["w_ezhi"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhizhi","term":"制止","kind":"word","definition":"强迫使停止；不允许继续。","coreMeaning":"使正在发生的行为停止","focus":"常直接作用于具体行为或行动。","targets":["违法行为","争执","冲突","行动"],"polarity":"中性","register":["通用"],"collocations":["制止违法行为","及时制止冲突"],"pitfalls":["对象通常更具体，不强调长期发展趋势。"],"synonymIds":["w_ezhi_stop"],"antonymIds":[],"groupIds":["g_ezhi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo1","term":"推脱","kind":"word","definition":"推卸、开脱，多指把责任等推开。","coreMeaning":"推卸责任","focus":"对象常是责任、过错、义务等。","targets":["责任","过错","义务"],"polarity":"贬义","register":["通用"],"collocations":["推脱责任","百般推脱"],"pitfalls":["不要与“推托”混为一谈；“推托”更偏借故拒绝。"],"synonymIds":["w_tuituo2"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_tuituo2","term":"推托","kind":"word","definition":"借故拒绝或推辞。","coreMeaning":"借故推辞","focus":"强调找理由拒绝请求、安排或事务。","targets":["邀请","事务","请求","安排"],"polarity":"中性偏负面","register":["通用"],"collocations":["借故推托","推托不去"],"pitfalls":["“托”侧重托辞、借口；不是主要指推卸责任。"],"synonymIds":["w_tuituo1"],"antonymIds":[],"groupIds":["g_tuituo"],"tags":["近义辨析","高频易混"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi","term":"质疑","kind":"word","definition":"提出疑问，表示怀疑。","coreMeaning":"提出疑问","focus":"可以直接带被怀疑、被追问的对象。","targets":["结论","观点","数据","做法"],"polarity":"中性","register":["书面","通用"],"collocations":["提出质疑","质疑结论","受到质疑"],"pitfalls":["“质疑”本身就是提出疑问，使用范围比“置疑”更常见。"],"synonymIds":["w_zhiyi2"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"w_zhiyi2","term":"置疑","kind":"word","definition":"表示怀疑，多用于否定式。","coreMeaning":"加以怀疑","focus":"常见于“不容置疑”“无可置疑”等固定结构。","targets":["事实","结论","权威性"],"polarity":"中性","register":["书面"],"collocations":["不容置疑","无可置疑"],"pitfalls":["通常不说“提出置疑”；常见固定搭配是否定式。"],"synonymIds":["w_zhiyi"],"antonymIds":[],"groupIds":["g_zhiyi"],"tags":["近义辨析","固定搭配"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang","term":"不负众望","kind":"idiom","definition":"不辜负大家的期望。","coreMeaning":"没有辜负期待","focus":"结果符合或达到众人的期待。","targets":["人","团队","表现","成果"],"polarity":"褒义","register":["书面","通用"],"collocations":["不负众望，取得佳绩"],"pitfalls":["与“不孚众望”仅一字之差，意思相反。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang2"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_bufuzhongwang2","term":"不孚众望","kind":"idiom","definition":"不能使大家信服，未能符合众人的期望。","coreMeaning":"没有达到众人期待","focus":"“孚”有使人信服之意，整体表示未获信任或未达期待。","targets":["人","团队","表现"],"polarity":"贬义","register":["书面"],"collocations":["表现不佳，不孚众望"],"pitfalls":["不能误当成“不负众望”的同义词。"],"synonymIds":[],"antonymIds":["i_bufuzhongwang"],"groupIds":["g_bufu"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shoudangqichong","term":"首当其冲","kind":"idiom","definition":"最先受到攻击或遭受灾难、压力等。","coreMeaning":"最先受到冲击","focus":"强调最先承受不利影响，不是“第一个冲上去”。","targets":["地区","行业","群体","对象"],"polarity":"多用于不利情境","register":["书面","通用"],"collocations":["首当其冲受到影响","在冲击中首当其冲"],"pitfalls":["不能理解为“第一个冲在前面”。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_shouquyizhi","term":"首屈一指","kind":"idiom","definition":"居第一位，数得上第一。","coreMeaning":"名列第一","focus":"强调水平、地位、成绩等非常突出。","targets":["人物","机构","水平","成绩"],"polarity":"褒义","register":["书面","通用"],"collocations":["业内首屈一指","技术水平首屈一指"],"pitfalls":["与“首当其冲”含义毫无相近之处。"],"synonymIds":[],"antonymIds":[],"groupIds":["g_shou"],"tags":["成语","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"i_fuguang","term":"浮光掠影","kind":"idiom","definition":"像水面的反光和一闪而过的影子；比喻观察不细致、印象不深刻。","coreMeaning":"观察肤浅、印象不深","focus":"偏重认识或观察停留在表面。","targets":["观察","认识","印象","了解"],"polarity":"贬义","register":["书面"],"collocations":["浮光掠影地了解","只留下浮光掠影的印象"],"pitfalls":["与“走马观花”相近，但更突出印象浅、观察不深入。"],"synonymIds":["i_zouma"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"i_zouma","term":"走马观花","kind":"idiom","definition":"比喻粗略地观察事物。","coreMeaning":"快速、粗略地看","focus":"偏重浏览过程快速而不细看。","targets":["参观","浏览","考察","阅读"],"polarity":"中性偏贬","register":["书面","通用"],"collocations":["走马观花地参观","走马观花式调研"],"pitfalls":["更突出“看得快、看得粗”，不等同于专指印象浅。"],"synonymIds":["i_fuguang"],"antonymIds":[],"groupIds":["g_fuguang"],"tags":["成语","近义辨析"],"source":{"title":"","page":"","note":""}}],"contrastGroups":[{"id":"g_ezhi","title":"遏制 / 遏止 / 抑制 / 制止","memberIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"summary":"四者都有控制、阻止之意，但关注点和常见对象不同。","quickRule":"趋势看“遏制”，止住看“遏止”，减弱看“抑制”，具体行为看“制止”。","dimensions":[{"name":"侧重点","notes":{"w_ezhi":"控制发展势头","w_ezhi_stop":"阻止并使停止","w_yizhi":"压低、减弱","w_zhizhi":"使具体行为停止"}},{"name":"典型对象","notes":{"w_ezhi":"趋势、上涨、蔓延","w_ezhi_stop":"事态、现象","w_yizhi":"情绪、需求、反应","w_zhizhi":"违法行为、冲突"}}],"commonTraps":["看到“增长/蔓延势头”时，通常优先考虑“遏制”。"],"tags":["近义辨析"]},{"id":"g_tuituo","title":"推脱 / 推托","memberIds":["w_tuituo1","w_tuituo2"],"summary":"“推脱”侧重推卸，“推托”侧重借故拒绝。","quickRule":"责任用“推脱”，事情/邀请用“推托”。","dimensions":[{"name":"对象","notes":{"w_tuituo1":"责任、过错、义务","w_tuituo2":"邀请、事务、请求"}}],"commonTraps":["“推脱责任”是高频固定搭配。"],"tags":["近义辨析","高频易混"]},{"id":"g_zhiyi","title":"质疑 / 置疑","memberIds":["w_zhiyi","w_zhiyi2"],"summary":"“质疑”是提出疑问；“置疑”常进入否定式固定搭配。","quickRule":"提出疑问用“质疑”，不容怀疑用“不容置疑”。","dimensions":[{"name":"句法习惯","notes":{"w_zhiyi":"可直接说“质疑某结论”","w_zhiyi2":"常见“不容置疑、无可置疑”"}}],"commonTraps":["一般不说“提出置疑”。"],"tags":["近义辨析","固定搭配"]},{"id":"g_bufu","title":"不负众望 / 不孚众望","memberIds":["i_bufuzhongwang","i_bufuzhongwang2"],"summary":"两者只有一字之差，但褒贬相反。","quickRule":"“负”=辜负，所以“不负”=没辜负；“孚”=信服，“不孚”=不能使人信服。","dimensions":[{"name":"意义","notes":{"i_bufuzhongwang":"达到期待，褒义","i_bufuzhongwang2":"未达期待，贬义"}}],"commonTraps":["把“不孚众望”误作褒义。"],"tags":["成语","易错成语"]},{"id":"g_shou","title":"首当其冲 / 首屈一指","memberIds":["i_shoudangqichong","i_shouquyizhi"],"summary":"两词都含“首”，但一个说受冲击，一个说排名第一。","quickRule":"受冲击用“首当其冲”，数第一用“首屈一指”。","dimensions":[{"name":"核心含义","notes":{"i_shoudangqichong":"最先受冲击","i_shouquyizhi":"名列第一"}}],"commonTraps":["“首当其冲”不是“冲在最前面”。"],"tags":["成语","易错成语"]},{"id":"g_fuguang","title":"浮光掠影 / 走马观花","memberIds":["i_fuguang","i_zouma"],"summary":"都可表示观察不深入，但一个偏结果印象浅，一个偏过程看得快。","quickRule":"印象浅看“浮光掠影”，浏览快看“走马观花”。","dimensions":[{"name":"侧重点","notes":{"i_fuguang":"观察肤浅、印象不深","i_zouma":"快速、粗略浏览"}}],"commonTraps":["语境强调“参观时间有限、快速浏览”时更偏“走马观花”。"],"tags":["成语","近义辨析"]}],"questions":[{"id":"q_contrast_01","type":"contrastChoice","groupId":"g_ezhi","stem":"强调“控制某种发展、蔓延的势头”，更准确的是：","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“遏制”更强调控制正在发展或蔓延的趋势；“制止”更偏具体行为，“抑制”强调减弱，“遏止”更突出止住。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_02","type":"contrastChoice","groupId":"g_tuituo","stem":"表示“把本应承担的责任推开、推卸”，应选：","optionIds":["w_tuituo1","w_tuituo2"],"answerId":"w_tuituo1","explanation":"“推脱”常与责任、过错、义务搭配；“推托”主要指借故拒绝。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_03","type":"contrastChoice","groupId":"g_zhiyi","stem":"与“提出疑问、表示怀疑”最直接对应的是：","optionIds":["w_zhiyi","w_zhiyi2"],"answerId":"w_zhiyi","explanation":"“质疑”可以直接表示提出疑问；“置疑”更常见于“不容置疑”等固定搭配。","difficulty":1,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_04","type":"contrastChoice","groupId":"g_bufu","stem":"表示“没有辜负大家的期望”，应选：","optionIds":["i_bufuzhongwang","i_bufuzhongwang2"],"answerId":"i_bufuzhongwang","explanation":"“不负众望”是没有辜负众人的期望；“不孚众望”表示不能使大家信服或未达期待。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_05","type":"contrastChoice","groupId":"g_shou","stem":"形容某机构在同行中水平突出、可以数得上第一，应选：","optionIds":["i_shoudangqichong","i_shouquyizhi"],"answerId":"i_shouquyizhi","explanation":"“首屈一指”表示居第一位；“首当其冲”表示最先受到冲击。","difficulty":1,"tags":["易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_contrast_06","type":"contrastChoice","groupId":"g_fuguang","stem":"如果语境强调“观察不深入，只留下肤浅印象”，更贴切的是：","optionIds":["i_fuguang","i_zouma"],"answerId":"i_fuguang","explanation":"“浮光掠影”更偏观察肤浅、印象不深；“走马观花”更偏浏览过程快速粗略。","difficulty":2,"tags":["近义辨析"],"source":{"title":"","page":"","note":""}},{"id":"q_context_01","type":"contextChoice","groupId":"g_ezhi","stem":"面对部分商品价格过快上涨，有关部门需要及时采取措施，____其上涨势头。","optionIds":["w_ezhi","w_ezhi_stop","w_yizhi","w_zhizhi"],"answerId":"w_ezhi","explanation":"“上涨势头”强调发展趋势，和“遏制”搭配自然。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_02","type":"contextChoice","groupId":"g_ezhi","stem":"执法人员及时赶到现场，____了正在发生的违法行为。","optionIds":["w_zhizhi","w_ezhi","w_yizhi","w_ezhi_stop"],"answerId":"w_zhizhi","explanation":"对象是具体的“违法行为”，且强调使其停止，“制止”最直接。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_03","type":"contextChoice","groupId":"g_tuituo","stem":"面对工作失误，他没有查找原因，反而一再____责任。","optionIds":["w_tuituo1","w_tuituo2","w_zhiyi","w_ezhi"],"answerId":"w_tuituo1","explanation":"“责任”与“推脱”是典型搭配，表示推卸本应承担的责任。","difficulty":1,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_04","type":"contextChoice","groupId":"g_zhiyi","stem":"由于样本规模有限，这一结论的可靠性仍受到不少研究者的____。","optionIds":["w_zhiyi","w_zhiyi2","w_yizhi","w_tuituo2"],"answerId":"w_zhiyi","explanation":"“受到质疑”是常见搭配；“置疑”通常出现在“不容置疑”等结构中。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_05","type":"contextChoice","groupId":"g_bufu","stem":"经过数月攻关，团队最终按期完成核心任务，____，赢得了大家的认可。","optionIds":["i_bufuzhongwang","i_bufuzhongwang2","i_shoudangqichong","i_shouquyizhi"],"answerId":"i_bufuzhongwang","explanation":"语境是完成任务、符合大家期待，因此用褒义的“不负众望”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_06","type":"contextChoice","groupId":"g_shou","stem":"极端天气来袭时，地势低洼的沿江地区往往____，最先受到影响。","optionIds":["i_shoudangqichong","i_shouquyizhi","i_fuguang","i_zouma"],"answerId":"i_shoudangqichong","explanation":"“最先受到影响”正对应“首当其冲”。","difficulty":1,"tags":["语境选词","易错成语"],"source":{"title":"","page":"","note":""}},{"id":"q_context_07","type":"contextChoice","groupId":"g_fuguang","stem":"如果调查只停留在表面材料，难免形成____的认识，无法触及问题实质。","optionIds":["i_fuguang","i_zouma","i_shouquyizhi","i_bufuzhongwang"],"answerId":"i_fuguang","explanation":"这里强调认识停留在表面、印象不深，“浮光掠影”更贴切。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}},{"id":"q_context_08","type":"contextChoice","groupId":"g_fuguang","stem":"由于参观时间有限，一行人只能____地浏览各个展厅。","optionIds":["i_zouma","i_fuguang","i_shoudangqichong","i_bufuzhongwang2"],"answerId":"i_zouma","explanation":"语境突出时间有限、浏览很快，“走马观花”更符合过程特征。","difficulty":2,"tags":["语境选词"],"source":{"title":"","page":"","note":""}}]};
 const VERBAL_DB_KEY='verbalVocabLibraryV1';
 const VERBAL_PROGRESS_KEY='verbalVocabProgressV1';
 const VERBAL_REMOTE_PATH='./data/verbal_vocab.json';
@@ -2435,6 +2450,7 @@ function normalizeVerbalDbPayload(payload){
     tags:Array.isArray(e?.tags)?e.tags:[],
     source:e?.source&&typeof e.source==='object'?e.source:{title:'',page:'',note:''},
     sourceRefs:Array.isArray(e?.sourceRefs)?e.sourceRefs:[],
+    sourceExamples:Array.isArray(e?.sourceExamples)?e.sourceExamples:[],
     definitionOrigin:String(e?.definitionOrigin||'original')
   }));
   return db;
@@ -2478,18 +2494,19 @@ function validateVerbalDb(db){
       for(const id of q.optionIds)if(!ids.has(id))throw new Error(`题目 ${q.id} 引用了不存在的词条 ${id}`);
       if(!q.optionIds.includes(q.answerId))throw new Error(`题目 ${q.id} 的 answerId 不在 optionIds 中`);
       if(q.semanticGroupId && !sgids.has(q.semanticGroupId))throw new Error(`题目 ${q.id} 引用了不存在的 semanticGroupId`);
-    }else if(q.type==='examContextChoice'){
-      if(!Array.isArray(q.optionTexts)||q.optionTexts.length<2||q.optionTexts.length>4)throw new Error(`真题 ${q.id} 缺少有效 optionTexts`);
-      if(!Number.isInteger(q.answerIndex)||q.answerIndex<0||q.answerIndex>=q.optionTexts.length)throw new Error(`真题 ${q.id} 的 answerIndex 无效`);
+    }else if(q.type==='examContextChoice'||q.type==='sourceContextChoice'){
+      const label=q.type==='examContextChoice'?'真题':'来源语境题';
+      if(!Array.isArray(q.optionTexts)||q.optionTexts.length<2||q.optionTexts.length>4)throw new Error(`${label} ${q.id} 缺少有效 optionTexts`);
+      if(!Number.isInteger(q.answerIndex)||q.answerIndex<0||q.answerIndex>=q.optionTexts.length)throw new Error(`${label} ${q.id} 的 answerIndex 无效`);
       if(q.optionTermIds!==undefined){
-        if(!Array.isArray(q.optionTermIds)||q.optionTermIds.length!==q.optionTexts.length)throw new Error(`真题 ${q.id} 的 optionTermIds 与选项数不一致`);
+        if(!Array.isArray(q.optionTermIds)||q.optionTermIds.length!==q.optionTexts.length)throw new Error(`${label} ${q.id} 的 optionTermIds 与选项数不一致`);
         for(const row of q.optionTermIds){
-          if(!Array.isArray(row))throw new Error(`真题 ${q.id} 的 optionTermIds 行格式无效`);
-          for(const id of row)if(id!=null&&!ids.has(id))throw new Error(`真题 ${q.id} 引用了不存在的词条 ${id}`);
+          if(!Array.isArray(row))throw new Error(`${label} ${q.id} 的 optionTermIds 行格式无效`);
+          for(const id of row)if(id!=null&&!ids.has(id))throw new Error(`${label} ${q.id} 引用了不存在的词条 ${id}`);
         }
       }
-      for(const id of (q.correctTermIds||[]))if(id!=null&&!ids.has(id))throw new Error(`真题 ${q.id} 的 correctTermIds 引用了不存在的词条 ${id}`);
-      for(const id of (q.focusTermIds||[]))if(id!=null&&!ids.has(id))throw new Error(`真题 ${q.id} 的 focusTermIds 引用了不存在的词条 ${id}`);
+      for(const id of (q.correctTermIds||[]))if(id!=null&&!ids.has(id))throw new Error(`${label} ${q.id} 的 correctTermIds 引用了不存在的词条 ${id}`);
+      for(const id of (q.focusTermIds||[]))if(id!=null&&!ids.has(id))throw new Error(`${label} ${q.id} 的 focusTermIds 引用了不存在的词条 ${id}`);
     }
   }
   return true;
@@ -2655,7 +2672,7 @@ function updateVerbalLibraryInfo(){
   const ready=(verbalDb.entries||[]).filter(e=>e.quizReady!==false).length;
   $('verbalLibraryInfo').innerHTML=`当前：<b>${escV(name)}</b><span class="verbalSourceBadge">${escV(sourceText)}</span> · ${verbalDb.entries.length} 词条 · ${verbalDb.contrastGroups.length} 精辨组 · ${(verbalDb.semanticGroups||[]).length} 语义组 · ${verbalDb.questions.length} 道题`;
   const qc=(verbalDb.questions||[]).reduce((o,q)=>(o[q.type]=(o[q.type]||0)+1,o),{});
-  $('verbalDbSummary').textContent=`schema ${verbalDb.schemaVersion||'—'}；${verbalDb.entries.length} 词条（可练 ${ready}），${verbalDb.contrastGroups.length} 精辨组，${(verbalDb.semanticGroups||[]).length} 资料语义组，${verbalDb.questions.length} 道题（真题 ${qc.examContextChoice||0} / 训练语境 ${qc.contextChoice||0} / 资料搭配 ${qc.collocationChoice||0} / 精辨 ${qc.contrastChoice||0} / 语义辨析 ${qc.semanticChoice||0}）；来源：${sourceText}${verbalDbLoadMessage?`（${verbalDbLoadMessage}）`:''}。`;
+  $('verbalDbSummary').textContent=`schema ${verbalDb.schemaVersion||'—'}；${verbalDb.entries.length} 词条（可练 ${ready}），${verbalDb.contrastGroups.length} 精辨组，${(verbalDb.semanticGroups||[]).length} 资料语义组，${verbalDb.questions.length} 道题（真题 ${qc.examContextChoice||0} / 人民日报 ${qc.sourceContextChoice||0} / 训练语境 ${qc.contextChoice||0} / 资料搭配 ${qc.collocationChoice||0} / 精辨 ${qc.contrastChoice||0} / 语义辨析 ${qc.semanticChoice||0}）；来源：${sourceText}${verbalDbLoadMessage?`（${verbalDbLoadMessage}）`:''}。`;
 }
 
 function showExamHome(){
@@ -2680,7 +2697,7 @@ function verbalTaskMeta(task){
   return {
     meaning:['词义识记','双向识记词义，按个人错选、精辨组与资料语义邻域智能出干扰'],
     contrast:['近义辨析','精辨组 + 资料语义分类双层训练，错答后对照正确词与误选词'],
-    context:['语境选词','扩充语境题库并自适应抽取，错词、混淆词与未熟练词优先'],
+    context:['语境选词','真题、人民日报原句改编与训练语境分源练习，错词和混淆词优先回放'],
     review:['易错复习','错词按词义、辨析、语境多角度交替复习，并优先回放个人混淆对']
   }[task]||['词汇训练',''];
 }
@@ -2706,7 +2723,7 @@ function setVerbalMode(mode){
   verbalStudyIndex=0;newVerbalItem();
 }
 function filteredVerbalEntries(reviewOnly=false){
-  let entries=(verbalDb?.entries||[]).filter(e=>e.quizReady!==false);
+  let entries=(verbalDb?.entries||[]).filter(e=>reviewOnly||e.quizReady!==false);
   const kind=$('verbalKindFilter')?.value||'all',scope=$('verbalScopeFilter')?.value||'all',p=loadVerbalProgress();
   if(reviewOnly){
     const ids=new Set(reviewTermIds(reviewFilterValue()));entries=entries.filter(e=>ids.has(e.id));
@@ -2741,9 +2758,12 @@ function currentGroupStudyPool(){
   if(scope==='favorites')groups=groups.filter(g=>p.groups?.[g.id]?.favorite);
   return groups;
 }
+function isTextContextChoice(q){
+  return !!q&&['examContextChoice','sourceContextChoice'].includes(q.type);
+}
 function questionTermIds(q){
   if(!q)return[];
-  if(q.type==='examContextChoice'){
+  if(isTextContextChoice(q)){
     const ids=(q.focusTermIds?.length?q.focusTermIds:(q.optionTermIds||[]).flat()).filter(Boolean);
     return [...new Set(ids)];
   }
@@ -2752,13 +2772,13 @@ function questionTermIds(q){
 function questionCorrectTermIds(q){
   if(!q)return[];
   if(q.type==='meaning')return q.entryId?[q.entryId]:[];
-  if(q.type==='examContextChoice')return [...new Set((q.correctTermIds||[]).filter(Boolean))];
+  if(isTextContextChoice(q))return [...new Set((q.correctTermIds||[]).filter(Boolean))];
   return q.answerId?[q.answerId]:[];
 }
 function questionSelectedTermIds(q,index){
   if(!q||index<0)return[];
   if(q.type==='meaning')return q.options?.[index]?.id?[q.options[index].id]:[];
-  if(q.type==='examContextChoice')return [...new Set((q.optionTermIds?.[index]||[]).filter(Boolean))];
+  if(isTextContextChoice(q))return [...new Set((q.optionTermIds?.[index]||[]).filter(Boolean))];
   return q.optionIds?.[index]?[q.optionIds[index]]:[];
 }
 function primaryQuestionTermId(q){
@@ -2776,10 +2796,11 @@ function contextOriginValue(){
 function currentQuestionPool(){
   let qs=(verbalDb?.questions||[]).filter(q=>verbalTask==='contrast'
     ?(q.type==='contrastChoice'||q.type==='semanticChoice')
-    :(q.type==='contextChoice'||q.type==='collocationChoice'||q.type==='examContextChoice'));
+    :(q.type==='contextChoice'||q.type==='collocationChoice'||q.type==='examContextChoice'||q.type==='sourceContextChoice'));
   if(verbalTask==='context'){
     const origin=contextOriginValue();
     if(origin==='exam')qs=qs.filter(q=>q.type==='examContextChoice');
+    if(origin==='peopleDaily')qs=qs.filter(q=>q.type==='sourceContextChoice'&&q.origin==='peopleDailyAdapted');
     if(origin==='training')qs=qs.filter(q=>q.type==='contextChoice'||q.type==='collocationChoice');
   }
   const scope=$('verbalScopeFilter')?.value||'all',p=loadVerbalProgress();
@@ -2961,8 +2982,8 @@ function pickVerbalQuestion(arr){
 }
 function prepareVerbalQuestion(q){
   const x=cloneJson(q);
-  // 真题必须保持资料中的原始 A/B/C/D 顺序，也不进行个性化替换。
-  if(x.type==='examContextChoice')return x;
+  // 真题与人民日报原句改编题均保留题库中的 A/B/C/D 顺序，不做个性化替换。
+  if(isTextContextChoice(x))return x;
   if(Array.isArray(x.optionIds)&&x.answerId){
     const em=verbalEntryMap(),ans=em.get(x.answerId),s=termState(x.answerId);
     const conf=Object.entries(s.confusions||{}).sort((a,b)=>b[1]-a[1])
@@ -3012,13 +3033,13 @@ function meaningQuestion(entry){
 }
 function reviewQuestion(entry){
   const related=(verbalDb?.questions||[]).filter(q=>{
-    if(q.type==='examContextChoice')return (q.correctTermIds||[]).includes(entry.id);
+    if(isTextContextChoice(q))return (q.correctTermIds||[]).includes(entry.id);
     return q.answerId===entry.id&&['contextChoice','collocationChoice','contrastChoice','semanticChoice'].includes(q.type);
   });
   if(!related.length)return meaningQuestion(entry);
   const r=Math.random();
-  if(r<.26)return meaningQuestion(entry);
-  const context=related.filter(q=>q.type==='contextChoice'||q.type==='collocationChoice'||q.type==='examContextChoice');
+  if(r<.26&&entry.quizReady!==false)return meaningQuestion(entry);
+  const context=related.filter(q=>q.type==='contextChoice'||q.type==='collocationChoice'||isTextContextChoice(q));
   const distinguish=related.filter(q=>q.type==='contrastChoice'||q.type==='semanticChoice');
   let pool=r<.70?context:distinguish;
   if(!pool.length)pool=related;
@@ -3059,13 +3080,27 @@ function newVerbalItem(){
   renderVerbalPractice();
 }
 function formatClozeV(s){
-  return escV(s).replace(/_{4,}/g,m=>`<u style="text-decoration-thickness:2px;text-underline-offset:4px">${m}</u>`);
+  return escV(s)
+    .replace(/_{2,}/g,m=>`<u style="text-decoration-thickness:2px;text-underline-offset:4px">${m}</u>`)
+    .replace(/[（(]\s*[）)]/g,'<u style="text-decoration-thickness:2px;text-underline-offset:4px">____</u>');
 }
 function examSourceLine(q){
   const bits=[];
   if(q?.exam?.year)bits.push(String(q.exam.year));
   if(q?.exam?.label)bits.push(String(q.exam.label));
+  const st=q?.source?.sourceType;
+  if(st==='recalled')bits.push('考生/网友回忆版');
+  else if(st==='thirdParty')bits.push('第三方整理题源');
+  if(q?.source?.questionNo)bits.push(`题号 ${q.source.questionNo}`);
   if(q?.source?.pdfPage)bits.push(`PDF p${q.source.pdfPage}`);
+  return bits.join(' · ');
+}
+function peopleDailySourceLine(q){
+  const bits=[];
+  if(q?.source?.articleDate)bits.push(String(q.source.articleDate));
+  if(q?.source?.title)bits.push(String(q.source.title));
+  if(q?.source?.sourceFile)bits.push(String(q.source.sourceFile));
+  if(q?.source?.pdfPage)bits.push(`p${q.source.pdfPage}`);
   return bits.join(' · ');
 }
 function renderVerbalPractice(){
@@ -3087,7 +3122,12 @@ function renderVerbalPractice(){
   }else if(q.type==='examContextChoice'){
     badge=`真题 · ${escV(q.exam?.year||'')}${q.exam?.label?' '+escV(q.exam.label):''}`;
     prompt=`<div class="verbalPrompt context">${formatClozeV(q.stem)}</div>`+
-      `<div style="font-size:11px;color:#9ca3af;margin-top:8px">${escV(examSourceLine(q))}${q.source?.pdfPage?' · 原题 A/B/C/D 顺序保留':''}</div>`;
+      `<div style="font-size:11px;color:#9ca3af;margin-top:8px">${escV(examSourceLine(q))} · 原 A/B/C/D 顺序保留</div>`;
+    options=(q.optionTexts||[]).map((txt,i)=>({id:String(i),text:txt}));
+  }else if(q.type==='sourceContextChoice'){
+    badge='人民日报原句改编';
+    prompt=`<div class="verbalPrompt context">${formatClozeV(q.stem)}</div>`+
+      `<div style="font-size:11px;color:#b45309;margin-top:8px">${escV(peopleDailySourceLine(q))}</div>`;
     options=(q.optionTexts||[]).map((txt,i)=>({id:String(i),text:txt}));
   }else{
     const group=gmap.get(q.groupId),sg=verbalSemanticGroupMap().get(q.semanticGroupId);
@@ -3124,7 +3164,7 @@ function renderVerbalPractice(){
   }else if(verbalTask==='context'){
     const origin=contextOriginValue();
     const poolCount=currentQuestionPool().length;
-    const label=origin==='exam'?'真题':origin==='training'?'训练题（语境+搭配）':'全部语境';
+    const label=origin==='exam'?'真题':origin==='peopleDaily'?'人民日报原句':origin==='training'?'训练题（语境+搭配）':'全部语境';
     $('verbalProgressText').textContent=`${label} · ${poolCount} 道`;
   }else{
     $('verbalProgressText').textContent=`智能选题 · 错词/未熟练优先 · ${verbalDb.entries.length} 词条`;
@@ -3135,7 +3175,7 @@ function verbalFavoriteTarget(){
   if(verbalCurrent.type==='meaning')return{kind:'term',id:verbalCurrent.entryId};
   if(verbalCurrent.groupId)return{kind:'group',id:verbalCurrent.groupId};
   if(verbalCurrent.semanticGroupId)return{kind:'group',id:verbalCurrent.semanticGroupId};
-  if(verbalCurrent.type==='examContextChoice'){
+  if(isTextContextChoice(verbalCurrent)){
     const id=questionCorrectTermIds(verbalCurrent)[0];
     return id?{kind:'term',id}:null;
   }
@@ -3159,7 +3199,7 @@ function selectVerbalOption(i){
 function verbalCorrectIndex(){
   const q=verbalCurrent;if(!q)return-1;
   if(q.type==='meaning')return q.options.findIndex(o=>o.id===q.answerId);
-  if(q.type==='examContextChoice')return Number.isInteger(q.answerIndex)?q.answerIndex:-1;
+  if(isTextContextChoice(q))return Number.isInteger(q.answerIndex)?q.answerIndex:-1;
   return (q.optionIds||[]).indexOf(q.answerId);
 }
 function verbalCompareHtml(correctEntry,selectedEntry){
@@ -3177,17 +3217,40 @@ function verbalCompareHtml(correctEntry,selectedEntry){
 }
 
 function examAnswerCompareHtml(q,selectedIndex){
-  if(!q||q.type!=='examContextChoice')return'';
+  if(!q||!isTextContextChoice(q))return'';
   const correctLetter='ABCD'[q.answerIndex]||String(q.answerIndex+1);
   const selectedLetter='ABCD'[selectedIndex]||String(selectedIndex+1);
+  const head=q.type==='examContextChoice'?'原题选项':'训练选项';
   return `<div class="verbalCompare">
-    <div class="verbalCompareHead"><div>原题选项</div><div class="right">✓ ${correctLetter}</div><div class="wrong">你选：${selectedLetter}</div></div>
+    <div class="verbalCompareHead"><div>${head}</div><div class="right">✓ ${correctLetter}</div><div class="wrong">你选：${selectedLetter}</div></div>
     <div class="verbalCompareRow"><div class="label">答案</div><div class="value">${escV(q.optionTexts?.[q.answerIndex]||'—')}</div><div class="value">${escV(q.optionTexts?.[selectedIndex]||'—')}</div></div>
   </div>`;
 }
+
+function renderTextChoiceAnalysis(q){
+  if(!q||!isTextContextChoice(q)||!q.analysis)return'';
+  const a=q.analysis,rows=(a.optionMeanings||[]).map((o,i)=>{
+    const cls=i===q.answerIndex?' correct':'';
+    const meaning=o.summary||(o.slots||[]).map(s=>`${s.term}：${s.meaning}`).join('；')||'—';
+    return `<div class="verbalMeaningRow${cls}">
+      <div class="letter">${escV(o.label||('ABCD'[i]||String(i+1)))}</div>
+      <div class="optionText">${escV(o.text||q.optionTexts?.[i]||'')}</div>
+      <div>${escV(meaning)}</div>
+    </div>`;
+  }).join('');
+  return `<div class="verbalAnalysisBox">
+    <div class="verbalAnalysisTitle">判断思路</div>
+    <div class="verbalReason">${escV(a.correctReason||q.explanation||'')}</div>
+    <div class="verbalAnalysisTitle">选项释义</div>
+    <div class="verbalMeaningHead"><div></div><div>选项</div><div>词义 / 语境义</div></div>
+    ${rows}
+    ${a.note?`<div class="verbalAnalysisNote">${escV(a.note)}</div>`:''}
+  </div>`;
+}
+
 function recordQuestionConfusions(q,selectedIndex){
   if(!q||selectedIndex<0)return[];
-  if(q.type!=='examContextChoice'){
+  if(!isTextContextChoice(q)){
     const c=questionCorrectTermIds(q)[0],s=questionSelectedTermIds(q,selectedIndex)[0];
     if(c&&s&&c!==s)return[{correctId:c,selectedId:s,count:recordVerbalConfusion(c,s)}];
     return[];
@@ -3203,7 +3266,7 @@ function recordQuestionConfusions(q,selectedIndex){
   return out;
 }
 function questionWrongTermIds(q,selectedIndex){
-  if(q?.type!=='examContextChoice'){
+  if(!isTextContextChoice(q)){
     return [...new Set([...questionCorrectTermIds(q),...questionSelectedTermIds(q,selectedIndex)].filter(Boolean))];
   }
   const c=q.optionTermIds?.[q.answerIndex]||[],s=q.optionTermIds?.[selectedIndex]||[];
@@ -3239,14 +3302,20 @@ function submitVerbalAnswer(){
   }else if(q.type==='examContextChoice'){
     const letter='ABCD'[q.answerIndex]||String(q.answerIndex+1);
     explanation=`<b>正确答案：${letter}. ${escV(q.optionTexts?.[q.answerIndex]||q.answerText||'')}</b>`+
-      `<br>该题按资料中的真题原句与原始 A/B/C/D 顺序收录，不对题干和选项进行改写或重排。`+
+      `<br>真题/回忆题保留题库中的原 A/B/C/D 顺序，不进行个性化替换。`+
       (examSourceLine(q)?`<br><span style="color:#9ca3af">${escV(examSourceLine(q))}</span>`:'');
+  }else if(q.type==='sourceContextChoice'){
+    const letter='ABCD'[q.answerIndex]||String(q.answerIndex+1);
+    explanation=`<b>正确答案：${letter}. ${escV(q.optionTexts?.[q.answerIndex]||q.answerText||'')}</b>`+
+      (q.adaptation?.originalSentence?`<br><b>人民日报原句：</b>${escV(q.adaptation.originalSentence)}`:'')+
+      (peopleDailySourceLine(q)?`<br><span style="color:#9ca3af">${escV(peopleDailySourceLine(q))}</span>`:'');
   }else{
     explanation=escV(q.explanation||'');
   }
   const compare=!correct
-    ?(q.type==='examContextChoice'?examAnswerCompareHtml(q,verbalSelected):verbalCompareHtml(correctEntry,selectedEntry))
+    ?(isTextContextChoice(q)?examAnswerCompareHtml(q,verbalSelected):verbalCompareHtml(correctEntry,selectedEntry))
     :'';
+  const analysisHtml=isTextContextChoice(q)?renderTextChoiceAnalysis(q):'';
   const sg=verbalSemanticGroupMap().get(q.semanticGroupId);
   let mechanism='';
   if(q.type==='meaning'&&q.distractorMeta){
@@ -3260,7 +3329,7 @@ function submitVerbalAnswer(){
     if(bits.length)mechanism=`<div class="verbalMechanismNote">本题智能干扰：${bits.join(' · ')}</div>`;
   }
   if(!correct&&confusionRecords.length){
-    if(q.type==='examContextChoice'){
+    if(isTextContextChoice(q)){
       const pairs=confusionRecords.map(r=>`${m.get(r.correctId)?.term||''} ↔ ${m.get(r.selectedId)?.term||''}`).filter(Boolean);
       mechanism+=`<div class="verbalMechanismNote">已按错空记录个人混淆关系${pairs.length?'：'+escV(pairs.join('；')):''}；后续会提高这些词在训练题中的共同出现概率。</div>`;
     }else{
@@ -3279,6 +3348,7 @@ function submitVerbalAnswer(){
   $('verbalFeedback').innerHTML=`<div class="verbalFeedbackHead ${correct?'ok':'bad'}">${correct?'✓ 回答正确':'✗ 需要复习'} <span style="font-size:11px;font-weight:600;color:#9ca3af">· ${elapsed.toFixed(1)} s</span></div>
     <div class="verbalExplanation">${explanation}</div>
     ${compare}
+    ${analysisHtml}
     ${g?.quickRule?`<div class="verbalQuickRule"><b>快速辨析：</b>${escV(g.quickRule)}</div>`:''}
     ${mechanism}
     <div class="verbalActionRow"><div>${answerId?masteryChipHtml(answerId):''}</div><button class="verbalAction primary" id="verbalNext">下一题（N）</button></div>`;
@@ -3293,6 +3363,7 @@ function renderTermStudy(e){
     ${e.targets?.length?`<div class="studySection"><h4>常见对象</h4><div class="studyTags">${e.targets.map(x=>`<span>${escV(x)}</span>`).join('')}</div></div>`:''}
     ${e.collocations?.length?`<div class="studySection"><h4>常见搭配</h4><div class="studyTags">${e.collocations.map(x=>`<span>${escV(x)}</span>`).join('')}</div></div>`:''}
     ${e.pitfalls?.length?`<div class="studySection"><h4>易错点</h4><p>${escV(e.pitfalls.join('；'))}</p></div>`:''}
+    ${e.sourceExamples?.length?`<div class="studySection"><h4>人民日报原文语境</h4><p>${e.sourceExamples.slice(0,3).map(x=>`${escV(x.sentence)}${x.articleTitle?` <span style="color:#9ca3af">——${escV(x.articleTitle)}</span>`:''}`).join('<br><br>')}</p></div>`:''}
     ${entrySemanticGroups(e).length?`<div class="studySection"><h4>资料语义场景</h4><div class="studyTags">${entrySemanticGroups(e).map(g=>`<span>${escV(g.major)} · ${escV(g.subcategory)}</span>`).join('')}</div></div>`:''}
     <div class="verbalActionRow">
       <div class="verbalActionLeft">
@@ -3350,7 +3421,21 @@ function renderQuestionStudy(q){
       <div class="verbalPrompt context">${formatClozeV(q.stem)}</div>
       <div class="studySection"><h4>原始选项</h4><p>${(q.optionTexts||[]).map((x,i)=>`<b>${'ABCD'[i]||i+1}.</b> ${escV(x)}`).join('<br>')}</p></div>
       <div class="studySection"><h4>正确答案</h4><p><b>${letter}. ${escV(q.optionTexts?.[q.answerIndex]||q.answerText||'')}</b></p></div>
-      <div class="studySection"><h4>来源</h4><p>${escV(examSourceLine(q))} · 真题原句与原选项顺序保留</p></div>
+      ${renderTextChoiceAnalysis(q)}
+      <div class="studySection"><h4>来源</h4><p>${escV(examSourceLine(q))} · A/B/C/D 顺序保留</p></div>
+      <div class="verbalActionRow"><button class="verbalAction" id="verbalStudyFav">${questionCorrectTermIds(q)[0]&&termState(questionCorrectTermIds(q)[0]).favorite?'★ 已收藏':'☆ 收藏'}</button><button class="verbalAction primary" id="verbalStudyNext">下一条</button></div>
+    </div>`;
+  }
+  if(q.type==='sourceContextChoice'){
+    const letter='ABCD'[q.answerIndex]||String(q.answerIndex+1);
+    return `<div class="studyReveal">
+      <div class="verbalBadge">人民日报原句改编</div>
+      <div class="verbalPrompt context">${formatClozeV(q.stem)}</div>
+      <div class="studySection"><h4>训练选项</h4><p>${(q.optionTexts||[]).map((x,i)=>`<b>${'ABCD'[i]||i+1}.</b> ${escV(x)}`).join('<br>')}</p></div>
+      <div class="studySection"><h4>正确答案</h4><p><b>${letter}. ${escV(q.optionTexts?.[q.answerIndex]||q.answerText||'')}</b></p></div>
+      ${q.adaptation?.originalSentence?`<div class="studySection"><h4>人民日报原句</h4><p>${escV(q.adaptation.originalSentence)}</p></div>`:''}
+      ${renderTextChoiceAnalysis(q)}
+      <div class="studySection"><h4>来源</h4><p>${escV(peopleDailySourceLine(q))}</p></div>
       <div class="verbalActionRow"><button class="verbalAction" id="verbalStudyFav">${questionCorrectTermIds(q)[0]&&termState(questionCorrectTermIds(q)[0]).favorite?'★ 已收藏':'☆ 收藏'}</button><button class="verbalAction primary" id="verbalStudyNext">下一条</button></div>
     </div>`;
   }
@@ -3388,7 +3473,7 @@ function renderVerbalStudy(){
     $('verbalStudyFav').onclick=()=>{
       if(item.groupId)toggleGroupFavorite(item.groupId);
       else if(item.semanticGroupId)toggleGroupFavorite(item.semanticGroupId);
-      else if(item.type==='examContextChoice'&&questionCorrectTermIds(item)[0])toggleTermFavorite(questionCorrectTermIds(item)[0]);
+      else if(isTextContextChoice(item)&&questionCorrectTermIds(item)[0])toggleTermFavorite(questionCorrectTermIds(item)[0]);
       else if(item.answerId)toggleTermFavorite(item.answerId);
       renderVerbalStudy()
     };
